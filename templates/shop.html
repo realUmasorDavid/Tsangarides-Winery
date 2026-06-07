@@ -1004,22 +1004,13 @@
 
         <ul class="nav-links">
             <li><a href="{% url 'shop' %}" class="active">Shop Wines</a></li>
-            <li><a href="#">Visit Us</a></li>
-            <li><a href="#">Our Story</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="{% url 'visit-us' %}">Visit Us</a></li>
+            <li><a href="{% url 'our-story' %}">Our Story</a></li>
+            <li><a href="{% url 'blog' %}">Blog</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
 
         <div class="nav-right">
-            <!-- Cart button -->
-            <button id="cart-toggle-btn" aria-label="Open cart">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
-                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-                    <line x1="3" y1="6" x2="21" y2="6" />
-                    <path d="M16 10a4 4 0 01-8 0" />
-                </svg>
-                <span id="cart-item-count" aria-live="polite">0</span>
-            </button>
             <!-- Hamburger -->
             <button id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
                 <span></span><span></span><span></span>
@@ -1042,18 +1033,18 @@
             </button>
         </div>
         <nav class="drawer-nav" aria-label="Mobile navigation">
-            <a href="#">Shop Wines <span class="arrow">›</span></a>
-            <a href="#">Visit the Winery <span class="arrow">›</span></a>
-            <a href="#">Book a Tasting <span class="arrow">›</span></a>
-            <a href="#">Events <span class="arrow">›</span></a>
-            <a href="#">Our Story <span class="arrow">›</span></a>
-            <a href="#">Contact <span class="arrow">›</span></a>
+            <a href="{% url 'shop' %}">Shop Wines <span class="arrow">›</span></a>
+            <a href="{% url 'visit-us' %}">Visit the Winery <span class="arrow">›</span></a>
+            <a href="https://tommys2000.myshopify.com/pages/booking" target="_blank">Book a Tasting <span class="arrow">›</span></a>
+            <a href="{% url 'events' %}">Events <span class="arrow">›</span></a>
+            <a href="{% url 'our-story' %}">Our Story <span class="arrow">›</span></a>
+            <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
         </nav>
         <div class="drawer-footer">
             <div class="drawer-footer-links">
-                <a href="#">Privacy</a>
-                <a href="#">Terms</a>
-                <a href="#">Cookies</a>
+                <a href="{% url 'privacy' %}">Privacy</a>
+                <a href="{% url 'terms' %}">Terms</a>
+                <a href="{% url 'cookies' %}">Cookies</a>
             </div>
             <div class="drawer-copy">© <span class="year-placeholder"></span> TSANGARIDES WINERY</div>
         </div>
@@ -1097,21 +1088,6 @@
                     <button class="filter-pill active" data-filter="type" data-value="all">
                         <span class="dot"></span> All Wines
                     </button>
-                    <button class="filter-pill" data-filter="type" data-value="red">
-                        <span class="dot" style="background:#6b1a1a;border-color:#6b1a1a;"></span> Red Wines
-                    </button>
-                    <button class="filter-pill" data-filter="type" data-value="white">
-                        <span class="dot" style="background:#e8d870;border-color:#c9b845;"></span> White Wines
-                    </button>
-                    <button class="filter-pill" data-filter="type" data-value="rose">
-                        <span class="dot" style="background:#d9748a;border-color:#c05870;"></span> Rosé
-                    </button>
-                    <button class="filter-pill" data-filter="type" data-value="organic">
-                        <span class="dot" style="background:#4a7a3a;border-color:#3a6030;"></span> Organic Range
-                    </button>
-                    <button class="filter-pill" data-filter="type" data-value="reserve">
-                        <span class="dot" style="background:#C9A84C;border-color:#C9A84C;"></span> Reserve
-                    </button>
                 </div>
             </div>
 
@@ -1137,7 +1113,7 @@
                 <div class="sidebar-title">NEED HELP?</div>
                 <p style="font-size:0.78rem;line-height:1.7;color:#8a7a5a;margin-bottom:14px;">Not sure which wine to
                     choose? Our team is happy to guide you.</p>
-                <a href="#" class="btn-gold" style="font-size:0.55rem;padding:10px 20px;">CONTACT US</a>
+                <a href="{% url 'contact' %}" class="btn-gold" style="font-size:0.55rem;padding:10px 20px;">CONTACT US</a>
             </div>
         </aside>
 
@@ -1222,20 +1198,6 @@
         </main>
     </div>
 
-    <!-- ─── PROMO BANNER ─── -->
-    <div class="promo-banner">
-        <div>
-            <div class="promo-eyebrow">EXCLUSIVE MEMBERSHIP</div>
-            <div class="promo-title">Join Our <em>Wine Club</em></div>
-            <p class="promo-body">Receive hand-selected wines from our estate delivered to your door each season — plus
-                early access to new releases and member-only events.</p>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;gap:0;align-items:center;">
-            <a href="#" class="btn-gold">JOIN NOW</a>
-            <a href="#" class="btn-outline-dark">LEARN MORE</a>
-        </div>
-    </div>
-
     <!-- Shopify cart mount point -->
     <div id="shopify-cart"></div>
 
@@ -1256,30 +1218,30 @@
             <div>
                 <div class="footer-col-title">WINES</div>
                 <ul class="footer-links">
-                    <li><a href="#">Red Wines</a></li>
-                    <li><a href="#">White Wines</a></li>
-                    <li><a href="#">Rosé Wines</a></li>
-                    <li><a href="#">Organic Range</a></li>
-                    <li><a href="#">Reserve Collection</a></li>
-                    <li><a href="#">Gift Sets</a></li>
+                    <li><a href="{% url 'shop' %}">Red Wines</a></li>
+                    <li><a href="{% url 'shop' %}">White Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Rosé Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Organic Range</a></li>
+                    <li><a href="{% url 'shop' %}">Reserve Collection</a></li>
+                    <li><a href="{% url 'shop' %}">Gift Sets</a></li>
                 </ul>
             </div>
             <div>
                 <div class="footer-col-title">VISIT</div>
                 <ul class="footer-links">
-                    <li><a href="#">Wine Tastings</a></li>
-                    <li><a href="#">Winery Tours</a></li>
-                    <li><a href="#">Events</a></li>
-                    <li><a href="#">Accommodation</a></li>
-                    <li><a href="#">Restaurant</a></li>
+                    <li><a href="{% url 'visit-us' %}">Wine Tastings</a></li>
+                    <li><a href="{% url 'visit-us' %}">Winery Tours</a></li>
+                    <li><a href="{% url 'visit-us' %}">Events</a></li>
+                    <li><a href="{% url 'visit-us' %}">Accommodation</a></li>
+                    <li><a href="{% url 'visit-us' %}">Restaurant</a></li>
                 </ul>
             </div>
             <div>
                 <div class="footer-col-title">CONTACT</div>
                 <ul class="footer-links">
-                    <li><a href="#">info@tsangarideswinery.com</a></li>
-                    <li><a href="#">+357 26 722 777</a></li>
-                    <li><a href="#" style="color:#8a7a5a;font-size:.75rem;line-height:1.5;">Lemona Village,<br>Paphos
+                    <li><a href="mailto:info@tsangarideswinery.com">info@tsangarideswinery.com</a></li>
+                    <li><a href="tel:+35726722777">+357 26 722 777</a></li>
+                    <li><a href="" style="color:#8a7a5a;font-size:.75rem;line-height:1.5;">Lemona Village,<br>Paphos
                             8545,<br>Cyprus</a></li>
                 </ul>
             </div>
@@ -1287,13 +1249,13 @@
         <div class="footer-bottom">
             <span>© <span class="year-placeholder"></span> TSANGARIDES WINERY. ALL RIGHTS RESERVED.</span>
             <div style="display:flex;gap:24px;flex-wrap:wrap;">
-                <a href="#"
+                <a href="{% url 'privacy' %}"
                     style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
                     onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">PRIVACY POLICY</a>
-                <a href="#"
+                <a href="{% url 'terms' %}"
                     style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
                     onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">TERMS OF USE</a>
-                <a href="#"
+                <a href="{% url 'cookies' %}"
                     style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
                     onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">COOKIE POLICY</a>
             </div>
@@ -1415,10 +1377,6 @@
                     }
                 }
             }).then(c => { cartComponent = c; });
-
-            document.getElementById('cart-toggle-btn').addEventListener('click', () => {
-                if (cartComponent) cartComponent.toggleVisibility();
-            });
 
             /* ── Collection loader ── */
             let collectionComponent = null;

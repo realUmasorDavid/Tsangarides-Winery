@@ -1224,11 +1224,11 @@
 
         <!-- Desktop nav links -->
         <ul class="nav-links">
-            <li><a href="#">Shop Wines</a></li>
-            <li><a href="#">Visit Us</a></li>
-            <li><a href="#">Our Story</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="{% url 'shop' %}">Shop Wines</a></li>
+            <li><a href="{% url 'visit-us' %}">Visit Us</a></li>
+            <li><a href="{% url 'our-story' %}">Our Story</a></li>
+            <li><a href="{% url 'blog' %}">Blog</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
 
         <!-- Right-side icons -->
@@ -1276,19 +1276,19 @@
         </div>
 
         <nav class="drawer-nav" aria-label="Mobile navigation">
-            <a href="#">Shop Wines <span class="arrow">›</span></a>
-            <a href="#">Visit the Winery <span class="arrow">›</span></a>
-            <a href="#">Book a Tasting <span class="arrow">›</span></a>
-            <a href="#">Events <span class="arrow">›</span></a>
-            <a href="#">Our Story <span class="arrow">›</span></a>
-            <a href="#">Contact <span class="arrow">›</span></a>
+            <a href="{% url 'shop' %}">Shop Wines <span class="arrow">›</span></a>
+            <a href="{% url 'visit-us' %}">Visit the Winery <span class="arrow">›</span></a>
+            <a href="https://tommys2000.myshopify.com/pages/booking" target="_blank">Book a Tasting <span class="arrow">›</span></a>
+            <a href="{% url 'events' %}">Events <span class="arrow">›</span></a>
+            <a href="{% url 'our-story' %}">Our Story <span class="arrow">›</span></a>
+            <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
         </nav>
 
         <div class="drawer-footer">
             <div class="drawer-footer-links">
-                <a href="#">Privacy</a>
-                <a href="#">Terms</a>
-                <a href="#">Cookies</a>
+                <a href="{% url 'privacy' %}">Privacy</a>
+                <a href="{% url 'terms' %}">Terms</a>
+                <a href="{% url 'cookies' %}">Cookies</a>
             </div>
             <div class="drawer-copy">© <span id="year"></span> TSANGARIDES WINERY</div>
         </div>
@@ -1303,9 +1303,9 @@
             <p class="hero-sub">Four generations of winemaking tradition, sustainable vineyards and passionate
                 craftsmanship poured into every bottle.</p>
             <div class="hero-btns">
-                <a href="#" class="btn-gold">SHOP WINES</a>
-                <a href="#" class="btn-outline">BOOK A TASTING</a>
-                <a href="#" class="btn-outline">VISIT THE WINERY</a>
+                <a href="{% url 'shop' %}" class="btn-gold">SHOP WINES</a>
+                <a href="https://tommys2000.myshopify.com/pages/booking" class="btn-outline">BOOK A TASTING</a>
+                <a href="{% url 'visit-us' %}" class="btn-outline">VISIT THE WINERY</a>
             </div>
         </div>
         <!-- <div class="hero-awards">
@@ -1369,7 +1369,7 @@
         <div class="section-rule"><span>✦</span></div>
         <h2 class="section-title">Featured Wines</h2>
     </div>
-    <a href="#" class="section-view-all">
+    <a href="{% url 'shop' %}" class="section-view-all">
         VIEW ALL WINES
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5">
             <path d="M5 12h14M12 5l7 7-7 7" />
@@ -1387,7 +1387,7 @@
                 <span class="feature-tag">COLLECTION</span>
                 <div class="feature-title">Shop Our Wines</div>
                 <p class="feature-desc">Discover our award-winning collection of red, white, rosé and organic wines.</p>
-                <a href="#" class="feature-link">SHOP NOW <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                <a href="{% url 'shop' %}" class="feature-link">SHOP NOW <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg></a>
             </div>
@@ -1475,7 +1475,7 @@
                     <div class="stat-label">ORGANIC</div>
                 </div>
             </div>
-            <a href="#" class="btn-gold" style="display:inline-block; text-decoration:none; align-self:flex-start;">OUR
+            <a href="{% url 'our-story' %}" class="btn-gold" style="display:inline-block; text-decoration:none; align-self:flex-start;">OUR
                 STORY</a>
         </div>
     </div>
@@ -1521,9 +1521,9 @@
             <div>
                 <div class="footer-col-title">CONTACT</div>
                 <ul class="footer-links">
-                    <li><a href="#">info@tsangarideswinery.com</a></li>
-                    <li><a href="#">+357 26 722 777</a></li>
-                    <li><a href="#" style="color:#8a7a5a; font-size:.75rem; line-height:1.5;">Lemona Village,<br>Paphos
+                    <li><a href="mailto:info@tsangarideswinery.com">info@tsangarideswinery.com</a></li>
+                    <li><a href="tel:+35726722777">+357 26 722 777</a></li>
+                    <li><a href="" style="color:#8a7a5a; font-size:.75rem; line-height:1.5;">Lemona Village,<br>Paphos
                             8545,<br>Cyprus</a></li>
                 </ul>
             </div>
