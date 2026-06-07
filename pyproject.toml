@@ -1,0 +1,13 @@
+[project]
+name = "tsangarides-winery"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10,<4.0"
+dependencies = [
+    "django>=5.2.15",
+    "dotenv>=0.9.9",
+    "pillow>=12.2.0",
+    "poetry>=2.4.1",
+    "whitenoise>=6.12.0",
+]

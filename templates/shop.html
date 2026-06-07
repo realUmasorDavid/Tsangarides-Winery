@@ -1,0 +1,1506 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop Wines — Tsangarides Winery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@shopify/buy-button-js@3.0.6/dist/buybutton.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Raleway:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E8C96A;
+            --dark: #1A1208;
+            --charcoal: #2C2318;
+            --cream: #F5F0E8;
+            --warm-white: #FAF7F2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: var(--warm-white);
+            color: var(--dark);
+        }
+
+        /* ─── TOP BAR ─── */
+        .topbar {
+            background: var(--dark);
+            color: #bfae94;
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            padding: 8px 48px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .topbar {
+                padding: 8px 20px;
+                font-size: 0.55rem;
+            }
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            background: rgba(250, 247, 242, 0.97);
+            backdrop-filter: blur(8px);
+            padding: 18px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 14px 20px;
+            }
+        }
+
+        .logo-mark {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-emblem {
+            width: 52px;
+            height: 52px;
+            border: 1.5px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .logo-emblem {
+                width: 42px;
+                height: 42px;
+                font-size: 1.1rem;
+            }
+        }
+
+        .logo-text {
+            line-height: 1.1;
+        }
+
+        .logo-text .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 0.22em;
+            color: var(--dark);
+        }
+
+        .logo-text .sub {
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.35em;
+            color: #8a7a5a;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            color: var(--charcoal);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 3px;
+            transition: color .2s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width .3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-right svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--charcoal);
+            cursor: pointer;
+            transition: stroke .2s;
+        }
+
+        .nav-right svg:hover {
+            stroke: var(--gold);
+        }
+
+        /* Cart button */
+        #cart-toggle-btn {
+            position: relative;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cart-toggle-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--charcoal);
+            transition: stroke .2s;
+        }
+
+        #cart-toggle-btn:hover svg {
+            stroke: var(--gold);
+        }
+
+        #cart-item-count {
+            display: none;
+            position: absolute;
+            top: -7px;
+            right: -8px;
+            background: var(--gold);
+            color: var(--dark);
+            font-family: 'Cinzel', serif;
+            font-size: 0.5rem;
+            font-weight: 700;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        #cart-item-count.visible {
+            display: flex;
+        }
+
+        .shopify-buy__cart-toggle {
+            display: none !important;
+        }
+
+        /* Hamburger */
+        #hamburger-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            flex-direction: column;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        #hamburger-btn span {
+            display: block;
+            width: 22px;
+            height: 1.5px;
+            background: var(--charcoal);
+            transition: all .3s ease;
+            transform-origin: center;
+        }
+
+        #hamburger-btn.open span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg);
+        }
+
+        #hamburger-btn.open span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        #hamburger-btn.open span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg);
+        }
+
+        @media (max-width: 1024px) {
+            #hamburger-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Mobile overlay */
+        #mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(26, 18, 8, 0.55);
+            backdrop-filter: blur(3px);
+            z-index: 300;
+            opacity: 0;
+            transition: opacity .3s ease;
+        }
+
+        #mobile-overlay.open {
+            display: block;
+        }
+
+        #mobile-overlay.visible {
+            opacity: 1;
+        }
+
+        /* Mobile drawer */
+        #mobile-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100dvh;
+            width: min(320px, 85vw);
+            background: var(--dark);
+            z-index: 400;
+            transform: translateX(-100%);
+            transition: transform .38s cubic-bezier(.4, 0, .2, 1);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        #mobile-drawer.open {
+            transform: translateX(0);
+        }
+
+        .drawer-header {
+            padding: 24px 28px 20px;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .drawer-logo .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.22em;
+            color: #F5F0E8;
+        }
+
+        .drawer-logo .sub {
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.55rem;
+            letter-spacing: 0.3em;
+            color: #8a7a5a;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        #drawer-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #drawer-close svg {
+            width: 18px;
+            height: 18px;
+            stroke: #bfae94;
+            transition: stroke .2s;
+        }
+
+        #drawer-close:hover svg {
+            stroke: var(--gold-light);
+        }
+
+        .drawer-nav {
+            padding: 16px 0;
+            flex: 1;
+        }
+
+        .drawer-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: #bfae94;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+            transition: color .2s, background .2s;
+        }
+
+        .drawer-nav a:hover {
+            color: var(--gold-light);
+            background: rgba(201, 168, 76, 0.06);
+        }
+
+        .drawer-nav a .arrow {
+            font-size: 0.6rem;
+            color: rgba(201, 168, 76, 0.4);
+            transition: color .2s;
+        }
+
+        .drawer-nav a:hover .arrow {
+            color: var(--gold-light);
+        }
+
+        .drawer-footer {
+            padding: 24px 28px;
+            border-top: 1px solid rgba(201, 168, 76, 0.15);
+            flex-shrink: 0;
+        }
+
+        .drawer-footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .drawer-footer-links a {
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.15em;
+            color: #8a7a5a;
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .drawer-footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .drawer-copy {
+            font-size: 0.62rem;
+            color: #5a4c30;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.08em;
+        }
+
+        /* ─── SHOP HERO BANNER ─── */
+        .shop-hero {
+            position: relative;
+            height: 42vh;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .shop-hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(110deg, rgba(9, 5, 1, 0.85) 0%, rgba(9, 5, 1, 0.55) 100%),
+            url("{% static 'Photo-147.jpg' %}") center 40%/cover no-repeat;
+        }
+
+        .shop-hero-content {
+            position: relative;
+            text-align: center;
+        }
+
+        .shop-hero-eyebrow {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.4em;
+            color: var(--gold-light);
+            margin-bottom: 12px;
+        }
+
+        .shop-hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 300;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .shop-hero-title em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 0.55rem;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--gold-light);
+        }
+
+        .breadcrumb span {
+            color: var(--gold);
+        }
+
+        /* ─── SHOP LAYOUT ─── */
+        .shop-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 56px 48px 80px;
+            align-items: start;
+        }
+
+        @media (max-width: 1024px) {
+            .shop-layout {
+                grid-template-columns: 1fr;
+                padding: 32px 24px 64px;
+            }
+        }
+
+        /* ─── SIDEBAR FILTERS ─── */
+        .shop-sidebar {
+            position: sticky;
+            top: 96px;
+            padding-right: 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .shop-sidebar {
+                position: static;
+                padding-right: 0;
+                margin-bottom: 32px;
+            }
+        }
+
+        .sidebar-section {
+            margin-bottom: 36px;
+        }
+
+        .sidebar-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.28em;
+            color: var(--gold);
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        }
+
+        /* Filter pills */
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .filter-group {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
+
+        .filter-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.15em;
+            color: #8a7a5a;
+            cursor: pointer;
+            padding: 6px 0;
+            background: none;
+            border: none;
+            text-align: left;
+            transition: color .2s;
+        }
+
+        @media (max-width: 1024px) {
+            .filter-pill {
+                border: 1px solid rgba(201, 168, 76, 0.25);
+                padding: 7px 14px;
+                border-radius: 0;
+                color: #8a7a5a;
+            }
+
+            .filter-pill.active {
+                background: var(--gold);
+                color: var(--dark);
+                border-color: var(--gold);
+            }
+        }
+
+        .filter-pill:hover {
+            color: var(--gold);
+        }
+
+        .filter-pill.active {
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .filter-pill .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 1px solid currentColor;
+            transition: background .2s;
+        }
+
+        .filter-pill.active .dot {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        @media (max-width: 1024px) {
+            .filter-pill .dot {
+                display: none;
+            }
+        }
+
+        /* Sort dropdown (mobile filter bar) */
+        .mobile-filter-bar {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-top: 1px solid rgba(201, 168, 76, 0.15);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+            margin-bottom: 28px;
+        }
+
+        @media (max-width: 1024px) {
+            .mobile-filter-bar {
+                display: flex;
+            }
+        }
+
+        .mobile-filter-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            color: var(--charcoal);
+        }
+
+        .sort-select {
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.15em;
+            color: var(--charcoal);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            padding-right: 16px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C9A84C' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0 center;
+        }
+
+        /* Result count */
+        .results-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        .results-count {
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.18em;
+            color: #8a7a5a;
+        }
+
+        .results-sort {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.15em;
+            color: #8a7a5a;
+        }
+
+        .results-sort select {
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.12em;
+            color: var(--charcoal);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            padding-right: 16px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C9A84C' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0 center;
+        }
+
+        @media (max-width: 1024px) {
+            .results-sort {
+                display: none;
+            }
+        }
+
+        /* ─── SHOPIFY COLLECTION GRID ─── */
+        /*
+            The Buy Button JS injects an iframe + its own CSS.
+            We override the wrapper grid via the options.collection.styles block
+            in the JS below, and add padding/min-height here for layout stability.
+        */
+        #shopify-collection-grid {
+            min-height: 400px;
+            width: 100%;
+        }
+
+        /* Loading skeleton while Shopify loads */
+        .collection-loading {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 28px;
+        }
+
+        .skeleton-card {
+            background: #fff;
+            border: 1px solid rgba(201, 168, 76, 0.1);
+            animation: pulse 1.6s ease-in-out infinite;
+        }
+
+        .skeleton-img {
+            height: 260px;
+            background: #ede8df;
+        }
+
+        .skeleton-body {
+            padding: 20px 16px;
+        }
+
+        .skeleton-line {
+            height: 10px;
+            background: #ede8df;
+            border-radius: 2px;
+            margin-bottom: 10px;
+        }
+
+        .skeleton-line.short {
+            width: 50%;
+        }
+
+        .skeleton-line.price {
+            width: 35%;
+            margin-top: 14px;
+            height: 14px;
+        }
+
+        .skeleton-btn {
+            height: 36px;
+            background: rgba(201, 168, 76, 0.2);
+            margin-top: 16px;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* ─── SECTION RULE (reused from homepage) ─── */
+        .section-rule {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .section-rule::before,
+        .section-rule::after {
+            content: '';
+            flex: 1;
+            max-width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold));
+        }
+
+        .section-rule::after {
+            background: linear-gradient(to left, transparent, var(--gold));
+        }
+
+        .section-rule span {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+        }
+
+        /* ─── PROMO BANNER ─── */
+        .promo-banner {
+            background: var(--dark);
+            padding: 48px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 32px;
+            margin: 0 0 0;
+        }
+
+        @media (max-width: 768px) {
+            .promo-banner {
+                grid-template-columns: 1fr;
+                padding: 32px 24px;
+                text-align: center;
+            }
+        }
+
+        .promo-eyebrow {
+            font-family: 'Cinzel', serif;
+            font-size: 0.55rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .promo-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 300;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .promo-title em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        .promo-body {
+            font-size: 0.8rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 10px;
+            max-width: 480px;
+        }
+
+        .btn-gold {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            padding: 14px 32px;
+            background: var(--gold);
+            color: var(--dark);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background .25s, transform .2s;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline-dark {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            padding: 13px 32px;
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color .25s, color .25s;
+            display: inline-block;
+            white-space: nowrap;
+            margin-left: 12px;
+        }
+
+        .btn-outline-dark:hover {
+            border-color: var(--gold-light);
+            color: var(--gold-light);
+        }
+
+        @media (max-width: 480px) {
+            .btn-outline-dark {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--dark);
+            color: #bfae94;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            padding: 64px 80px 48px;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        @media (max-width: 1024px) {
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+                padding: 48px 40px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                padding: 40px 24px;
+            }
+        }
+
+        .footer-brand p {
+            font-size: 0.8rem;
+            line-height: 1.7;
+            color: #8a7a5a;
+            margin-top: 16px;
+            max-width: 280px;
+        }
+
+        .footer-col-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: 0.78rem;
+            color: #8a7a5a;
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+        }
+
+        .footer-bottom {
+            padding: 24px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.68rem;
+            color: #5a4c30;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.1em;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-bottom {
+                padding: 20px 24px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ─── TOP BAR ─── -->
+    <div class="topbar">
+        <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
+    </div>
+
+    <!-- ─── NAV ─── -->
+    <nav>
+        <a href="{% url 'index' %}" class="logo-mark">
+            <div class="logo-emblem">T</div>
+            <div class="logo-text">
+                <div class="brand">TSANGARIDES</div>
+                <div class="sub">Winery &amp; Estate</div>
+            </div>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="{% url 'shop' %}" class="active">Shop Wines</a></li>
+            <li><a href="#">Visit Us</a></li>
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <!-- Cart button -->
+            <button id="cart-toggle-btn" aria-label="Open cart">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <path d="M16 10a4 4 0 01-8 0" />
+                </svg>
+                <span id="cart-item-count" aria-live="polite">0</span>
+            </button>
+            <!-- Hamburger -->
+            <button id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ─── MOBILE OVERLAY + DRAWER ─── -->
+    <div id="mobile-overlay" aria-hidden="true"></div>
+    <aside id="mobile-drawer" aria-label="Navigation menu" aria-hidden="true">
+        <div class="drawer-header">
+            <div class="drawer-logo">
+                <div class="brand">TSANGARIDES</div>
+                <div class="sub">Winery &amp; Estate</div>
+            </div>
+            <button id="drawer-close" aria-label="Close menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <nav class="drawer-nav" aria-label="Mobile navigation">
+            <a href="#">Shop Wines <span class="arrow">›</span></a>
+            <a href="#">Visit the Winery <span class="arrow">›</span></a>
+            <a href="#">Book a Tasting <span class="arrow">›</span></a>
+            <a href="#">Events <span class="arrow">›</span></a>
+            <a href="#">Our Story <span class="arrow">›</span></a>
+            <a href="#">Contact <span class="arrow">›</span></a>
+        </nav>
+        <div class="drawer-footer">
+            <div class="drawer-footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Cookies</a>
+            </div>
+            <div class="drawer-copy">© <span class="year-placeholder"></span> TSANGARIDES WINERY</div>
+        </div>
+    </aside>
+
+    <!-- ─── SHOP HERO BANNER ─── -->
+    <section class="shop-hero">
+        <div class="shop-hero-bg"></div>
+        <div class="shop-hero-content">
+            <p class="shop-hero-eyebrow">LEMONA, PAPHOS · CYPRUS</p>
+            <h1 class="shop-hero-title">Our <em>Wine Collection</em></h1>
+            <div class="breadcrumb" style="margin-top:14px;">
+                <a href="{% url 'index' %}">Home</a>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)"
+                    stroke-width="1.5">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+                <span>Shop Wines</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── SHOP LAYOUT ─── -->
+    <div class="shop-layout">
+
+        <!-- ── SIDEBAR ── -->
+        <aside class="shop-sidebar">
+
+            <!-- Active filters summary (shown only if filters active) -->
+            <div id="active-filter-summary" style="display:none; margin-bottom:28px;">
+                <div class="sidebar-title" style="margin-bottom:10px;">ACTIVE FILTERS</div>
+                <div id="active-filter-tags" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+                <button id="clear-all-filters"
+                    style="margin-top:12px; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em; color:#8a7a5a; background:none; border:none; cursor:pointer; padding:0; text-decoration:underline; text-underline-offset:3px;">CLEAR
+                    ALL</button>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">WINE TYPE</div>
+                <div class="filter-group" id="filter-type">
+                    <button class="filter-pill active" data-filter="type" data-value="all">
+                        <span class="dot"></span> All Wines
+                    </button>
+                    <button class="filter-pill" data-filter="type" data-value="red">
+                        <span class="dot" style="background:#6b1a1a;border-color:#6b1a1a;"></span> Red Wines
+                    </button>
+                    <button class="filter-pill" data-filter="type" data-value="white">
+                        <span class="dot" style="background:#e8d870;border-color:#c9b845;"></span> White Wines
+                    </button>
+                    <button class="filter-pill" data-filter="type" data-value="rose">
+                        <span class="dot" style="background:#d9748a;border-color:#c05870;"></span> Rosé
+                    </button>
+                    <button class="filter-pill" data-filter="type" data-value="organic">
+                        <span class="dot" style="background:#4a7a3a;border-color:#3a6030;"></span> Organic Range
+                    </button>
+                    <button class="filter-pill" data-filter="type" data-value="reserve">
+                        <span class="dot" style="background:#C9A84C;border-color:#C9A84C;"></span> Reserve
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">SORT BY</div>
+                <div class="filter-group" id="filter-sort">
+                    <button class="filter-pill active" data-filter="sort" data-value="default">
+                        <span class="dot"></span> Featured
+                    </button>
+                    <button class="filter-pill" data-filter="sort" data-value="price-asc">
+                        <span class="dot"></span> Price: Low to High
+                    </button>
+                    <button class="filter-pill" data-filter="sort" data-value="price-desc">
+                        <span class="dot"></span> Price: High to Low
+                    </button>
+                    <button class="filter-pill" data-filter="sort" data-value="title-asc">
+                        <span class="dot"></span> Name A–Z
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">NEED HELP?</div>
+                <p style="font-size:0.78rem;line-height:1.7;color:#8a7a5a;margin-bottom:14px;">Not sure which wine to
+                    choose? Our team is happy to guide you.</p>
+                <a href="#" class="btn-gold" style="font-size:0.55rem;padding:10px 20px;">CONTACT US</a>
+            </div>
+        </aside>
+
+        <!-- ── MAIN CONTENT ── -->
+        <main>
+            <!-- Mobile filter pills -->
+            <div class="mobile-filter-bar">
+                <span class="mobile-filter-label">FILTER BY</span>
+                <select class="sort-select" id="mobile-sort-select">
+                    <option value="default">Featured</option>
+                    <option value="price-asc">Price: Low → High</option>
+                    <option value="price-desc">Price: High → Low</option>
+                    <option value="title-asc">Name A–Z</option>
+                </select>
+            </div>
+
+            <!-- Mobile type filters -->
+            <div style="display:none;" id="mobile-type-filters" class="filter-group"
+                style="margin-bottom:24px; flex-wrap:wrap; gap:8px;">
+            </div>
+
+            <!-- Results header -->
+            <div class="results-header">
+                <span class="results-count" id="results-count">LOADING WINES…</span>
+                <div class="results-sort">
+                    <span>SORT:</span>
+                    <select id="desktop-sort-select">
+                        <option value="default">Featured</option>
+                        <option value="price-asc">Price: Low → High</option>
+                        <option value="price-desc">Price: High → Low</option>
+                        <option value="title-asc">Name A–Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Loading skeleton (hidden once Shopify loads) -->
+            <div id="collection-skeleton" class="collection-loading">
+                <div class="skeleton-card">
+                    <div class="skeleton-img"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                        <div class="skeleton-line price"></div>
+                        <div class="skeleton-btn"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="skeleton-img"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                        <div class="skeleton-line price"></div>
+                        <div class="skeleton-btn"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="skeleton-img"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                        <div class="skeleton-line price"></div>
+                        <div class="skeleton-btn"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="skeleton-img"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                        <div class="skeleton-line price"></div>
+                        <div class="skeleton-btn"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--
+                ✅ SHOPIFY COLLECTION GRID TARGET
+                The Buy Button JS mounts the product grid here.
+                Grid columns and gap are set in the JS options below.
+            -->
+            <div id="shopify-collection-grid"></div>
+        </main>
+    </div>
+
+    <!-- ─── PROMO BANNER ─── -->
+    <div class="promo-banner">
+        <div>
+            <div class="promo-eyebrow">EXCLUSIVE MEMBERSHIP</div>
+            <div class="promo-title">Join Our <em>Wine Club</em></div>
+            <p class="promo-body">Receive hand-selected wines from our estate delivered to your door each season — plus
+                early access to new releases and member-only events.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:0;align-items:center;">
+            <a href="#" class="btn-gold">JOIN NOW</a>
+            <a href="#" class="btn-outline-dark">LEARN MORE</a>
+        </div>
+    </div>
+
+    <!-- Shopify cart mount point -->
+    <div id="shopify-cart"></div>
+
+    <!-- ─── FOOTER ─── -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo-mark">
+                    <div class="logo-emblem" style="border-color:rgba(201,168,76,0.5);color:var(--gold);">T</div>
+                    <div class="logo-text">
+                        <div class="brand" style="color:#F5F0E8;">TSANGARIDES</div>
+                        <div class="sub" style="color:#8a7a5a;">Winery &amp; Estate</div>
+                    </div>
+                </div>
+                <p>Family owned &amp; estate grown in Lemona, Paphos, Cyprus. Crafting organic wines with passion since
+                    2005.</p>
+            </div>
+            <div>
+                <div class="footer-col-title">WINES</div>
+                <ul class="footer-links">
+                    <li><a href="#">Red Wines</a></li>
+                    <li><a href="#">White Wines</a></li>
+                    <li><a href="#">Rosé Wines</a></li>
+                    <li><a href="#">Organic Range</a></li>
+                    <li><a href="#">Reserve Collection</a></li>
+                    <li><a href="#">Gift Sets</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">VISIT</div>
+                <ul class="footer-links">
+                    <li><a href="#">Wine Tastings</a></li>
+                    <li><a href="#">Winery Tours</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Accommodation</a></li>
+                    <li><a href="#">Restaurant</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">CONTACT</div>
+                <ul class="footer-links">
+                    <li><a href="#">info@tsangarideswinery.com</a></li>
+                    <li><a href="#">+357 26 722 777</a></li>
+                    <li><a href="#" style="color:#8a7a5a;font-size:.75rem;line-height:1.5;">Lemona Village,<br>Paphos
+                            8545,<br>Cyprus</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span class="year-placeholder"></span> TSANGARIDES WINERY. ALL RIGHTS RESERVED.</span>
+            <div style="display:flex;gap:24px;flex-wrap:wrap;">
+                <a href="#"
+                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
+                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">PRIVACY POLICY</a>
+                <a href="#"
+                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
+                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">TERMS OF USE</a>
+                <a href="#"
+                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
+                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">COOKIE POLICY</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ─── SCRIPTS ─── -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+
+            /* ── Year ── */
+            document.querySelectorAll('.year-placeholder').forEach(el => el.textContent = new Date().getFullYear());
+
+            /* ── Mobile drawer ── */
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const drawerClose = document.getElementById('drawer-close');
+            const overlay = document.getElementById('mobile-overlay');
+            const drawer = document.getElementById('mobile-drawer');
+
+            function openDrawer() {
+                overlay.classList.add('open');
+                requestAnimationFrame(() => { overlay.classList.add('visible'); drawer.classList.add('open'); });
+                hamburgerBtn.classList.add('open');
+                hamburgerBtn.setAttribute('aria-expanded', 'true');
+                drawer.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeDrawer() {
+                overlay.classList.remove('visible'); drawer.classList.remove('open');
+                hamburgerBtn.classList.remove('open'); hamburgerBtn.setAttribute('aria-expanded', 'false');
+                drawer.setAttribute('aria-hidden', 'true'); document.body.style.overflow = '';
+                overlay.addEventListener('transitionend', () => overlay.classList.remove('open'), { once: true });
+            }
+            hamburgerBtn.addEventListener('click', openDrawer);
+            drawerClose.addEventListener('click', closeDrawer);
+            overlay.addEventListener('click', closeDrawer);
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+            window.addEventListener('resize', () => { if (window.innerWidth >= 1024) closeDrawer(); });
+
+            /* ── Filter / Sort state ── */
+            let activeType = 'all';
+            let activeSort = 'default';
+
+            /* Map sort values to Shopify sortKey + reverse */
+            const sortMap = {
+                'default': { sortKey: 'COLLECTION_DEFAULT', reverse: false },
+                'price-asc': { sortKey: 'PRICE', reverse: false },
+                'price-desc': { sortKey: 'PRICE', reverse: true },
+                'title-asc': { sortKey: 'TITLE', reverse: false }
+            };
+
+            /* ── Sidebar filter pills ── */
+            document.querySelectorAll('.filter-pill').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const group = btn.dataset.filter;
+                    const val = btn.dataset.value;
+
+                    // Deactivate siblings in same group
+                    document.querySelectorAll(`.filter-pill[data-filter="${group}"]`).forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    if (group === 'type') {
+                        activeType = val;
+                        reloadCollection();
+                    } else if (group === 'sort') {
+                        activeSort = val;
+                        document.getElementById('desktop-sort-select').value = val;
+                        document.getElementById('mobile-sort-select').value = val;
+                        reloadCollection();
+                    }
+                });
+            });
+
+            /* ── Sort dropdowns (desktop + mobile) ── */
+            ['desktop-sort-select', 'mobile-sort-select'].forEach(id => {
+                document.getElementById(id).addEventListener('change', function () {
+                    activeSort = this.value;
+                    // Sync sidebar pills
+                    document.querySelectorAll('.filter-pill[data-filter="sort"]').forEach(b => {
+                        b.classList.toggle('active', b.dataset.value === activeSort);
+                    });
+                    // Sync the other select
+                    const other = id === 'desktop-sort-select' ? 'mobile-sort-select' : 'desktop-sort-select';
+                    document.getElementById(other).value = activeSort;
+                    reloadCollection();
+                });
+            });
+
+            /* ── Shopify ── */
+            const client = ShopifyBuy.buildClient({
+                domain: 'tommys2000.myshopify.com',
+                storefrontAccessToken: 'bbc2c3d95d8ecc7895e08d8448e7f28f',
+            });
+            const ui = ShopifyBuy.UI.init(client);
+
+            /* Cart badge */
+            function updateCartBadge(cart) {
+                const badge = document.getElementById('cart-item-count');
+                if (!badge) return;
+                const count = cart ? cart.lineItems.reduce((s, i) => s + i.quantity, 0) : 0;
+                badge.textContent = count;
+                count > 0 ? badge.classList.add('visible') : badge.classList.remove('visible');
+            }
+
+            let cartComponent = null;
+
+            ui.createComponent('cart', {
+                node: document.getElementById('shopify-cart'),
+                options: {
+                    cart: {
+                        startOpen: false,
+                        styles: {
+                            button: { 'background-color': '#C9A84C', 'color': '#1A1208', 'font-family': 'Cinzel, serif', ':hover': { 'background-color': '#b0923d' } }
+                        },
+                        events: {
+                            afterInit: c => { cartComponent = c; updateCartBadge(c.model); },
+                            updateComplete: c => updateCartBadge(c.model)
+                        }
+                    }
+                }
+            }).then(c => { cartComponent = c; });
+
+            document.getElementById('cart-toggle-btn').addEventListener('click', () => {
+                if (cartComponent) cartComponent.toggleVisibility();
+            });
+
+            /* ── Collection loader ── */
+            let collectionComponent = null;
+
+            function getCollectionOptions() {
+                const { sortKey, reverse } = sortMap[activeSort];
+                return {
+                    product: {
+                        buttonDestination: 'cart',
+                        layout: 'vertical',
+                        contents: { img: true, title: true, price: true, button: true },
+                        styles: {
+                            product: { 'text-align': 'center', 'margin-bottom': '0' },
+                            title: { 'font-family': 'Cinzel, serif', 'color': '#1A1208', 'font-size': '0.75rem', 'letter-spacing': '0.12em' },
+                            price: { 'color': '#C9A84C', 'font-family': 'Cormorant Garamond, serif', 'font-size': '1.1rem' },
+                            button: {
+                                'background-color': '#C9A84C', 'color': '#1A1208',
+                                'font-family': 'Cinzel, serif', 'font-size': '0.6rem',
+                                'letter-spacing': '0.15em', 'border-radius': '0',
+                                ':hover': { 'background-color': '#b0923d' }
+                            }
+                        },
+                        events: {
+                            afterInit: () => {
+                                hideSkeleton();
+                            },
+                            addToCart: () => {
+                                if (cartComponent) updateCartBadge(cartComponent.model);
+                            }
+                        }
+                    },
+                    collection: {
+                        /*
+                            sortKey + reverse drive the Shopify Storefront API query.
+                            The grid layout is set here so it's responsive and matches the page design.
+                        */
+                        sortKey: sortKey,
+                        reverse: reverse,
+                        styles: {
+                            products: {
+                                'display': 'grid',
+                                'grid-template-columns': 'repeat(auto-fill, minmax(220px, 1fr))',
+                                'gap': '28px'
+                            }
+                        }
+                    }
+                };
+            }
+
+            function hideSkeleton() {
+                const sk = document.getElementById('collection-skeleton');
+                if (sk) sk.style.display = 'none';
+                document.getElementById('results-count').textContent = 'SHOWING ALL WINES';
+            }
+
+            function reloadCollection() {
+                /* Destroy existing component and re-create with new options */
+                const grid = document.getElementById('shopify-collection-grid');
+                grid.innerHTML = ''; // clear previous iframe
+
+                /* Show skeleton again briefly */
+                const sk = document.getElementById('collection-skeleton');
+                if (sk) sk.style.display = 'grid';
+                document.getElementById('results-count').textContent = 'LOADING WINES…';
+
+                ui.createComponent('collection', {
+                    id: '574777786634',
+                    node: grid,
+                    options: getCollectionOptions()
+                }).then(c => { collectionComponent = c; });
+            }
+
+            /* Initial load */
+            ui.createComponent('collection', {
+                id: '574777786634',
+                node: document.getElementById('shopify-collection-grid'),
+                options: getCollectionOptions()
+            }).then(c => { collectionComponent = c; });
+
+        });
+    </script>
+
+</body>
+
+</html>

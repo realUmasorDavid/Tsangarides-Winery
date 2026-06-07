@@ -1,0 +1,1682 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tsangarides Winery — Organic Wines</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@shopify/buy-button-js@3.0.6/dist/buybutton.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Raleway:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E8C96A;
+            --dark: #1A1208;
+            --charcoal: #2C2318;
+            --cream: #F5F0E8;
+            --warm-white: #FAF7F2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: var(--warm-white);
+            color: var(--dark);
+        }
+
+        /* ── Top bar ── */
+        .topbar {
+            background: var(--dark);
+            color: #bfae94;
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            padding: 8px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .topbar {
+                padding: 8px 20px;
+                font-size: 0.55rem;
+            }
+
+            .topbar .topbar-links {
+                display: none;
+            }
+        }
+
+        .topbar a {
+            color: #bfae94;
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .topbar a:hover {
+            color: var(--gold-light);
+        }
+
+        /* ── Nav ── */
+        nav {
+            background: rgba(250, 247, 242, 0.97);
+            backdrop-filter: blur(8px);
+            padding: 18px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 14px 20px;
+            }
+        }
+
+        .logo-mark {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-emblem {
+            width: 52px;
+            height: 52px;
+            border: 1.5px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .logo-emblem {
+                width: 42px;
+                height: 42px;
+                font-size: 1.1rem;
+            }
+        }
+
+        .logo-text {
+            line-height: 1.1;
+        }
+
+        .logo-text .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 0.22em;
+            color: var(--dark);
+        }
+
+        .logo-text .sub {
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.35em;
+            color: #8a7a5a;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            color: var(--charcoal);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 3px;
+            transition: color .2s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width .3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ── Nav right icons ── */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-right svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--charcoal);
+            cursor: pointer;
+            transition: stroke .2s;
+        }
+
+        .nav-right svg:hover {
+            stroke: var(--gold);
+        }
+
+        /* ── Cart toggle button ── */
+        #cart-toggle-btn {
+            position: relative;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cart-toggle-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--charcoal);
+            transition: stroke .2s;
+        }
+
+        #cart-toggle-btn:hover svg {
+            stroke: var(--gold);
+        }
+
+        #cart-item-count {
+            display: none;
+            position: absolute;
+            top: -7px;
+            right: -8px;
+            background: var(--gold);
+            color: var(--dark);
+            font-family: 'Cinzel', serif;
+            font-size: 0.5rem;
+            font-weight: 700;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        #cart-item-count.visible {
+            display: flex;
+        }
+
+        .shopify-buy__cart-toggle {
+            display: none !important;
+        }
+
+        /* ── Hamburger button ── */
+        #hamburger-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            flex-direction: column;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        #hamburger-btn span {
+            display: block;
+            width: 22px;
+            height: 1.5px;
+            background: var(--charcoal);
+            transition: all .3s ease;
+            transform-origin: center;
+        }
+
+        #hamburger-btn.open span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg);
+        }
+
+        #hamburger-btn.open span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        #hamburger-btn.open span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg);
+        }
+
+        @media (max-width: 1024px) {
+            #hamburger-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* ── Mobile drawer overlay ── */
+        #mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(26, 18, 8, 0.55);
+            backdrop-filter: blur(3px);
+            z-index: 300;
+            opacity: 0;
+            transition: opacity .3s ease;
+        }
+
+        #mobile-overlay.open {
+            display: block;
+        }
+
+        #mobile-overlay.visible {
+            opacity: 1;
+        }
+
+        /* ── Mobile drawer panel ── */
+        #mobile-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100dvh;
+            width: min(320px, 85vw);
+            background: var(--dark);
+            z-index: 400;
+            transform: translateX(-100%);
+            transition: transform .38s cubic-bezier(.4, 0, .2, 1);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        #mobile-drawer.open {
+            transform: translateX(0);
+        }
+
+        .drawer-header {
+            padding: 24px 28px 20px;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .drawer-logo .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.22em;
+            color: #F5F0E8;
+        }
+
+        .drawer-logo .sub {
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.55rem;
+            letter-spacing: 0.3em;
+            color: #8a7a5a;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        #drawer-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #drawer-close svg {
+            width: 18px;
+            height: 18px;
+            stroke: #bfae94;
+            transition: stroke .2s;
+        }
+
+        #drawer-close:hover svg {
+            stroke: var(--gold-light);
+        }
+
+        .drawer-nav {
+            padding: 16px 0;
+            margin: 8px 0px;
+            flex: 1;
+            flex-direction: column;
+        }
+
+        .drawer-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: #bfae94;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+            transition: color .2s, background .2s;
+        }
+
+        .drawer-nav a:hover {
+            color: var(--gold-light);
+            background: rgba(201, 168, 76, 0.06);
+        }
+
+        .drawer-nav a .arrow {
+            font-size: 0.6rem;
+            color: rgba(201, 168, 76, 0.4);
+            transition: color .2s;
+        }
+
+        .drawer-nav a:hover .arrow {
+            color: var(--gold-light);
+        }
+
+        .drawer-footer {
+            padding: 24px 28px;
+            border-top: 1px solid rgba(201, 168, 76, 0.15);
+            flex-shrink: 0;
+        }
+
+        .drawer-footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .drawer-footer-links a {
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.15em;
+            color: #8a7a5a;
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .drawer-footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .drawer-copy {
+            font-size: 0.62rem;
+            color: #5a4c30;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.08em;
+        }
+
+        /* ── Gold divider line ── */
+        .drawer-section-label {
+            padding: 16px 28px 8px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.52rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            opacity: 0.7;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            height: 88vh;
+            min-height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            padding: 72px 80px;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 100svh;
+                padding: 40px 24px;
+                min-height: 500px;
+            }
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(110deg, rgba(9, 5, 1, 0.90) 0%, rgba(9, 5, 1, 0.65) 55%, rgba(9, 5, 1, 0.40) 100%),
+            url("{% static 'Photo-147.jpg' %}") center/cover no-repeat;
+            transform: scale(1.04);
+            opacity: 1;
+            animation: slowzoom 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowzoom {
+            from {
+                transform: scale(1.04);
+            }
+
+            to {
+                transform: scale(1.00);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 600px;
+        }
+
+        .hero-eyebrow {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.35em;
+            color: var(--gold-light);
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeup .8s .3s forwards;
+        }
+
+        @media (max-width: 768px) {
+            .hero-eyebrow {
+                font-size: 0.55rem;
+            }
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.6rem, 6vw, 5.2rem);
+            font-weight: 300;
+            line-height: 1.05;
+            color: #fff;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeup .9s .5s forwards;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        .hero-sub {
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.78);
+            margin-bottom: 36px;
+            max-width: 420px;
+            opacity: 0;
+            animation: fadeup .9s .7s forwards;
+        }
+
+        @media (max-width: 768px) {
+            .hero-sub {
+                font-size: 0.8rem;
+            }
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeup .9s .9s forwards;
+        }
+
+        @media (max-width: 480px) {
+            .hero-btns {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        .hero-awards {
+            position: absolute;
+            right: 60px;
+            bottom: 60px;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero-awards {
+                display: none;
+            }
+        }
+
+        .btn-gold {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            padding: 14px 32px;
+            background: var(--gold);
+            color: var(--dark);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background .25s, transform .2s;
+            display: inline-block;
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 480px) {
+
+            .btn-gold,
+            .btn-outline {
+                padding: 12px 24px;
+                font-size: 0.55rem;
+            }
+        }
+
+        .btn-outline {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            padding: 13px 32px;
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color .25s, color .25s;
+            display: inline-block;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold-light);
+            color: var(--gold-light);
+        }
+
+        .award-badge {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(201, 168, 76, 0.5);
+            backdrop-filter: blur(6px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-light);
+            font-size: 0.52rem;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.05em;
+            text-align: center;
+            padding: 6px;
+        }
+
+        .award-badge .award-icon {
+            font-size: 1.1rem;
+            margin-bottom: 2px;
+        }
+
+        .award-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.55rem;
+            letter-spacing: .12em;
+            color: rgba(255, 255, 255, 0.55);
+            align-self: flex-end;
+            margin-bottom: 6px;
+        }
+
+        @keyframes fadeup {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── Pillars ── */
+        .pillars {
+            background: var(--warm-white);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (max-width: 768px) {
+            .pillars {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pillars {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pillar {
+            padding: 44px 32px;
+            text-align: center;
+            border-right: 1px solid rgba(201, 168, 76, 0.15);
+            transition: background .25s;
+        }
+
+        @media (max-width: 768px) {
+            .pillar {
+                padding: 32px 20px;
+            }
+
+            .pillar:nth-child(2) {
+                border-right: none;
+            }
+
+            .pillar:nth-child(3) {
+                border-right: 1px solid rgba(201, 168, 76, 0.15);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pillar {
+                border-right: none;
+                border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+            }
+        }
+
+        .pillar:last-child {
+            border-right: none;
+        }
+
+        .pillar:hover {
+            background: rgba(201, 168, 76, 0.06);
+        }
+
+        .pillar-icon {
+            margin: 0 auto 14px;
+            opacity: 0.7;
+        }
+
+        .pillar-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.22em;
+            color: var(--charcoal);
+            margin-bottom: 8px;
+        }
+
+        .pillar-desc {
+            font-size: 0.78rem;
+            line-height: 1.6;
+            color: #6b5c3e;
+        }
+
+        /* ── Shopify section ── */
+        #shopify-collection-section {
+            padding: 0 48px 72px;
+            min-height: 200px;
+        }
+
+        @media (max-width: 768px) {
+            #shopify-collection-section {
+                padding: 0 20px 48px;
+            }
+        }
+
+        /* ── Section headers ── */
+        .section-header {
+            text-align: center;
+            padding: 72px 48px 48px;
+        }
+
+        @media (max-width: 768px) {
+            .section-header {
+                padding: 48px 20px 32px;
+            }
+        }
+
+        .section-rule {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .section-rule::before,
+        .section-rule::after {
+            content: '';
+            flex: 1;
+            max-width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold));
+        }
+
+        .section-rule::after {
+            background: linear-gradient(to left, transparent, var(--gold));
+        }
+
+        .section-rule span {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 300;
+            color: var(--dark);
+        }
+
+        .section-view-all {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.18em;
+            color: var(--gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: flex-end;
+            padding-right: 48px;
+            margin-top: -40px;
+            transition: gap .2s;
+        }
+
+        @media (max-width: 768px) {
+            .section-view-all {
+                padding-right: 20px;
+                margin-top: -24px;
+            }
+        }
+
+        .section-view-all:hover {
+            gap: 14px;
+        }
+
+        /* ── Feature Grid ── */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: 280px 280px;
+        }
+
+        @media (max-width: 1024px) {
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 260px 260px 260px;
+            }
+
+            .feature-card:nth-child(1) {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .feature-card:nth-child(2) {
+                grid-column: 2;
+                grid-row: 1;
+            }
+
+            .feature-card:nth-child(3) {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            .feature-card:nth-child(4) {
+                grid-column: 2;
+                grid-row: 2;
+            }
+
+            .feature-card:nth-child(5) {
+                grid-column: 1;
+                grid-row: 3;
+            }
+
+            .feature-card:nth-child(6) {
+                grid-column: 2;
+                grid-row: 3;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(6, 220px);
+            }
+
+            .feature-card:nth-child(n) {
+                grid-column: 1;
+                grid-row: auto;
+            }
+        }
+
+        .feature-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        @media (min-width: 1025px) {
+            .feature-card:nth-child(1) {
+                grid-column: 1;
+                grid-row: 1 / 3;
+            }
+
+            .feature-card:nth-child(2) {
+                grid-column: 2;
+                grid-row: 1 / 3;
+            }
+
+            .feature-card:nth-child(3) {
+                grid-column: 3;
+                grid-row: 1;
+            }
+
+            .feature-card:nth-child(4) {
+                grid-column: 4;
+                grid-row: 1 / 2;
+            }
+
+            .feature-card:nth-child(5) {
+                grid-column: 3;
+                grid-row: 2;
+            }
+
+            .feature-card:nth-child(6) {
+                grid-column: 4;
+                grid-row: 2;
+            }
+        }
+
+        .feature-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .6s ease;
+        }
+
+        .feature-card:hover img {
+            transform: scale(1.06);
+        }
+
+        .feature-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(26, 18, 8, 0.82) 0%, rgba(26, 18, 8, 0.1) 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 28px;
+        }
+
+        @media (max-width: 480px) {
+            .feature-overlay {
+                padding: 20px;
+            }
+        }
+
+        .feature-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            color: var(--gold-light);
+            margin-bottom: 8px;
+        }
+
+        .feature-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 480px) {
+            .feature-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        .feature-desc {
+            font-size: 0.75rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.72);
+            margin-bottom: 16px;
+        }
+
+        .feature-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.18em;
+            color: var(--gold-light);
+            text-decoration: none;
+            transition: gap .2s;
+        }
+
+        .feature-link:hover {
+            gap: 14px;
+        }
+
+        .feature-link svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--gold-light);
+        }
+
+        /* ── Story Section ── */
+        .story-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 520px;
+        }
+
+        @media (max-width: 768px) {
+            .story-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .story-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .story-image {
+                height: 300px;
+            }
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, transparent 70%, var(--warm-white));
+        }
+
+        @media (max-width: 768px) {
+            .story-image::after {
+                background: linear-gradient(to bottom, transparent 60%, var(--warm-white));
+            }
+        }
+
+        .story-content {
+            padding: 72px 64px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .story-content {
+                padding: 40px 24px 48px;
+            }
+        }
+
+        .story-content .section-rule {
+            justify-content: flex-start;
+        }
+
+        .story-content .section-rule::before {
+            display: none;
+        }
+
+        .story-content .section-rule::after {
+            background: linear-gradient(to right, var(--gold), transparent);
+        }
+
+        .story-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            font-weight: 300;
+            line-height: 1.15;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .story-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .story-body {
+            font-size: 0.85rem;
+            line-height: 1.85;
+            color: #5a4c30;
+            margin-bottom: 32px;
+        }
+
+        .story-stat {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 36px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(201, 168, 76, 0.2);
+            flex-wrap: wrap;
+        }
+
+        .stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 300;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.55rem;
+            letter-spacing: 0.18em;
+            color: #8a7a5a;
+            margin-top: 4px;
+        }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--dark);
+            color: #bfae94;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            padding: 64px 80px 48px;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        @media (max-width: 1024px) {
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+                padding: 48px 40px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                padding: 40px 24px;
+            }
+        }
+
+        .footer-brand p {
+            font-size: 0.8rem;
+            line-height: 1.7;
+            color: #8a7a5a;
+            margin-top: 16px;
+            max-width: 280px;
+        }
+
+        .footer-col-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: 0.78rem;
+            color: #8a7a5a;
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+        }
+
+        .footer-bottom {
+            padding: 24px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.68rem;
+            color: #5a4c30;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.1em;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-bottom {
+                padding: 20px 24px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── Top bar ── -->
+    <div class="topbar text-center">
+        <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
+        <!-- <div class="topbar-links" style="display:flex;gap:28px;">
+            <a href="#">Visit Us</a>
+            <a href="#">Wine Club</a>
+            <a href="#">Adopt a Vine</a>
+            <span style="border-left:1px solid rgba(191,174,148,0.3); padding-left:28px;">EN ▾</span>
+        </div> -->
+    </div>
+
+    <!-- ── Navigation ── -->
+    <nav>
+        <!-- Logo -->
+        <a href="#" class="logo-mark">
+            <div class="logo-emblem">T</div>
+            <div class="logo-text">
+                <div class="brand">TSANGARIDES</div>
+                <div class="sub">Winery &amp; Estate</div>
+            </div>
+        </a>
+
+        <!-- Desktop nav links -->
+        <ul class="nav-links">
+            <li><a href="#">Shop Wines</a></li>
+            <li><a href="#">Visit Us</a></li>
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+        <!-- Right-side icons -->
+        <div class="nav-right">
+            <!-- <svg class="hidden lg:block" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                <circle cx="11" cy="11" r="7" />
+                <path d="M21 21l-4.35-4.35" />
+            </svg>
+            <svg class="hidden lg:block" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+            </svg>
+            <button id="cart-toggle-btn" aria-label="Open cart">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <path d="M16 10a4 4 0 01-8 0" />
+                </svg>
+                <span id="cart-item-count" aria-live="polite">0</span>
+            </button> -->
+            <!-- Hamburger — mobile/tablet only -->
+            <button id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ── Mobile overlay ── -->
+    <div id="mobile-overlay" aria-hidden="true"></div>
+
+    <!-- ── Mobile drawer ── -->
+    <aside id="mobile-drawer" aria-label="Navigation menu" aria-hidden="true">
+        <div class="drawer-header">
+            <div class="drawer-logo">
+                <div class="brand">TSANGARIDES</div>
+                <div class="sub">Winery &amp; Estate</div>
+            </div>
+            <button id="drawer-close" aria-label="Close menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <nav class="drawer-nav" aria-label="Mobile navigation">
+            <a href="#">Shop Wines <span class="arrow">›</span></a>
+            <a href="#">Visit the Winery <span class="arrow">›</span></a>
+            <a href="#">Book a Tasting <span class="arrow">›</span></a>
+            <a href="#">Events <span class="arrow">›</span></a>
+            <a href="#">Our Story <span class="arrow">›</span></a>
+            <a href="#">Contact <span class="arrow">›</span></a>
+        </nav>
+
+        <div class="drawer-footer">
+            <div class="drawer-footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Cookies</a>
+            </div>
+            <div class="drawer-copy">© <span id="year"></span> TSANGARIDES WINERY</div>
+        </div>
+    </aside>
+
+    <!-- ── Hero ── -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">FROM THE HEART OF CYPRUS</p>
+            <h1 class="hero-title">Award-Winning<br><em>Organic Wines</em></h1>
+            <p class="hero-sub">Four generations of winemaking tradition, sustainable vineyards and passionate
+                craftsmanship poured into every bottle.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn-gold">SHOP WINES</a>
+                <a href="#" class="btn-outline">BOOK A TASTING</a>
+                <a href="#" class="btn-outline">VISIT THE WINERY</a>
+            </div>
+        </div>
+        <!-- <div class="hero-awards">
+            <span class="award-label">AWARD WINNING WINES</span>
+            <div class="award-badge">
+                <div class="award-icon">🥇</div>DECANTER<br>GOLD
+            </div>
+            <div class="award-badge">
+                <div class="award-icon">🏅</div>MUNDUS VINI<br>GOLD
+            </div>
+            <div class="award-badge">
+                <div class="award-icon">⭐</div>IWSC<br>TROPHY
+            </div>
+        </div> -->
+    </section>
+
+    <!-- ── Four Pillars ── -->
+    <div class="pillars">
+        <div class="pillar">
+            <svg class="pillar-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C9A84C"
+                stroke-width="1.2">
+                <path d="M20 4C20 4 8 14 8 24a12 12 0 0024 0C32 14 20 4 20 4z" />
+                <path d="M20 14v14M14 20h12" />
+            </svg>
+            <div class="pillar-title">100% ORGANIC VINEYARDS</div>
+            <p class="pillar-desc">The largest organic vineyard estate in Cyprus.</p>
+        </div>
+        <div class="pillar">
+            <svg class="pillar-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C9A84C"
+                stroke-width="1.2">
+                <circle cx="14" cy="14" r="5" />
+                <circle cx="26" cy="14" r="5" />
+                <path d="M4 34c0-6 4-10 10-10h12c6 0 10 4 10 10" />
+            </svg>
+            <div class="pillar-title">FAMILY HERITAGE</div>
+            <p class="pillar-desc">Four generations of passion and dedication.</p>
+        </div>
+        <div class="pillar">
+            <svg class="pillar-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C9A84C"
+                stroke-width="1.2">
+                <rect x="10" y="18" width="20" height="16" rx="2" />
+                <path d="M14 18v-4a6 6 0 0112 0v4" />
+                <circle cx="20" cy="27" r="2" />
+            </svg>
+            <div class="pillar-title">ESTATE GROWN</div>
+            <p class="pillar-desc">From our vineyards to your table, we craft every step.</p>
+        </div>
+        <div class="pillar">
+            <svg class="pillar-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C9A84C"
+                stroke-width="1.2">
+                <path d="M20 36s-12-8-12-18a12 12 0 0124 0c0 10-12 18-12 18z" />
+                <circle cx="20" cy="18" r="4" />
+            </svg>
+            <div class="pillar-title">LEMONA, PAPHOS</div>
+            <p class="pillar-desc">In the foothills of the Troodos Mountains.</p>
+        </div>
+    </div>
+
+    <!-- ── Shopify Featured Wines ── -->
+    <div class="section-header">
+        <div class="section-rule"><span>✦</span></div>
+        <h2 class="section-title">Featured Wines</h2>
+    </div>
+    <a href="#" class="section-view-all">
+        VIEW ALL WINES
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+    </a>
+    <div id="shopify-collection-section">
+        <div id="shopify-collection-grid"></div>
+    </div>
+
+    <!-- ── Feature Grid ── -->
+    <div class="feature-grid">
+        <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&q=80" alt="Shop our wines" />
+            <div class="feature-overlay">
+                <span class="feature-tag">COLLECTION</span>
+                <div class="feature-title">Shop Our Wines</div>
+                <p class="feature-desc">Discover our award-winning collection of red, white, rosé and organic wines.</p>
+                <a href="#" class="feature-link">SHOP NOW <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg></a>
+            </div>
+        </div>
+        <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600&q=80" alt="Visit the Winery" />
+            <div class="feature-overlay">
+                <span class="feature-tag">EXPERIENCE</span>
+                <div class="feature-title">Visit the Winery</div>
+                <p class="feature-desc">Join us for a wine tasting or tour and enjoy the true taste of Cyprus.</p>
+                <a href="#" class="feature-link">BOOK NOW <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg></a>
+            </div>
+        </div>
+        <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?w=600&q=80" alt="Wine Club" />
+            <div class="feature-overlay">
+                <span class="feature-tag">MEMBERSHIP</span>
+                <div class="feature-title">Wine Club</div>
+                <p class="feature-desc">Join our Wine Club and receive hand-selected wines delivered to your door.</p>
+                <a href="#" class="feature-link">JOIN NOW <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg></a>
+            </div>
+        </div>
+        <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1474722883778-792e7990302f?w=600&q=80" alt="Adopt a Vine" />
+            <div class="feature-overlay">
+                <span class="feature-tag">UNIQUE</span>
+                <div class="feature-title">Adopt a Vine</div>
+                <p class="feature-desc">Become part of our vineyard family and adopt your own vine.</p>
+                <a href="#" class="feature-link">LEARN MORE <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg></a>
+            </div>
+        </div>
+        <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1568213816046-0ee1c42bd559?w=600&q=80" alt="Blog" />
+            <div class="feature-overlay">
+                <span class="feature-tag">JOURNAL</span>
+                <div class="feature-title">From the Cellar</div>
+                <p class="feature-desc">Stories, recipes, and winemaking notes from our estate.</p>
+                <a href="#" class="feature-link">READ MORE <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg></a>
+            </div>
+        </div>
+        <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=600&q=80" alt="Gift Sets" />
+            <div class="feature-overlay">
+                <span class="feature-tag">GIFTING</span>
+                <div class="feature-title">Gift Sets</div>
+                <p class="feature-desc">Curated boxes for every occasion.</p>
+                <a href="#" class="feature-link">EXPLORE <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Our Story ── -->
+    <div class="story-section">
+        <div class="story-image">
+            <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=900&q=80" alt="Our Story" />
+        </div>
+        <div class="story-content">
+            <div class="section-rule"><span>✦</span></div>
+            <h2 class="story-title">Four Generations of<br><em>Passion &amp; Craft</em></h2>
+            <p class="story-body">Founded in 2005, Tsangarides Winery has remained in the family for generations, each
+                one deepening our commitment to the land and to the art of winemaking. Our 100% organic vineyards,
+                nestled in the hills of Paphos, yield grapes of extraordinary character — the foundation of wines that
+                consistently earn the world's highest accolades.</p>
+            <div class="story-stat">
+                <div>
+                    <div class="stat-num">20+</div>
+                    <div class="stat-label">YEARS HERITAGE</div>
+                </div>
+                <div>
+                    <div class="stat-num">4</div>
+                    <div class="stat-label">GENERATIONS</div>
+                </div>
+                <div>
+                    <div class="stat-num">100%</div>
+                    <div class="stat-label">ORGANIC</div>
+                </div>
+            </div>
+            <a href="#" class="btn-gold" style="display:inline-block; text-decoration:none; align-self:flex-start;">OUR
+                STORY</a>
+        </div>
+    </div>
+
+    <!-- Shopify cart mount -->
+    <div id="shopify-cart"></div>
+
+    <!-- ── Footer ── -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo-mark">
+                    <div class="logo-emblem" style="border-color:rgba(201,168,76,0.5); color:var(--gold);">T</div>
+                    <div class="logo-text">
+                        <div class="brand" style="color:#F5F0E8;">TSANGARIDES</div>
+                        <div class="sub" style="color:#8a7a5a;">Winery &amp; Estate</div>
+                    </div>
+                </div>
+                <p>Family owned &amp; estate grown in Lemona, Paphos, Cyprus. Crafting organic wines with passion since
+                    2005.</p>
+            </div>
+            <div>
+                <div class="footer-col-title">WINES</div>
+                <ul class="footer-links">
+                    <li><a href="#">Red Wines</a></li>
+                    <li><a href="#">White Wines</a></li>
+                    <li><a href="#">Rosé Wines</a></li>
+                    <li><a href="#">Organic Range</a></li>
+                    <li><a href="#">Reserve Collection</a></li>
+                    <li><a href="#">Gift Sets</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">VISIT</div>
+                <ul class="footer-links">
+                    <li><a href="#">Wine Tastings</a></li>
+                    <li><a href="#">Winery Tours</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Accommodation</a></li>
+                    <li><a href="#">Restaurant</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">CONTACT</div>
+                <ul class="footer-links">
+                    <li><a href="#">info@tsangarideswinery.com</a></li>
+                    <li><a href="#">+357 26 722 777</a></li>
+                    <li><a href="#" style="color:#8a7a5a; font-size:.75rem; line-height:1.5;">Lemona Village,<br>Paphos
+                            8545,<br>Cyprus</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span id="year"></span> TSANGARIDES WINERY. ALL RIGHTS RESERVED.</span>
+            <div style="display:flex;gap:24px;flex-wrap:wrap;">
+                <a href="#"
+                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
+                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">PRIVACY POLICY</a>
+                <a href="#"
+                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
+                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">TERMS OF USE</a>
+                <a href="#"
+                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
+                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">COOKIE POLICY</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ── Shopify Init ── -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // ── Mobile drawer logic ───────────────────────────────────────
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const drawerClose = document.getElementById('drawer-close');
+            const overlay = document.getElementById('mobile-overlay');
+            const drawer = document.getElementById('mobile-drawer');
+            const body = document.body;
+
+            function openDrawer() {
+                // Show overlay (display:block), then next frame add visible for opacity transition
+                overlay.classList.add('open');
+                requestAnimationFrame(() => {
+                    overlay.classList.add('visible');
+                    drawer.classList.add('open');
+                });
+                hamburgerBtn.classList.add('open');
+                hamburgerBtn.setAttribute('aria-expanded', 'true');
+                drawer.setAttribute('aria-hidden', 'false');
+                overlay.setAttribute('aria-hidden', 'false');
+                body.style.overflow = 'hidden'; // prevent background scroll
+            }
+
+            function closeDrawer() {
+                overlay.classList.remove('visible');
+                drawer.classList.remove('open');
+                hamburgerBtn.classList.remove('open');
+                hamburgerBtn.setAttribute('aria-expanded', 'false');
+                drawer.setAttribute('aria-hidden', 'true');
+                overlay.setAttribute('aria-hidden', 'true');
+                body.style.overflow = '';
+                // Remove display:block after transition ends
+                overlay.addEventListener('transitionend', () => overlay.classList.remove('open'), { once: true });
+            }
+
+            hamburgerBtn.addEventListener('click', openDrawer);
+            drawerClose.addEventListener('click', closeDrawer);
+            overlay.addEventListener('click', closeDrawer);
+
+            // Close on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+            });
+
+            // Close drawer if window resized to desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 1024 && drawer.classList.contains('open')) closeDrawer();
+            });
+
+            // ── Shopify ──────────────────────────────────────────────────
+            const client = ShopifyBuy.buildClient({
+                domain: 'tommys2000.myshopify.com',
+                storefrontAccessToken: 'bbc2c3d95d8ecc7895e08d8448e7f28f',
+            });
+
+            const ui = ShopifyBuy.UI.init(client);
+
+            function updateCartBadge(cart) {
+                const badge = document.getElementById('cart-item-count');
+                if (!badge) return;
+                const count = cart ? cart.lineItems.reduce((sum, item) => sum + item.quantity, 0) : 0;
+                badge.textContent = count;
+                count > 0 ? badge.classList.add('visible') : badge.classList.remove('visible');
+            }
+
+            let cartComponent = null;
+
+            ui.createComponent('cart', {
+                node: document.getElementById('shopify-cart'),
+                options: {
+                    cart: {
+                        startOpen: false,
+                        styles: {
+                            button: {
+                                'background-color': '#C9A84C', 'color': '#1A1208',
+                                'font-family': 'Cinzel, serif',
+                                ':hover': { 'background-color': '#b0923d' }
+                            }
+                        },
+                        events: {
+                            afterInit: function (component) { cartComponent = component; updateCartBadge(component.model); },
+                            updateComplete: function (component) { updateCartBadge(component.model); }
+                        }
+                    }
+                }
+            }).then(function (component) { cartComponent = component; });
+
+            // document.getElementById('cart-toggle-btn').addEventListener('click', function () {
+            //     if (cartComponent) cartComponent.toggleVisibility();
+            // });
+
+            ui.createComponent('collection', {
+                id: '574777786634',
+                node: document.getElementById('shopify-collection-grid'),
+                options: {
+                    product: {
+                        buttonDestination: 'cart',
+                        layout: 'vertical',
+                        contents: { img: true, title: true, price: true, button: true },
+                        styles: {
+                            product: { 'text-align': 'center', 'margin-bottom': '40px' },
+                            title: { 'font-family': 'Cinzel, serif', 'color': '#1A1208' },
+                            price: { 'color': '#C9A84C' },
+                            button: {
+                                'background-color': '#C9A84C', 'color': '#1A1208',
+                                'font-family': 'Cinzel, serif',
+                                ':hover': { 'background-color': '#b0923d' }
+                            }
+                        },
+                        events: {
+                            addToCart: function () {
+                                if (cartComponent) updateCartBadge(cartComponent.model);
+                            }
+                        }
+                    },
+                    collection: {
+                        styles: {
+                            products: {
+                                'display': 'grid',
+                                'grid-template-columns': 'repeat(auto-fit, minmax(220px, 1fr))',
+                                'gap': '30px'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
