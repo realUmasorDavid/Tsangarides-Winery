@@ -20,9 +20,6 @@ def events(request):
 def story(request):
     return render(request, 'index.html')
 
-def blog(request):
-    return render(request, 'index.html')
-
 def privacy(request):
     return render(request, 'index.html')
 
