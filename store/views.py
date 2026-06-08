@@ -12,7 +12,7 @@ def visit(request):
     return render(request, 'visit.html')
 
 def contact(request):
-    return render(request, 'index.html')
+    return render(request, 'contact.html')
 
 def events(request):
     return render(request, 'index.html')
