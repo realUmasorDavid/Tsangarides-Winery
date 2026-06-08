@@ -18,7 +18,7 @@ def events(request):
     return render(request, 'index.html')
 
 def story(request):
-    return render(request, 'index.html')
+    return render(request, 'story.html')
 
 def privacy(request):
     return render(request, 'index.html')
