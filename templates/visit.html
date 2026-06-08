@@ -1,0 +1,1075 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visit Us — Tsangarides Winery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@shopify/buy-button-js@3.0.6/dist/buybutton.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Raleway:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E8C96A;
+            --dark: #1A1208;
+            --charcoal: #2C2318;
+            --cream: #F5F0E8;
+            --warm-white: #FAF7F2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: var(--warm-white);
+            color: var(--dark);
+        }
+
+        /* ── Top bar ── */
+        .topbar {
+            background: var(--dark);
+            color: #bfae94;
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            padding: 8px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .topbar {
+                padding: 8px 20px;
+                font-size: 0.55rem;
+            }
+        }
+
+        .topbar a {
+            color: #bfae94;
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .topbar a:hover {
+            color: var(--gold-light);
+        }
+
+        /* ── Nav ── */
+        nav {
+            background: rgba(250, 247, 242, 0.97);
+            backdrop-filter: blur(8px);
+            padding: 18px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 14px 20px;
+            }
+        }
+
+        .logo-mark {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-emblem {
+            width: 52px;
+            height: 52px;
+            border: 1.5px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .logo-emblem {
+                width: 42px;
+                height: 42px;
+                font-size: 1.1rem;
+            }
+        }
+
+        .logo-text {
+            line-height: 1.1;
+        }
+
+        .logo-text .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 0.22em;
+            color: var(--dark);
+        }
+
+        .logo-text .sub {
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.35em;
+            color: #8a7a5a;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            color: var(--charcoal);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 3px;
+            transition: color .2s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width .3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ── Nav right icons ── */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-right svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--charcoal);
+            cursor: pointer;
+            transition: stroke .2s;
+        }
+
+        .nav-right svg:hover {
+            stroke: var(--gold);
+        }
+
+        /* Hamburger button */
+        #hamburger-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            flex-direction: column;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        #hamburger-btn span {
+            display: block;
+            width: 22px;
+            height: 1.5px;
+            background: var(--charcoal);
+            transition: all .3s ease;
+            transform-origin: center;
+        }
+
+        #hamburger-btn.open span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg);
+        }
+
+        #hamburger-btn.open span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        #hamburger-btn.open span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg);
+        }
+
+        @media (max-width: 1024px) {
+            #hamburger-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Mobile drawer */
+        #mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(26, 18, 8, 0.55);
+            backdrop-filter: blur(3px);
+            z-index: 300;
+            opacity: 0;
+            transition: opacity .3s ease;
+        }
+
+        #mobile-overlay.open {
+            display: block;
+        }
+
+        #mobile-overlay.visible {
+            opacity: 1;
+        }
+
+        #mobile-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100dvh;
+            width: min(320px, 85vw);
+            background: var(--dark);
+            z-index: 400;
+            transform: translateX(-100%);
+            transition: transform .38s cubic-bezier(.4, 0, .2, 1);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        #mobile-drawer.open {
+            transform: translateX(0);
+        }
+
+        .drawer-header {
+            padding: 24px 28px 20px;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .drawer-logo .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.22em;
+            color: #F5F0E8;
+        }
+
+        .drawer-logo .sub {
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.55rem;
+            letter-spacing: 0.3em;
+            color: #8a7a5a;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        #drawer-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #drawer-close svg {
+            width: 18px;
+            height: 18px;
+            stroke: #bfae94;
+            transition: stroke .2s;
+        }
+
+        #drawer-close:hover svg {
+            stroke: var(--gold-light);
+        }
+
+        .drawer-nav {
+            padding: 16px 0;
+            margin: 8px 0px;
+            flex: 1;
+            flex-direction: column;
+        }
+
+        .drawer-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: #bfae94;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+            transition: color .2s, background .2s;
+        }
+
+        .drawer-nav a:hover {
+            color: var(--gold-light);
+            background: rgba(201, 168, 76, 0.06);
+        }
+
+        .drawer-nav a .arrow {
+            font-size: 0.6rem;
+            color: rgba(201, 168, 76, 0.4);
+            transition: color .2s;
+        }
+
+        .drawer-nav a:hover .arrow {
+            color: var(--gold-light);
+        }
+
+        .drawer-footer {
+            padding: 24px 28px;
+            border-top: 1px solid rgba(201, 168, 76, 0.15);
+            flex-shrink: 0;
+        }
+
+        .drawer-footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .drawer-footer-links a {
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.15em;
+            color: #8a7a5a;
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .drawer-footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .drawer-copy {
+            font-size: 0.62rem;
+            color: #5a4c30;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.08em;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            height: 85vh;
+            min-height: 620px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 24px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(26, 18, 8, 0.65), rgba(26, 18, 8, 0.45)),
+            url("{% static 'photo-100.webp' %}") center/cover no-repeat;
+            animation: slowzoom 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowzoom {
+            from {
+                transform: scale(1.05);
+            }
+
+            to {
+                transform: scale(1.00);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 720px;
+            color: #fff;
+        }
+
+        .hero-eyebrow {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.35em;
+            color: var(--gold-light);
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            line-height: 1.65;
+            max-width: 520px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .btn-gold {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            padding: 14px 36px;
+            background: var(--gold);
+            color: var(--dark);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all .25s;
+            display: inline-block;
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            padding: 13px 36px;
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all .25s;
+            display: inline-block;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold-light);
+            color: var(--gold-light);
+        }
+
+        /* ── Visit Info Grid ── */
+        .visit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 48px;
+            padding: 80px 48px;
+        }
+
+        @media (max-width: 768px) {
+            .visit-grid {
+                padding: 48px 20px;
+                gap: 32px;
+            }
+        }
+
+        .visit-card {
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(26, 18, 8, 0.08);
+            transition: transform .3s;
+        }
+
+        .visit-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .visit-card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+        }
+
+        .visit-content {
+            padding: 32px;
+        }
+
+        .visit-content h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.35rem;
+            letter-spacing: 0.03em;
+            margin-bottom: 16px;
+            color: var(--dark);
+        }
+
+        .visit-content p {
+            line-height: 1.75;
+            color: #5a4c30;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            background: rgba(201, 168, 76, 0.08);
+            padding: 20px;
+            border-left: 4px solid var(--gold);
+            margin: 24px 0;
+            font-size: 0.95rem;
+        }
+
+        /* ── Booking CTA ── */
+        .booking-cta {
+            background: var(--dark);
+            color: #F5F0E8;
+            padding: 100px 48px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .booking-cta {
+                padding: 72px 24px;
+            }
+        }
+
+        .booking-cta h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 300;
+            margin-bottom: 24px;
+        }
+
+        /* ── Location Section ── */
+        .location-section {
+            padding: 80px 48px;
+            background: var(--warm-white);
+        }
+
+        @media (max-width: 768px) {
+            .location-section {
+                padding: 48px 20px;
+            }
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .location-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        .map-placeholder {
+            background: #e5e0d8;
+            height: 420px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            color: #8a7a5a;
+            font-size: 1.1rem;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+        }
+
+        /* ── Experiences ── */
+        .experiences {
+            padding: 80px 48px;
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+            .experiences {
+                padding: 48px 20px;
+            }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-rule {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .section-rule::before,
+        .section-rule::after {
+            content: '';
+            flex: 1;
+            max-width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold));
+        }
+
+        .section-rule::after {
+            background: linear-gradient(to left, transparent, var(--gold));
+        }
+
+        .section-rule span {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 300;
+        }
+
+        .exp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+        }
+
+        .exp-card {
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            padding: 40px 32px;
+            transition: all .3s;
+        }
+
+        .exp-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(201, 168, 76, 0.1);
+        }
+
+        .exp-price {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        /* Footer (same as index) */
+        footer {
+            background: var(--dark);
+            color: #bfae94;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            padding: 64px 80px 48px;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        @media (max-width: 1024px) {
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+                padding: 48px 40px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                padding: 40px 24px;
+            }
+        }
+
+        .footer-brand p {
+            font-size: 0.8rem;
+            line-height: 1.7;
+            color: #8a7a5a;
+            margin-top: 16px;
+            max-width: 280px;
+        }
+
+        .footer-col-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: 0.78rem;
+            color: #8a7a5a;
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+        }
+
+        .footer-bottom {
+            padding: 24px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.68rem;
+            color: #5a4c30;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.1em;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-bottom {
+                padding: 20px 24px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top bar -->
+    <div class="topbar text-center">
+        <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="{% url 'index' %}" class="logo-mark">
+            <div class="logo-emblem">T</div>
+            <div class="logo-text">
+                <div class="brand">TSANGARIDES</div>
+                <div class="sub">Winery &amp; Estate</div>
+            </div>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="{% url 'shop' %}">Shop Wines</a></li>
+            <li><a href="{% url 'visit-us' %}" class="text-[var(--gold)]">Visit Us</a></li>
+            <li><a href="{% url 'our-story' %}">Our Story</a></li>
+            <li><a href="{% url 'blog' %}">Blog</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <button id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile overlay -->
+    <div id="mobile-overlay" aria-hidden="true"></div>
+
+    <!-- Mobile drawer -->
+    <aside id="mobile-drawer" aria-label="Navigation menu" aria-hidden="true">
+        <div class="drawer-header">
+            <div class="drawer-logo">
+                <div class="brand">TSANGARIDES</div>
+                <div class="sub">Winery &amp; Estate</div>
+            </div>
+            <button id="drawer-close" aria-label="Close menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <nav class="drawer-nav" aria-label="Mobile navigation">
+            <a href="{% url 'shop' %}">Shop Wines <span class="arrow">›</span></a>
+            <a href="{% url 'visit-us' %}">Visit the Winery <span class="arrow">›</span></a>
+            <a href="https://tommys2000.myshopify.com/pages/booking" target="_blank">Book a Tasting <span
+                    class="arrow">›</span></a>
+            <a href="{% url 'events' %}">Events <span class="arrow">›</span></a>
+            <a href="{% url 'our-story' %}">Our Story <span class="arrow">›</span></a>
+            <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
+        </nav>
+
+        <div class="drawer-footer">
+            <div class="drawer-footer-links">
+                <a href="{% url 'privacy' %}">Privacy</a>
+                <a href="{% url 'terms' %}">Terms</a>
+                <a href="{% url 'cookies' %}">Cookies</a>
+            </div>
+            <div class="drawer-copy">© <span id="year">2026</span> TSANGARIDES WINERY</div>
+        </div>
+    </aside>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">WELCOME TO THE ESTATE</p>
+            <h1 class="hero-title">Experience<br><em>Lemona</em></h1>
+            <p class="hero-sub">Step into our world of organic winemaking. Enjoy guided tastings, vineyard walks, and
+                unforgettable moments in the heart of Cyprus.</p>
+            <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+                <a href="https://tommys2000.myshopify.com/pages/booking" target="_blank" class="btn-gold">BOOK YOUR
+                    TASTING</a>
+                <a href="#experiences" class="btn-outline">SEE EXPERIENCES</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit Info -->
+    <div class="visit-grid">
+        <div class="visit-card">
+            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80" alt="Wine tasting">
+            <div class="visit-content">
+                <h3>Wine Tastings</h3>
+                <p>Discover our award-winning collection through guided tastings led by our winemakers. Learn about each
+                    vintage and the unique terroir of Lemona.</p>
+                <div class="highlight">
+                    60–90 minutes • From €35 per person
+                </div>
+                <a href="https://tommys2000.myshopify.com/pages/booking" target="_blank" class="btn-gold"
+                    style="width:100%; text-align:center;">Reserve Now</a>
+            </div>
+        </div>
+
+        <div class="visit-card">
+            <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=800&q=80" alt="Vineyard tour">
+            <div class="visit-content">
+                <h3>Vineyard Tours</h3>
+                <p>Walk through our 100% organic vineyards with our team. See how we care for the land and understand
+                    the journey from vine to bottle.</p>
+                <div class="highlight">
+                    Includes tasting • From €45 per person
+                </div>
+                <a href="https://tommys2000.myshopify.com/pages/booking" target="_blank" class="btn-gold"
+                    style="width:100%; text-align:center;">Book a Tour</a>
+            </div>
+        </div>
+
+        <div class="visit-card">
+            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80" alt="Private events">
+            <div class="visit-content">
+                <h3>Private Events</h3>
+                <p>Host your special occasion at the winery — weddings, corporate retreats, or private dinners with
+                    panoramic views of the Troodos foothills.</p>
+                <a href="{% url 'contact' %}" class="btn-gold" style="width:100%; text-align:center;">Inquire</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking CTA -->
+    <div class="booking-cta">
+        <h2>Ready to visit?</h2>
+        <p style="max-width:480px; margin:0 auto 32px; font-size:1.05rem; opacity:0.85;">Tastings and tours are
+            available Wednesday to Sunday. Private groups welcome by appointment.</p>
+        <a href="https://tommys2000.myshopify.com/pages/booking" target="_blank" class="btn-gold"
+            style="font-size:0.75rem; padding:16px 48px;">BOOK YOUR EXPERIENCE</a>
+    </div>
+
+    <!-- Location -->
+    <div class="location-section">
+        <div class="location-grid">
+            <div>
+                <div class="section-rule"><span>✦</span></div>
+                <h2 class="section-title" style="margin-bottom:24px;">How to Find Us</h2>
+                <p style="line-height:1.8; color:#5a4c30;">Lemona Village, Paphos District, Cyprus 8545</p>
+                <ul style="margin-top:28px; space-y-4; font-size:0.95rem;">
+                    <li><strong>From Paphos Airport:</strong> 25 minutes drive</li>
+                    <li><strong>From Limassol:</strong> 45 minutes drive</li>
+                    <li><strong>Nearest town:</strong> Paphos (20 km)</li>
+                </ul>
+                <div style="margin-top:40px;">
+                    <a href="#" class="btn-gold">GET DIRECTIONS</a>
+                </div>
+            </div>
+            <div class="map-placeholder">
+                <iframe class="w-full h-full rounded"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26193.443835640912!2d32.542651143502354!3d34.85169218169457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14e7118b997fa13f%3A0x4f6603d7915a5312!2sLemona%208545%2C%20Cyprus!5e0!3m2!1sen!2sng!4v1780902025034!5m2!1sen!2sng" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Experiences -->
+    <div id="experiences" class="experiences">
+        <div class="section-header">
+            <div class="section-rule"><span>✦</span></div>
+            <h2 class="section-title">Signature Experiences</h2>
+        </div>
+
+        <div class="exp-grid">
+            <div class="exp-card">
+                <div class="exp-price">€35</div>
+                <h3 style="font-family:'Cinzel',serif; font-size:1.4rem; margin-bottom:12px;">Classic Tasting</h3>
+                <p style="color:#5a4c30; line-height:1.7;">Sample 5 wines paired with local cheeses and olives. Learn
+                    the story behind each bottle.</p>
+                <p style="margin-top:20px; font-size:0.8rem; color:var(--gold);">60 minutes • Max 12 guests</p>
+            </div>
+            <div class="exp-card">
+                <div class="exp-price">€65</div>
+                <h3 style="font-family:'Cinzel',serif; font-size:1.4rem; margin-bottom:12px;">Vineyard to Glass</h3>
+                <p style="color:#5a4c30; line-height:1.7;">Guided vineyard walk followed by an in-depth tasting of our
+                    Reserve Collection.</p>
+                <p style="margin-top:20px; font-size:0.8rem; color:var(--gold);">90 minutes • Includes vineyard tour</p>
+            </div>
+            <div class="exp-card">
+                <div class="exp-price">€120</div>
+                <h3 style="font-family:'Cinzel',serif; font-size:1.4rem; margin-bottom:12px;">Sunset Private Tour</h3>
+                <p style="color:#5a4c30; line-height:1.7;">Exclusive evening experience with sunset views, 6 wines and a
+                    light Mediterranean dinner.</p>
+                <p style="margin-top:20px; font-size:0.8rem; color:var(--gold);">2 hours • For 2–8 people</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo-mark">
+                    <div class="logo-emblem" style="border-color:rgba(201,168,76,0.5); color:var(--gold);">T</div>
+                    <div class="logo-text">
+                        <div class="brand" style="color:#F5F0E8;">TSANGARIDES</div>
+                        <div class="sub" style="color:#8a7a5a;">Winery &amp; Estate</div>
+                    </div>
+                </div>
+                <p>Family owned &amp; estate grown in Lemona, Paphos, Cyprus. Crafting organic wines with passion since
+                    2005.</p>
+            </div>
+            <div>
+                <div class="footer-col-title">WINES</div>
+                <ul class="footer-links">
+                    <li><a href="#">Red Wines</a></li>
+                    <li><a href="#">White Wines</a></li>
+                    <li><a href="#">Rosé Wines</a></li>
+                    <li><a href="#">Organic Range</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">VISIT</div>
+                <ul class="footer-links">
+                    <li><a href="#">Wine Tastings</a></li>
+                    <li><a href="#">Vineyard Tours</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Private Bookings</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">CONTACT</div>
+                <ul class="footer-links">
+                    <li><a href="mailto:info@tsangarideswinery.com">info@tsangarideswinery.com</a></li>
+                    <li><a href="tel:+35726722777">+357 26 722 777</a></li>
+                    <li><a href="#">Lemona Village, Paphos 8545, Cyprus</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span id="year">2026</span> TSANGARIDES WINERY. ALL RIGHTS RESERVED.</span>
+            <div style="display:flex;gap:24px;flex-wrap:wrap;">
+                <a href="{% url 'privacy' %}"
+                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
+                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">PRIVACY POLICY</a>
+                <a href="{% url 'terms' %}"
+                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
+                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">TERMS OF USE</a>
+                <a href="{% url 'cookies' %}"
+                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
+                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">COOKIE POLICY</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Mobile drawer logic
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const drawerClose = document.getElementById('drawer-close');
+            const overlay = document.getElementById('mobile-overlay');
+            const drawer = document.getElementById('mobile-drawer');
+            const body = document.body;
+
+            function openDrawer() {
+                overlay.classList.add('open');
+                requestAnimationFrame(() => {
+                    overlay.classList.add('visible');
+                    drawer.classList.add('open');
+                });
+                hamburgerBtn.classList.add('open');
+                hamburgerBtn.setAttribute('aria-expanded', 'true');
+                drawer.setAttribute('aria-hidden', 'false');
+                overlay.setAttribute('aria-hidden', 'false');
+                body.style.overflow = 'hidden';
+            }
+
+            function closeDrawer() {
+                overlay.classList.remove('visible');
+                drawer.classList.remove('open');
+                hamburgerBtn.classList.remove('open');
+                hamburgerBtn.setAttribute('aria-expanded', 'false');
+                drawer.setAttribute('aria-hidden', 'true');
+                overlay.setAttribute('aria-hidden', 'true');
+                body.style.overflow = '';
+                overlay.addEventListener('transitionend', () => overlay.classList.remove('open'), { once: true });
+            }
+
+            hamburgerBtn.addEventListener('click', openDrawer);
+            drawerClose.addEventListener('click', closeDrawer);
+            overlay.addEventListener('click', closeDrawer);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 1024 && drawer.classList.contains('open')) closeDrawer();
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -9,7 +9,7 @@ def shop(request):
     return render(request, 'shop.html')
 
 def visit(request):
-    return render(request, 'visit-us.html')
+    return render(request, 'visit.html')
 
 def contact(request):
     return render(request, 'index.html')
