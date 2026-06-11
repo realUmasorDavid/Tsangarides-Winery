@@ -1,0 +1,585 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book a Tasting — Tsangarides Winery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Raleway:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E8C96A;
+            --dark: #1A1208;
+            --charcoal: #2C2318;
+            --cream: #F5F0E8;
+            --warm-white: #FAF7F2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: var(--warm-white);
+            color: var(--dark);
+        }
+
+        /* ── Top bar ── */
+        .topbar {
+            background: var(--dark);
+            color: #bfae94;
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            padding: 8px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .topbar {
+                padding: 8px 20px;
+                font-size: 0.55rem;
+            }
+        }
+
+        /* ── Nav ── */
+        nav {
+            background: rgba(250, 247, 242, 0.97);
+            backdrop-filter: blur(8px);
+            padding: 18px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 14px 20px;
+            }
+        }
+
+        .logo-mark {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-emblem {
+            width: 52px;
+            height: 52px;
+            border: 1.5px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            line-height: 1.1;
+        }
+
+        .logo-text .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 0.22em;
+            color: var(--dark);
+        }
+
+        .logo-text .sub {
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.35em;
+            color: #8a7a5a;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            color: var(--charcoal);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 3px;
+            transition: color .2s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width .3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger */
+        #hamburger-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        #hamburger-btn span {
+            display: block;
+            width: 22px;
+            height: 1.5px;
+            background: var(--charcoal);
+            transition: all .3s ease;
+        }
+
+        @media (max-width: 1024px) {
+            #hamburger-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            height: 80vh;
+            min-height: 580px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 24px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(26, 18, 8, 0.65), rgba(26, 18, 8, 0.45)),
+            url("{% static 'Photo-100.webp' %}") center/cover no-repeat;
+            animation: slowzoom 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowzoom {
+            from {
+                transform: scale(1.05);
+            }
+
+            to {
+                transform: scale(1.00);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 720px;
+            color: #fff;
+        }
+
+        .hero-eyebrow {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.35em;
+            color: var(--gold-light);
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 7vw, 5.2rem);
+            font-weight: 300;
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            line-height: 1.65;
+            max-width: 520px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .btn-gold {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            padding: 14px 36px;
+            background: var(--gold);
+            color: var(--dark);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all .25s;
+            display: inline-block;
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        /* ── Experiences Grid ── */
+        .experiences {
+            padding: 80px 48px;
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+            .experiences {
+                padding: 48px 20px;
+            }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-rule {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .section-rule::before,
+        .section-rule::after {
+            content: '';
+            flex: 1;
+            max-width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold));
+        }
+
+        .section-rule::after {
+            background: linear-gradient(to left, transparent, var(--gold));
+        }
+
+        .section-rule span {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 300;
+        }
+
+        .exp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 32px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .exp-card {
+            background: white;
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all .3s;
+            position: relative;
+        }
+
+        .exp-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(201, 168, 76, 0.12);
+            transform: translateY(-8px);
+        }
+
+        .exp-card.classic {
+            background: #fff;
+        }
+
+        .exp-card.organic {
+            background: #f8f5f0;
+        }
+
+        .exp-header {
+            padding: 32px 32px 20px;
+        }
+
+        .price {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .exp-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.65rem;
+            margin: 8px 0 16px;
+        }
+
+        .exp-desc {
+            line-height: 1.7;
+            color: #5a4c30;
+            margin-bottom: 24px;
+        }
+
+        .exp-meta {
+            border-top: 1px solid rgba(201, 168, 76, 0.2);
+            padding: 20px 32px;
+            font-size: 0.95rem;
+        }
+
+        .exp-meta ul {
+            list-style: none;
+        }
+
+        .exp-meta li {
+            padding: 6px 0;
+            color: #5a4c30;
+        }
+
+        .new-badge {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: #1A1208;
+            color: #fff;
+            font-size: 0.65rem;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.08em;
+            padding: 4px 14px;
+            border-radius: 2px;
+        }
+
+        /* Booking CTA */
+        .booking-cta {
+            background: var(--dark);
+            color: #F5F0E8;
+            padding: 100px 48px;
+            text-align: center;
+        }
+
+        .booking-cta h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 300;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top bar -->
+    <div class="topbar text-center">
+        <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="{% url 'index' %}" class="logo-mark">
+            <div class="logo-emblem">T</div>
+            <div class="logo-text">
+                <div class="brand">TSANGARIDES</div>
+                <div class="sub">Winery &amp; Estate</div>
+            </div>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="{% url 'shop' %}">Shop Wines</a></li>
+            <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
+            <li><a href="{% url 'book-tasting' %}" class="text-[var(--gold)]">Book Tasting</a></li>
+            <li><a href="{% url 'our-story' %}">Our Story</a></li>
+            <li><a href="{% url 'events' %}">Events</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <button id="hamburger-btn" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">SIGNATURE EXPERIENCES</p>
+            <h1 class="hero-title">Book a Tasting</h1>
+            <p class="hero-sub">Each visit is crafted to tell a different story of the estate — from first pour to last
+                light.</p>
+            <a href="#experiences" class="btn-gold">EXPLORE OUR TASTINGS</a>
+        </div>
+    </section>
+
+    <!-- Experiences -->
+    <div id="experiences" class="experiences">
+        <div class="section-header">
+            <div class="section-rule"><span>✦</span></div>
+            <h2 class="section-title">Signature Tastings</h2>
+        </div>
+
+        <div class="exp-grid">
+            <!-- Classic Tasting -->
+            <div class="exp-card classic">
+                <div class="exp-header">
+                    <div class="price">€35</div>
+                    <h3 class="exp-title">Classic Tasting</h3>
+                    <p class="exp-desc">Sample 5 wines paired with local cheeses and olives. Learn the story behind each
+                        bottle.</p>
+                </div>
+                <div class="exp-meta">
+                    <ul>
+                        <li>• 60 minutes</li>
+                        <li>• Max 12 guests</li>
+                    </ul>
+                </div>
+                <div style="padding:0 32px 32px;">
+                    <a href="https://tommys2000.myshopify.com/pages/booking" target="_blank" class="btn-gold"
+                        style="width:100%; text-align:center; display:block;">
+                        BOOK THIS EXPERIENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Organic Wine Journey -->
+            <div class="exp-card organic" style="position:relative;">
+                <div class="new-badge">NEW</div>
+                <div class="exp-header">
+                    <div class="price">€50</div>
+                    <h3 class="exp-title">Organic Wine Journey</h3>
+                    <p class="exp-desc">Explore 5 certified organic wines from our biodynamic plots. Discover how
+                        farming without intervention shapes flavour.</p>
+                </div>
+                <div class="exp-meta">
+                    <ul>
+                        <li>• 75 minutes</li>
+                        <li>• Max 10 guests</li>
+                        <li>• Certified organic selection</li>
+                    </ul>
+                </div>
+                <div style="padding:0 32px 32px;">
+                    <a href="https://tommys2000.myshopify.com/pages/booking" target="_blank" class="btn-gold"
+                        style="width:100%; text-align:center; display:block;">
+                        BOOK THIS EXPERIENCE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking CTA -->
+    <div class="booking-cta">
+        <h2>Ready to experience Lemona?</h2>
+        <p style="max-width:520px; margin:0 auto 40px; font-size:1.05rem; opacity:0.9;">
+            Tastings run Wednesday to Sunday. Private groups and custom experiences available by request.
+        </p>
+        <a href="https://tommys2000.myshopify.com/pages/booking" target="_blank" class="btn-gold"
+            style="font-size:0.75rem; padding:16px 48px;">
+            RESERVE YOUR SPOT
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: var(--dark); color: #bfae94;">
+        <div class="footer-top"
+            style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding: 64px 80px 48px; border-bottom: 1px solid rgba(201, 168, 76, 0.15);">
+            <div class="footer-brand">
+                <div class="logo-mark">
+                    <div class="logo-emblem" style="border-color:rgba(201,168,76,0.5); color:var(--gold);">T</div>
+                    <div class="logo-text">
+                        <div class="brand" style="color:#F5F0E8;">TSANGARIDES</div>
+                        <div class="sub" style="color:#8a7a5a;">Winery &amp; Estate</div>
+                    </div>
+                </div>
+                <p style="font-size:0.8rem; line-height:1.7; color:#8a7a5a; margin-top:16px; max-width:280px;">
+                    Family owned &amp; estate grown in Lemona, Paphos, Cyprus.
+                </p>
+            </div>
+            <div>
+                <div class="footer-col-title"
+                    style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.25em; color:var(--gold); margin-bottom:20px;">
+                    WINES</div>
+                <ul class="footer-links" style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+                    <li><a href="{% url 'shop' %}" style="color:#8a7a5a; text-decoration:none;">Red Wines</a></li>
+                    <li><a href="{% url 'shop' %}" style="color:#8a7a5a; text-decoration:none;">White Wines</a></li>
+                    <li><a href="{% url 'shop' %}" style="color:#8a7a5a; text-decoration:none;">Organic Range</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title"
+                    style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.25em; color:var(--gold); margin-bottom:20px;">
+                    EXPERIENCES</div>
+                <ul class="footer-links" style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+                    <li><a href="{% url 'book-tasting' %}" style="color:#8a7a5a; text-decoration:none;">Wine
+                            Tastings</a></li>
+                    <li><a href="{% url 'visit-us' %}" style="color:#8a7a5a; text-decoration:none;">Stay with Us</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title"
+                    style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.25em; color:var(--gold); margin-bottom:20px;">
+                    CONTACT</div>
+                <ul class="footer-links" style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+                    <li><a href="mailto:info@tsangarideswinery.com"
+                            style="color:#8a7a5a; text-decoration:none;">info@tsangarideswinery.com</a></li>
+                    <li><a href="tel:+35726722777" style="color:#8a7a5a; text-decoration:none;">+357 26 722 777</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom"
+            style="padding:24px 80px; display:flex; justify-content:space-between; align-items:center; font-size:0.68rem; color:#5a4c30; font-family:'Cinzel',serif; letter-spacing:0.1em; flex-wrap:wrap; gap:12px;">
+            <span>© <span id="year">2026</span> TSANGARIDES WINERY. ALL RIGHTS RESERVED.</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+
+</html>

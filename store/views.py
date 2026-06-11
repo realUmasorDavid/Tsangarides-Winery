@@ -14,6 +14,9 @@ def visit(request):
 def contact(request):
     return render(request, 'contact.html')
 
+def book(request):
+    return render(request, 'book.html')
+
 def events(request):
     return render(request, 'index.html')
 
