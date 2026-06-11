@@ -828,7 +828,7 @@
         .feature-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
-            grid-template-rows: 280px 280px;
+            /* grid-template-rows: 280px 280px; */
         }
 
         @media (max-width: 1024px) {
@@ -1204,7 +1204,7 @@
     <div class="topbar text-center">
         <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
         <!-- <div class="topbar-links" style="display:flex;gap:28px;">
-            <a href="#">Visit Us</a>
+            <a href="#">Stay with us</a>
             <a href="#">Wine Club</a>
             <a href="#">Adopt a Vine</a>
             <span style="border-left:1px solid rgba(191,174,148,0.3); padding-left:28px;">EN ▾</span>
@@ -1225,7 +1225,7 @@
         <!-- Desktop nav links -->
         <ul class="nav-links">
             <li><a href="{% url 'shop' %}">Shop Wines</a></li>
-            <li><a href="{% url 'visit-us' %}">Visit Us</a></li>
+            <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
             <li><a href="{% url 'our-story' %}">Our Story</a></li>
             <li><a href="{% url 'events' %}">Events</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
@@ -1398,29 +1398,7 @@
                 <span class="feature-tag">EXPERIENCE</span>
                 <div class="feature-title">Stay with us</div>
                 <p class="feature-desc">Join us for a wine tasting or tour and enjoy the true taste of Cyprus.</p>
-                <a href="#" class="feature-link">BOOK NOW <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="feature-card">
-            <img src="https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?w=600&q=80" alt="Wine Club" />
-            <div class="feature-overlay">
-                <span class="feature-tag">MEMBERSHIP</span>
-                <div class="feature-title">Wine Club</div>
-                <p class="feature-desc">Join our Wine Club and receive hand-selected wines delivered to your door.</p>
-                <a href="#" class="feature-link">JOIN NOW <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="feature-card">
-            <img src="https://images.unsplash.com/photo-1474722883778-792e7990302f?w=600&q=80" alt="Adopt a Vine" />
-            <div class="feature-overlay">
-                <span class="feature-tag">UNIQUE</span>
-                <div class="feature-title">Adopt a Vine</div>
-                <p class="feature-desc">Become part of our vineyard family and adopt your own vine.</p>
-                <a href="#" class="feature-link">LEARN MORE <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                <a href="{% url 'visit-us' %}" class="feature-link">BOOK NOW <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg></a>
             </div>
@@ -1442,7 +1420,7 @@
                 <span class="feature-tag">GIFTING</span>
                 <div class="feature-title">Gift Sets</div>
                 <p class="feature-desc">Curated boxes for every occasion.</p>
-                <a href="#" class="feature-link">EXPLORE <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                <a href="{% url 'shop' %}" class="feature-link">EXPLORE <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg></a>
             </div>
@@ -1500,22 +1478,20 @@
             <div>
                 <div class="footer-col-title">WINES</div>
                 <ul class="footer-links">
-                    <li><a href="#">Red Wines</a></li>
-                    <li><a href="#">White Wines</a></li>
-                    <li><a href="#">Rosé Wines</a></li>
-                    <li><a href="#">Organic Range</a></li>
-                    <li><a href="#">Reserve Collection</a></li>
-                    <li><a href="#">Gift Sets</a></li>
+                    <li><a href="{% url 'shop' %}">Red Wines</a></li>
+                    <li><a href="{% url 'shop' %}">White Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Rosé Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Organic Range</a></li>
                 </ul>
             </div>
             <div>
-                <div class="footer-col-title">VISIT</div>
+                <div class="footer-col-title">EVENTS</div>
                 <ul class="footer-links">
-                    <li><a href="#">Wine Tastings</a></li>
-                    <li><a href="#">Winery Tours</a></li>
-                    <li><a href="#">Events</a></li>
-                    <li><a href="#">Accommodation</a></li>
-                    <li><a href="#">Restaurant</a></li>
+                    <li><a href="{% url 'events' %}">Wine Tastings</a></li>
+                    <li><a href="{% url 'events' %}">Winery Tours</a></li>
+                    <li><a href="{% url 'events' %}">Events</a></li>
+                    <li><a href="{% url 'events' %}">Accommodation</a></li>
+                    <li><a href="{% url 'events' %}">Restaurant</a></li>
                 </ul>
             </div>
             <div>
@@ -1523,7 +1499,7 @@
                 <ul class="footer-links">
                     <li><a href="mailto:info@tsangarideswinery.com">info@tsangarideswinery.com</a></li>
                     <li><a href="tel:+35726722777">+357 26 722 777</a></li>
-                    <li><a href="" style="color:#8a7a5a; font-size:.75rem; line-height:1.5;">Lemona Village,<br>Paphos
+                    <li><a href="https://maps.app.goo.gl/79rim1Pa48aP5Zsw5" style="color:#8a7a5a; font-size:.75rem; line-height:1.5;">Lemona Village,<br>Paphos
                             8545,<br>Cyprus</a></li>
                 </ul>
             </div>
@@ -1531,13 +1507,13 @@
         <div class="footer-bottom">
             <span>© <span id="year">2026</span> TSANGARIDES WINERY. ALL RIGHTS RESERVED.</span>
             <div style="display:flex;gap:24px;flex-wrap:wrap;">
-                <a href="#"
+                <a href="{% url 'privacy' %}"
                     style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
                     onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">PRIVACY POLICY</a>
-                <a href="#"
+                <a href="{% url 'terms' %}"
                     style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
                     onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">TERMS OF USE</a>
-                <a href="#"
+                <a href="{% url 'cookies' %}"
                     style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
                     onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">COOKIE POLICY</a>
             </div>

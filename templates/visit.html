@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Visit Us — Tsangarides Winery</title>
+    <title>Stay with Us — Tsangarides Winery</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@shopify/buy-button-js@3.0.6/dist/buybutton.min.js"></script>
     <link
@@ -26,6 +26,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -489,22 +490,22 @@
             color: var(--gold-light);
         }
 
-        /* ── Visit Info Grid ── */
-        .visit-grid {
+        /* ── Stay Cards ── */
+        .stay-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
             gap: 48px;
             padding: 80px 48px;
         }
 
         @media (max-width: 768px) {
-            .visit-grid {
+            .stay-grid {
                 padding: 48px 20px;
                 gap: 32px;
             }
         }
 
-        .visit-card {
+        .stay-card {
             background: white;
             border-radius: 4px;
             overflow: hidden;
@@ -512,40 +513,61 @@
             transition: transform .3s;
         }
 
-        .visit-card:hover {
+        .stay-card:hover {
             transform: translateY(-8px);
         }
 
-        .visit-card img {
+        .stay-card img {
             width: 100%;
-            height: 260px;
+            height: 320px;
             object-fit: cover;
         }
 
-        .visit-content {
+        .stay-content {
             padding: 32px;
         }
 
-        .visit-content h3 {
+        .stay-content h3 {
             font-family: 'Cinzel', serif;
-            font-size: 1.35rem;
+            font-size: 1.45rem;
             letter-spacing: 0.03em;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             color: var(--dark);
         }
 
-        .visit-content p {
-            line-height: 1.75;
-            color: #5a4c30;
-            margin-bottom: 20px;
+        .stay-content .subtitle {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
         }
 
-        .highlight {
-            background: rgba(201, 168, 76, 0.08);
-            padding: 20px;
-            border-left: 4px solid var(--gold);
-            margin: 24px 0;
-            font-size: 0.95rem;
+        .stay-content p {
+            line-height: 1.75;
+            color: #5a4c30;
+            margin-bottom: 24px;
+        }
+
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+
+        .amenity-tag {
+            background: rgba(201, 168, 76, 0.1);
+            color: var(--gold);
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 9999px;
+        }
+
+        .price {
+            font-size: 1.35rem;
+            color: var(--gold);
+            font-weight: 500;
+            margin-bottom: 20px;
         }
 
         /* ── Booking CTA ── */
@@ -606,81 +628,6 @@
             color: #8a7a5a;
             font-size: 1.1rem;
             border: 1px solid rgba(201, 168, 76, 0.2);
-        }
-
-        /* ── Experiences ── */
-        .experiences {
-            padding: 80px 48px;
-            background: white;
-        }
-
-        @media (max-width: 768px) {
-            .experiences {
-                padding: 48px 20px;
-            }
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-rule {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 16px;
-        }
-
-        .section-rule::before,
-        .section-rule::after {
-            content: '';
-            flex: 1;
-            max-width: 80px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--gold));
-        }
-
-        .section-rule::after {
-            background: linear-gradient(to left, transparent, var(--gold));
-        }
-
-        .section-rule span {
-            font-family: 'Cinzel', serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.3em;
-            color: var(--gold);
-        }
-
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 3.5vw, 3rem);
-            font-weight: 300;
-        }
-
-        .exp-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 32px;
-        }
-
-        .exp-card {
-            border: 1px solid rgba(201, 168, 76, 0.15);
-            padding: 40px 32px;
-            transition: all .3s;
-        }
-
-        .exp-card:hover {
-            border-color: var(--gold);
-            box-shadow: 0 20px 40px rgba(201, 168, 76, 0.1);
-        }
-
-        .exp-price {
-            font-family: 'Cinzel', serif;
-            color: var(--gold);
-            font-size: 1.4rem;
-            margin-bottom: 12px;
         }
 
         /* Footer (same as index) */
@@ -790,7 +737,7 @@
 
         <ul class="nav-links">
             <li><a href="{% url 'shop' %}">Shop Wines</a></li>
-            <li><a href="{% url 'visit-us' %}" class="text-[var(--gold)]">Visit Us</a></li>
+            <li><a href="{% url 'visit-us' %}" class="text-[var(--gold)]">Stay with us</a></li>
             <li><a href="{% url 'our-story' %}">Our Story</a></li>
             <li><a href="{% url 'events' %}">Events</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
@@ -847,69 +794,100 @@
         <div class="hero-bg"></div>
         <div class="hero-content">
             <p class="hero-eyebrow">WELCOME TO THE ESTATE</p>
-            <h1 class="hero-title">Experience<br><em>Lemona</em></h1>
-            <p class="hero-sub">Step into our world of organic winemaking. Enjoy guided tastings, vineyard walks, and
-                unforgettable moments in the heart of Cyprus.</p>
+            <h1 class="hero-title">Stay with Us<br><em>in Lemona</em></h1>
+            <p class="hero-sub">Immerse yourself in the heart of our vineyard. Three beautiful private villas nestled
+                among the vines, offering peace, luxury, and the authentic Cyprus countryside experience.</p>
             <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
-                <a href="https://tommys2000.myshopify.com/pages/booking" target="_blank" class="btn-gold">BOOK YOUR
-                    TASTING</a>
-                <a href="#experiences" class="btn-outline">SEE EXPERIENCES</a>
+                <a href="#our-villas" class="btn-gold">EXPLORE OUR VILLAS</a>
+                <a href="#location" class="btn-outline">SEE LOCATION</a>
             </div>
         </div>
     </section>
 
-    <!-- Visit Info -->
-    <div class="visit-grid">
-        <div class="visit-card">
-            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80" alt="Wine tasting">
-            <div class="visit-content">
-                <h3>Wine Tastings</h3>
-                <p>Discover our award-winning collection through guided tastings led by our winemakers. Learn about each
-                    vintage and the unique terroir of Lemona.</p>
-                <div class="highlight">
-                    60–90 minutes • From €35 per person
+    <!-- Stay Villas -->
+    <div id="our-villas" class="stay-grid">
+        <!-- Villa 1 -->
+        <div class="stay-card">
+            <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1607751144185647813/original/a530c2e0-03cc-488b-9bc7-99b53861ccf5.jpeg?im_w=960" alt="The Vineyard Villa">
+            <div class="stay-content">
+                <h3>Luxury 4-bd Family Apartment</h3>
+                <div class="subtitle">4 bedroom • Sleeps 8</div>
+                <p>Located above our family-owned winery in Lemona Village. This elegant 4-bedroom apartment features ensuite bathrooms
+                    and private patios with magnificent Ezousa Valley and vineyard views. Complimentary wine tasting and cheese/meat
+                    platter included. Shared communal pool (May–October).</p>
+
+                <div class="amenities">
+                    <span class="amenity-tag">Communal Pool</span>
+                    <span class="amenity-tag">Cellars</span>
+                    <span class="amenity-tag">Kitchen</span>
+                    <span class="amenity-tag">Complimentary Wine Tasting</span>
                 </div>
-                <a href="https://tommys2000.myshopify.com/pages/booking" target="_blank" class="btn-gold"
-                    style="width:100%; text-align:center;">Reserve Now</a>
+
+                <!-- <div class="price">From €180 / night</div> -->
+                <a href="https://www.airbnb.co.uk/rooms/1607751144185647813?unique_share_id=2920c5c1-d375-4200-b97c-68ba0d7244f6&viralityEntryPoint=1&s=76&source_impression_id=p3_1781191182_P3rvM1_RR2qpiZ0y" target="_blank" class="btn-gold"
+                    style="width:100%; text-align:center;">Book on Airbnb</a>
             </div>
         </div>
 
-        <div class="visit-card">
-            <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=800&q=80" alt="Vineyard tour">
-            <div class="visit-content">
-                <h3>Vineyard Tours</h3>
-                <p>Walk through our 100% organic vineyards with our team. See how we care for the land and understand
-                    the journey from vine to bottle.</p>
-                <div class="highlight">
-                    Includes tasting • From €45 per person
+        <!-- Villa 2 -->
+        <div class="stay-card">
+            <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1592424064671699836/original/82e018d1-8f04-4d64-a584-5faaba13fe35.jpeg?im_w=720" alt="The Vineyard Villa">
+            <div class="stay-content">
+                <h3>Cosy Studio, Private Patio</h3>
+                <div class="subtitle">1 bedroom • Sleeps 2</div>
+                <p>Located above our family-owned winery in Lemona Village. This charming studio features a King bed, full kitchen, and
+                    a cosy private veranda with views of the pool and surrounding landscape. Complimentary wine tasting and cheese/meat
+                    platter included. Shared communal pool (May–October).</p>
+
+                <div class="amenities">
+                    <span class="amenity-tag">Communal Pool</span>
+                    <span class="amenity-tag">Cellars</span>
+                    <span class="amenity-tag">Kitchen</span>
+                    <span class="amenity-tag">Complimentary Wine Tasting</span>
                 </div>
-                <a href="https://tommys2000.myshopify.com/pages/booking" target="_blank" class="btn-gold"
-                    style="width:100%; text-align:center;">Book a Tour</a>
+
+                <!-- <div class="price">From €180 / night</div> -->
+                <a href="https://www.airbnb.co.uk/rooms/1592424064671699836?unique_share_id=5339c01c-6a4f-4ca4-b978-0c0f81424958&viralityEntryPoint=1&s=76&source_impression_id=p3_1781191183_P3bo_Dxoi5AwVy8N" target="_blank" class="btn-gold"
+                    style="width:100%; text-align:center;">Book on Airbnb</a>
             </div>
         </div>
 
-        <div class="visit-card">
-            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80" alt="Private events">
-            <div class="visit-content">
-                <h3>Private Events</h3>
-                <p>Host your special occasion at the winery — weddings, corporate retreats, or private dinners with
-                    panoramic views of the Troodos foothills.</p>
-                <a href="{% url 'contact' %}" class="btn-gold" style="width:100%; text-align:center;">Inquire</a>
+        <!-- Villa 3 -->
+        <div class="stay-card">
+            <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1590911936465854271/original/a1a8d349-a6fc-416a-a3b8-4c8787d446f6.jpeg?im_w=720" alt="The Vineyard Villa">
+            <div class="stay-content">
+                <h3>Luxury 1 bd Apt with Jacuzzi</h3>
+                <div class="subtitle">1 bedroom • Sleeps 2</div>
+                <p>Located above our family-owned winery in Lemona Village. This elegant apartment features a spacious private patio
+                    with dining area and private heated Jacuzzi offering magnificent valley and vineyard views. Complimentary wine
+                    tasting and cheese/meat platter included. Shared communal pool (May–October).</p>
+
+                <div class="amenities">
+                    <span class="amenity-tag">Communal Pool</span>
+                    <span class="amenity-tag">Cellars</span>
+                    <span class="amenity-tag">Jacuzzi</span>
+                    <span class="amenity-tag">Complimentary Wine Tasting</span>
+                </div>
+
+                <!-- <div class="price">From €180 / night</div> -->
+                <a href="https://www.airbnb.co.uk/rooms/1590911936465854271?unique_share_id=261bc2ee-1b22-4475-8c9e-e6ee77d617e4&viralityEntryPoint=1&s=76&source_impression_id=p3_1781191186_P3x6g3o2aBFJfjXF" target="_blank" class="btn-gold"
+                    style="width:100%; text-align:center;">Book on Airbnb</a>
             </div>
         </div>
+
+        
     </div>
 
     <!-- Booking CTA -->
     <div class="booking-cta">
-        <h2>Ready to visit?</h2>
-        <p style="max-width:480px; margin:0 auto 32px; font-size:1.05rem; opacity:0.85;">Tastings and tours are
-            available Wednesday to Sunday. Private groups welcome by appointment.</p>
-        <a href="https://tommys2000.myshopify.com/pages/booking" target="_blank" class="btn-gold"
-            style="font-size:0.75rem; padding:16px 48px;">BOOK YOUR EXPERIENCE</a>
+        <h2>Ready for an unforgettable stay?</h2>
+        <p style="max-width:520px; margin:0 auto 32px; font-size:1.05rem; opacity:0.9;">All villas include complimentary
+            winery tour &amp; tasting for two guests. Minimum stay 3 nights.</p>
+        <a href="#our-villas" class="btn-gold" style="font-size:0.75rem; padding:16px 48px;">BROWSE VILLAS</a>
     </div>
 
     <!-- Location -->
-    <div class="location-section">
+    <div id="location" class="location-section">
         <div class="location-grid">
             <div>
                 <div class="section-rule"><span>✦</span></div>
@@ -921,45 +899,14 @@
                     <li><strong>Nearest town:</strong> Paphos (20 km)</li>
                 </ul>
                 <div style="margin-top:40px;">
-                    <a href="#" class="btn-gold">GET DIRECTIONS</a>
+                    <a href="https://maps.app.goo.gl/79rim1Pa48aP5Zsw5" class="btn-gold">GET DIRECTIONS</a>
                 </div>
             </div>
             <div class="map-placeholder">
                 <iframe class="w-full h-full rounded"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26193.443835640912!2d32.542651143502354!3d34.85169218169457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14e7118b997fa13f%3A0x4f6603d7915a5312!2sLemona%208545%2C%20Cyprus!5e0!3m2!1sen!2sng!4v1780902025034!5m2!1sen!2sng" style="border:0;" allowfullscreen="" loading="lazy"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26193.443835640912!2d32.542651143502354!3d34.85169218169457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14e7118b997fa13f%3A0x4f6603d7915a5312!2sLemona%208545%2C%20Cyprus!5e0!3m2!1sen!2sng!4v1780902025034!5m2!1sen!2sng"
+                    style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </div>
-    </div>
-
-    <!-- Experiences -->
-    <div id="experiences" class="experiences">
-        <div class="section-header">
-            <div class="section-rule"><span>✦</span></div>
-            <h2 class="section-title">Signature Experiences</h2>
-        </div>
-
-        <div class="exp-grid">
-            <div class="exp-card">
-                <div class="exp-price">€35</div>
-                <h3 style="font-family:'Cinzel',serif; font-size:1.4rem; margin-bottom:12px;">Classic Tasting</h3>
-                <p style="color:#5a4c30; line-height:1.7;">Sample 5 wines paired with local cheeses and olives. Learn
-                    the story behind each bottle.</p>
-                <p style="margin-top:20px; font-size:0.8rem; color:var(--gold);">60 minutes • Max 12 guests</p>
-            </div>
-            <div class="exp-card">
-                <div class="exp-price">€65</div>
-                <h3 style="font-family:'Cinzel',serif; font-size:1.4rem; margin-bottom:12px;">Vineyard to Glass</h3>
-                <p style="color:#5a4c30; line-height:1.7;">Guided vineyard walk followed by an in-depth tasting of our
-                    Reserve Collection.</p>
-                <p style="margin-top:20px; font-size:0.8rem; color:var(--gold);">90 minutes • Includes vineyard tour</p>
-            </div>
-            <div class="exp-card">
-                <div class="exp-price">€120</div>
-                <h3 style="font-family:'Cinzel',serif; font-size:1.4rem; margin-bottom:12px;">Sunset Private Tour</h3>
-                <p style="color:#5a4c30; line-height:1.7;">Exclusive evening experience with sunset views, 6 wines and a
-                    light Mediterranean dinner.</p>
-                <p style="margin-top:20px; font-size:0.8rem; color:var(--gold);">2 hours • For 2–8 people</p>
             </div>
         </div>
     </div>
@@ -981,19 +928,18 @@
             <div>
                 <div class="footer-col-title">WINES</div>
                 <ul class="footer-links">
-                    <li><a href="#">Red Wines</a></li>
-                    <li><a href="#">White Wines</a></li>
-                    <li><a href="#">Rosé Wines</a></li>
-                    <li><a href="#">Organic Range</a></li>
+                    <li><a href="{% url 'shop' %}">Red Wines</a></li>
+                    <li><a href="{% url 'shop' %}">White Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Rosé Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Organic Range</a></li>
                 </ul>
             </div>
             <div>
-                <div class="footer-col-title">VISIT</div>
+                <div class="footer-col-title">STAY</div>
                 <ul class="footer-links">
-                    <li><a href="#">Wine Tastings</a></li>
-                    <li><a href="#">Vineyard Tours</a></li>
-                    <li><a href="#">Events</a></li>
-                    <li><a href="#">Private Bookings</a></li>
+                    <li><a href="{% url 'visit-us' %}">Our Villas</a></li>
+                    <li><a href="{% url 'visit-us' %}">Vineyard Experience</a></li>
+                    <li><a href="https://tommys2000.myshopify.com/pages/booking" target="_blank">Book Tasting</a></li>
                 </ul>
             </div>
             <div>
@@ -1001,7 +947,8 @@
                 <ul class="footer-links">
                     <li><a href="mailto:info@tsangarideswinery.com">info@tsangarideswinery.com</a></li>
                     <li><a href="tel:+35726722777">+357 26 722 777</a></li>
-                    <li><a href="#">Lemona Village, Paphos 8545, Cyprus</a></li>
+                    <li><a href="https://maps.app.goo.gl/79rim1Pa48aP5Zsw5" target="_blank">Lemona Village, Paphos 8545,
+                            Cyprus</a></li>
                 </ul>
             </div>
         </div>

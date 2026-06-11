@@ -674,7 +674,7 @@
 
         <ul class="nav-links">
             <li><a href="{% url 'shop' %}">Shop Wines</a></li>
-            <li><a href="{% url 'visit-us' %}">Visit Us</a></li>
+            <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
             <li><a href="{% url 'our-story' %}" class="active">Our Story</a></li>
             <li><a href="{% url 'events' %}">Events</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
@@ -845,8 +845,8 @@
     <div style="background:var(--warm-white); padding:80px 48px; text-align:center;">
         <h3 style="font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:300; margin-bottom:24px;">Come
             Experience Our Story</h3>
-        <a href="{% url 'visit-us' %}" class="btn-gold"
-            style="font-size:0.75rem; padding:16px 48px; display:inline-block;">PLAN YOUR VISIT</a>
+        <a href="https://tommys2000.myshopify.com/pages/booking" class="btn-gold"
+            style="font-size:0.75rem; padding:16px 48px; display:inline-block;">BOOK A TASTING</a>
     </div>
 
     <!-- Footer -->
@@ -866,18 +866,18 @@
             <div>
                 <div class="footer-col-title">WINES</div>
                 <ul class="footer-links">
-                    <li><a href="#">Red Wines</a></li>
-                    <li><a href="#">White Wines</a></li>
-                    <li><a href="#">Rosé Wines</a></li>
-                    <li><a href="#">Organic Range</a></li>
+                    <li><a href="{% url 'shop' %}">Red Wines</a></li>
+                    <li><a href="{% url 'shop' %}">White Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Rosé Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Organic Range</a></li>
                 </ul>
             </div>
             <div>
                 <div class="footer-col-title">EXPLORE</div>
                 <ul class="footer-links">
                     <li><a href="{% url 'our-story' %}">Our Story</a></li>
-                    <li><a href="{% url 'visit-us' %}">Visit Us</a></li>
-                    <li><a href="#">Wine Club</a></li>
+                    <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
+                    <li><a href="https://tommys2000.myshopify.com/pages/booking" target="_blank">Book a Tasting</a></li>
                 </ul>
             </div>
             <div>
