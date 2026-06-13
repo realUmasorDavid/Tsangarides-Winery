@@ -169,6 +169,44 @@
             transition: all .3s ease;
         }
 
+        .mobile-menu {
+            display: none;
+            background: rgba(250, 247, 242, 0.98);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+            padding: 18px 48px 22px;
+            box-shadow: 0 12px 24px rgba(26, 18, 8, 0.08);
+            z-index: 150;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 0;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            color: var(--charcoal);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+            transition: color .2s ease;
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu a:hover,
+        .mobile-menu a.active {
+            color: var(--gold);
+        }
+
         @media (max-width: 1024px) {
             #hamburger-btn {
                 display: flex;
@@ -406,6 +444,52 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+
+            .hero {
+                min-height: 520px;
+                padding: 60px 20px;
+            }
+
+            .hero-bg {
+                background-position: center top;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero-title {
+                font-size: clamp(2.5rem, 10vw, 4rem);
+            }
+
+            .story-section,
+            .family-section {
+                padding: 60px 20px;
+            }
+
+            .family-grid {
+                gap: 28px;
+            }
+
+            .logo-mark img {
+                max-width: 140px;
+                height: auto;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 28px;
+                padding: 40px 24px 32px;
+            }
+
+            .footer-bottom {
+                padding: 20px 24px;
+                justify-content: flex-start;
+            }
         }
     </style>
 </head>
@@ -420,9 +504,7 @@
     <!-- Navigation -->
     <nav>
         <a href="{% url 'index' %}" class="logo-mark">
-            <a href="{% url 'index' %}" class="logo-mark">
-                <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
-            </a>
+            <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
         </a>
 
         <ul class="nav-links">
@@ -435,11 +517,20 @@
         </ul>
 
         <div class="nav-right">
-            <button id="hamburger-btn" aria-label="Open menu">
+            <button id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
+
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <a href="{% url 'shop' %}">Shop Wines</a>
+        <a href="{% url 'visit-us' %}">Stay with us</a>
+        <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking">Book Tasting</a>
+        <a href="{% url 'our-story' %}" class="active">Our Story</a>
+        <a href="{% url 'who-we-are' %}">Who We Are</a>
+        <a href="{% url 'contact' %}">Contact</a>
+    </div>
 
     <!-- Hero -->
     <section class="hero">
@@ -564,6 +655,17 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('year').textContent = new Date().getFullYear();
+
+            var hamburger = document.getElementById('hamburger-btn');
+            var mobileMenu = document.getElementById('mobile-menu');
+
+            if (hamburger && mobileMenu) {
+                hamburger.addEventListener('click', function () {
+                    var isOpen = mobileMenu.classList.toggle('open');
+                    mobileMenu.setAttribute('aria-hidden', !isOpen);
+                    hamburger.setAttribute('aria-expanded', isOpen);
+                });
+            }
         });
     </script>
 </body>
