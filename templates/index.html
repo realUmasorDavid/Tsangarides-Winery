@@ -932,11 +932,23 @@
         .feature-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(26, 18, 8, 0.82) 0%, rgba(26, 18, 8, 0.1) 60%);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             padding: 28px;
+        }
+
+        .feature-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.4) 60%);
+            z-index: 0;
+        }
+
+        .feature-overlay > * {
+            position: relative;
+            z-index: 1;
         }
 
         @media (max-width: 480px) {
@@ -1214,12 +1226,8 @@
     <!-- ── Navigation ── -->
     <nav>
         <!-- Logo -->
-        <a href="#" class="logo-mark">
-            <div class="logo-emblem">T</div>
-            <div class="logo-text">
-                <div class="brand">TSANGARIDES</div>
-                <div class="sub">Winery &amp; Estate</div>
-            </div>
+        <a href="{% url 'index' %}" class="logo-mark">
+            <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
         </a>
 
         <!-- Desktop nav links -->
@@ -1227,7 +1235,7 @@
             <li><a href="{% url 'shop' %}">Shop Wines</a></li>
             <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
             <li><a href="{% url 'our-story' %}">Our Story</a></li>
-            <li><a href="{% url 'events' %}">Events</a></li>
+            <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
 
@@ -1279,7 +1287,7 @@
             <a href="{% url 'shop' %}">Shop Wines <span class="arrow">›</span></a>
             <a href="{% url 'visit-us' %}">Stay with us <span class="arrow">›</span></a>
             <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank">Book a Tasting <span class="arrow">›</span></a>
-            <a href="{% url 'events' %}">Events <span class="arrow">›</span></a>
+            <a href="{% url 'who-we-are' %}">Who We Are <span class="arrow">›</span></a>
             <a href="{% url 'our-story' %}">Our Story <span class="arrow">›</span></a>
             <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
         </nav>
@@ -1382,7 +1390,7 @@
     <!-- ── Feature Grid ── -->
     <div class="feature-grid">
         <div class="feature-card">
-            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&q=80" alt="Shop our wines" />
+            <img src="{% static 'Photo-86.jpg' %}" alt="Shop our wines" />
             <div class="feature-overlay">
                 <span class="feature-tag">COLLECTION</span>
                 <div class="feature-title">Shop Our Wines</div>
@@ -1393,7 +1401,7 @@
             </div>
         </div>
         <div class="feature-card">
-            <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600&q=80" alt="Stay with us" />
+            <img src="{% static 'Photo-131.jpg' %}" class="" alt="Stay with us" />
             <div class="feature-overlay">
                 <span class="feature-tag">EXPERIENCE</span>
                 <div class="feature-title">Stay with us</div>
@@ -1404,7 +1412,7 @@
             </div>
         </div>
         <div class="feature-card">
-            <img src="https://images.unsplash.com/photo-1568213816046-0ee1c42bd559?w=600&q=80" alt="events" />
+            <img src="{% static 'cellar.jpg' %}" alt="events" />
             <div class="feature-overlay">
                 <span class="feature-tag">JOURNAL</span>
                 <div class="feature-title">From the Cellar</div>
@@ -1415,7 +1423,7 @@
             </div>
         </div>
         <div class="feature-card">
-            <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=600&q=80" alt="Gift Sets" />
+            <img src="{% static 'Photo-119.jpg' %}" class="object-left" alt="Gift Sets" />
             <div class="feature-overlay">
                 <span class="feature-tag">GIFTING</span>
                 <div class="feature-title">Gift Sets</div>
@@ -1430,7 +1438,7 @@
     <!-- ── Our Story ── -->
     <div class="story-section">
         <div class="story-image">
-            <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=900&q=80" alt="Our Story" />
+            <img src="{% static 'Photo-10.jpg' %}" alt="Our Story" />
         </div>
         <div class="story-content">
             <div class="section-rule"><span>✦</span></div>
@@ -1466,11 +1474,9 @@
         <div class="footer-top">
             <div class="footer-brand">
                 <div class="logo-mark">
-                    <div class="logo-emblem" style="border-color:rgba(201,168,76,0.5); color:var(--gold);">T</div>
-                    <div class="logo-text">
-                        <div class="brand" style="color:#F5F0E8;">TSANGARIDES</div>
-                        <div class="sub" style="color:#8a7a5a;">Winery &amp; Estate</div>
-                    </div>
+                    <a href="{% url 'index' %}" class="logo-mark">
+                        <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
+                    </a>
                 </div>
                 <p>Family owned &amp; estate grown in Lemona, Paphos, Cyprus. Crafting organic wines with passion since
                     2005.</p>
@@ -1485,13 +1491,13 @@
                 </ul>
             </div>
             <div>
-                <div class="footer-col-title">EVENTS</div>
+                <div class="footer-col-title">Who We Are</div>
                 <ul class="footer-links">
-                    <li><a href="{% url 'events' %}">Wine Tastings</a></li>
-                    <li><a href="{% url 'events' %}">Winery Tours</a></li>
-                    <li><a href="{% url 'events' %}">Events</a></li>
-                    <li><a href="{% url 'events' %}">Accommodation</a></li>
-                    <li><a href="{% url 'events' %}">Restaurant</a></li>
+                    <li><a href="{% url 'who-we-are' %}">Wine Tastings</a></li>
+                    <li><a href="{% url 'who-we-are' %}">Winery Tours</a></li>
+                    <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
+                    <li><a href="{% url 'who-we-are' %}">Accommodation</a></li>
+                    <li><a href="{% url 'who-we-are' %}">Restaurant</a></li>
                 </ul>
             </div>
             <div>

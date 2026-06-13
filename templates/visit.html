@@ -403,7 +403,7 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(rgba(26, 18, 8, 0.65), rgba(26, 18, 8, 0.45)),
-            url("{% static 'Photo-100.webp' %}") center/cover no-repeat;
+            url("{% static 'stay.jpg' %}") center/cover no-repeat;
             animation: slowzoom 22s ease-in-out infinite alternate;
         }
 
@@ -728,18 +728,14 @@
     <!-- Navigation -->
     <nav>
         <a href="{% url 'index' %}" class="logo-mark">
-            <div class="logo-emblem">T</div>
-            <div class="logo-text">
-                <div class="brand">TSANGARIDES</div>
-                <div class="sub">Winery &amp; Estate</div>
-            </div>
+            <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
         </a>
 
         <ul class="nav-links">
             <li><a href="{% url 'shop' %}">Shop Wines</a></li>
             <li><a href="{% url 'visit-us' %}" class="text-[var(--gold)]">Stay with us</a></li>
             <li><a href="{% url 'our-story' %}">Our Story</a></li>
-            <li><a href="{% url 'events' %}">Events</a></li>
+            <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
 
@@ -774,7 +770,7 @@
             <a href="{% url 'visit-us' %}">Stay with us <span class="arrow">›</span></a>
             <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank">Book a Tasting <span
                     class="arrow">›</span></a>
-            <a href="{% url 'events' %}">Events <span class="arrow">›</span></a>
+            <a href="{% url 'who-we-are' %}">Who We Are <span class="arrow">›</span></a>
             <a href="{% url 'our-story' %}">Our Story <span class="arrow">›</span></a>
             <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
         </nav>
@@ -916,11 +912,9 @@
         <div class="footer-top">
             <div class="footer-brand">
                 <div class="logo-mark">
-                    <div class="logo-emblem" style="border-color:rgba(201,168,76,0.5); color:var(--gold);">T</div>
-                    <div class="logo-text">
-                        <div class="brand" style="color:#F5F0E8;">TSANGARIDES</div>
-                        <div class="sub" style="color:#8a7a5a;">Winery &amp; Estate</div>
-                    </div>
+                    <a href="{% url 'index' %}" class="logo-mark">
+                        <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
+                    </a>
                 </div>
                 <p>Family owned &amp; estate grown in Lemona, Paphos, Cyprus. Crafting organic wines with passion since
                     2005.</p>

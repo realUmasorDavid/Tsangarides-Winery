@@ -17,8 +17,8 @@ def contact(request):
 def book(request):
     return render(request, 'book.html')
 
-def events(request):
-    return render(request, 'index.html')
+def who_we_are(request):
+    return render(request, 'who.html')
 
 def story(request):
     return render(request, 'story.html')

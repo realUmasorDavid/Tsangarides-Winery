@@ -1,0 +1,571 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Story — Tsangarides Winery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Raleway:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E8C96A;
+            --dark: #1A1208;
+            --charcoal: #2C2318;
+            --cream: #F5F0E8;
+            --warm-white: #FAF7F2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: var(--warm-white);
+            color: var(--dark);
+        }
+
+        /* ── Top bar ── */
+        .topbar {
+            background: var(--dark);
+            color: #bfae94;
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            padding: 8px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .topbar {
+                padding: 8px 20px;
+                font-size: 0.55rem;
+            }
+        }
+
+        /* ── Nav ── */
+        nav {
+            background: rgba(250, 247, 242, 0.97);
+            backdrop-filter: blur(8px);
+            padding: 18px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 14px 20px;
+            }
+        }
+
+        .logo-mark {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-emblem {
+            width: 52px;
+            height: 52px;
+            border: 1.5px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            line-height: 1.1;
+        }
+
+        .logo-text .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 0.22em;
+            color: var(--dark);
+        }
+
+        .logo-text .sub {
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.35em;
+            color: #8a7a5a;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            color: var(--charcoal);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 3px;
+            transition: color .2s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width .3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger button */
+        #hamburger-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            flex-direction: column;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        #hamburger-btn span {
+            display: block;
+            width: 22px;
+            height: 1.5px;
+            background: var(--charcoal);
+            transition: all .3s ease;
+        }
+
+        @media (max-width: 1024px) {
+            #hamburger-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            height: 85vh;
+            min-height: 620px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 24px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(26, 18, 8, 0.65), rgba(26, 18, 8, 0.45)),
+            url("{% static 'tsangarides.jpg' %}") center/cover no-repeat;
+            animation: slowzoom 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowzoom {
+            from {
+                transform: scale(1.05);
+            }
+
+            to {
+                transform: scale(1.00);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 760px;
+            color: #fff;
+        }
+
+        .hero-eyebrow {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.35em;
+            color: var(--gold-light);
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            line-height: 1.65;
+            max-width: 520px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .btn-gold {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            padding: 14px 36px;
+            background: var(--gold);
+            color: var(--dark);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all .25s;
+            display: inline-block;
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        /* ── Story Section ── */
+        .story-section {
+            padding: 100px 48px;
+            background: white;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .story-section {
+                padding: 60px 20px;
+            }
+        }
+
+        .story-text {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: #5a4c30;
+            max-width: 780px;
+            margin: 0 auto;
+        }
+
+        .story-text p {
+            margin-bottom: 28px;
+        }
+
+        .highlight {
+            background: rgba(201, 168, 76, 0.08);
+            padding: 32px;
+            border-left: 5px solid var(--gold);
+            margin: 48px 0;
+            font-style: italic;
+            color: var(--charcoal);
+        }
+
+        /* ── Family Section ── */
+        .family-section {
+            padding: 100px 48px;
+            background: var(--warm-white);
+        }
+
+        .family-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 48px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .family-card {
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(26, 18, 8, 0.08);
+        }
+
+        .family-card img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+
+        .family-content {
+            padding: 32px;
+        }
+
+        .family-content h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: #bfae94;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            padding: 64px 80px 48px;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        @media (max-width: 1024px) {
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+                padding: 48px 40px;
+            }
+        }
+
+        .footer-brand p {
+            font-size: 0.8rem;
+            line-height: 1.7;
+            color: #8a7a5a;
+            margin-top: 16px;
+            max-width: 280px;
+        }
+
+        .footer-col-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: 0.78rem;
+            color: #8a7a5a;
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+        }
+
+        .footer-bottom {
+            padding: 24px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.68rem;
+            color: #5a4c30;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.1em;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-bottom {
+                padding: 20px 24px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top bar -->
+    <div class="topbar text-center">
+        <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="{% url 'index' %}" class="logo-mark">
+            <a href="{% url 'index' %}" class="logo-mark">
+                <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
+            </a>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="{% url 'shop' %}">Shop Wines</a></li>
+            <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
+            <li><a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking">Book Tasting</a></li>
+            <li><a href="{% url 'our-story' %}" class="text-[var(--gold)]">Our Story</a></li>
+            <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <button id="hamburger-btn" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">GENERATIONS OF PASSION</p>
+            <h1 class="hero-title">Who We Are</h1>
+            <p class="hero-sub">A family legacy rooted in the vineyards of Lemona, blending tradition with innovation to
+                create wines of character and distinction.</p>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <div class="story-section">
+        <div class="story-text">
+            <p>The Tsangarides winery is the next generation of Cypriot wines. Our philosophy is to blend old school
+                traditions with new school style. Our youth, energy, and passion, coupled with the distinct sense of
+                place that wine brings to our lives, allow us to produce wines of great character and distinction.</p>
+
+            <p>We are extremely proud to be considered one of the key wineries at the leading edge of the long-awaited
+                revival of Cyprus’s wine industry.</p>
+
+            <div class="highlight">
+                “The Tsangarides heritage is one that has enormous respect for the craft as a living breathing art, with
+                the vines being both our livelihood as well as our passion.”
+            </div>
+
+            <p>The Tsangarides winery is situated in the lovely old village of Lemona. It is here that our
+                great-great-grandfather prepared the land and planted the first vineyards. The knowledge passed down
+                through generations, enriched by travel and collaboration with foreign winemakers, has helped us become
+                one of the best examples of a boutique winery in Cyprus.</p>
+
+            <p>Today, siblings Loukia and Angelos Tsangarides continue this legacy, carrying the mantle passed on by
+                their father. With deep roots in winemaking running through their veins, they strive to open new “wine
+                frontiers” while facing the challenges of modern winemaking.</p>
+        </div>
+    </div>
+
+    <!-- Family / Legacy -->
+    <div class="family-section">
+        <div style="text-align:center; margin-bottom:60px;">
+            <div class="section-rule"><span>✦</span></div>
+            <h2 style="font-family:'Cormorant Garamond',serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight:300;">A
+                Family Legacy</h2>
+        </div>
+
+        <div class="family-grid">
+            <div class="family-card">
+                <img src="{% static 'roots.jpg' %}" alt="Vineyards in Lemona">
+                <div class="family-content">
+                    <h3>Our Roots</h3>
+                    <p>From our great-great-grandfather who first planted the vines in Lemona, to the present day — five
+                        generations of passionate winemakers.</p>
+                </div>
+            </div>
+
+            <div class="family-card">
+                <img src="{% static 'family.jpg' %}"
+                    alt="Loukia & Angelos">
+                <div class="family-content">
+                    <h3>Loukia &amp; Angelos</h3>
+                    <p>Current stewards of the family winery, committed to excellence, innovation, and preserving the
+                        authentic character of Cypriot wines.</p>
+                </div>
+            </div>
+
+            <div class="family-card">
+                <img src="{% static 'Photo-150.jpg' %}" alt="Winemaking">
+                <div class="family-content">
+                    <h3>Our Philosophy</h3>
+                    <p>Respect for tradition, sustainable practices, and a relentless pursuit of quality — creating
+                        wines that tell the story of Lemona.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo-mark">
+                    <a href="{% url 'index' %}" class="logo-mark">
+                        <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
+                    </a>
+                </div>
+                <p>Family owned &amp; estate grown in Lemona, Paphos, Cyprus. Crafting organic wines with passion since
+                    2005.</p>
+            </div>
+            <div>
+                <div class="footer-col-title">WINES</div>
+                <ul class="footer-links">
+                    <li><a href="{% url 'shop' %}">Red Wines</a></li>
+                    <li><a href="{% url 'shop' %}">White Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Rosé Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Organic Range</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">EXPLORE</div>
+                <ul class="footer-links">
+                    <li><a href="{% url 'visit-us' %}">Stay with Us</a></li>
+                    <li><a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking">Book a Tasting</a></li>
+                    <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">CONTACT</div>
+                <ul class="footer-links">
+                    <li><a href="mailto:info@tsangarideswinery.com">info@tsangarideswinery.com</a></li>
+                    <li><a href="tel:+35726722777">+357 26 722 777</a></li>
+                    <li><a href="https://maps.app.goo.gl/79rim1Pa48aP5Zsw5" target="_blank">Lemona Village, Paphos
+                            8545</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span id="year">2026</span> TSANGARIDES WINERY. ALL RIGHTS RESERVED.</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+
+</html>

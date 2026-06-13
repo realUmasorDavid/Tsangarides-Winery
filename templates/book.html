@@ -418,19 +418,15 @@
     <!-- Navigation -->
     <nav>
         <a href="{% url 'index' %}" class="logo-mark">
-            <div class="logo-emblem">T</div>
-            <div class="logo-text">
-                <div class="brand">TSANGARIDES</div>
-                <div class="sub">Winery &amp; Estate</div>
-            </div>
+            <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
         </a>
 
         <ul class="nav-links">
             <li><a href="{% url 'shop' %}">Shop Wines</a></li>
             <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
-            <li><a href="{% url 'book-tasting' %}" class="text-[var(--gold)]">Book Tasting</a></li>
+            <li><a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" class="text-[var(--gold)]">Book Tasting</a></li>
             <li><a href="{% url 'our-story' %}">Our Story</a></li>
-            <li><a href="{% url 'events' %}">Events</a></li>
+            <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
 
@@ -527,11 +523,9 @@
             style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding: 64px 80px 48px; border-bottom: 1px solid rgba(201, 168, 76, 0.15);">
             <div class="footer-brand">
                 <div class="logo-mark">
-                    <div class="logo-emblem" style="border-color:rgba(201,168,76,0.5); color:var(--gold);">T</div>
-                    <div class="logo-text">
-                        <div class="brand" style="color:#F5F0E8;">TSANGARIDES</div>
-                        <div class="sub" style="color:#8a7a5a;">Winery &amp; Estate</div>
-                    </div>
+                    <a href="{% url 'index' %}" class="logo-mark">
+                        <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
+                    </a>
                 </div>
                 <p style="font-size:0.8rem; line-height:1.7; color:#8a7a5a; margin-top:16px; max-width:280px;">
                     Family owned &amp; estate grown in Lemona, Paphos, Cyprus.
@@ -552,7 +546,7 @@
                     style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.25em; color:var(--gold); margin-bottom:20px;">
                     EXPERIENCES</div>
                 <ul class="footer-links" style="list-style:none; display:flex; flex-direction:column; gap:10px;">
-                    <li><a href="{% url 'book-tasting' %}" style="color:#8a7a5a; text-decoration:none;">Wine
+                    <li><a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" style="color:#8a7a5a; text-decoration:none;">Wine
                             Tastings</a></li>
                     <li><a href="{% url 'visit-us' %}" style="color:#8a7a5a; text-decoration:none;">Stay with Us</a>
                     </li>

@@ -995,18 +995,14 @@
     <!-- ─── NAV ─── -->
     <nav>
         <a href="{% url 'index' %}" class="logo-mark">
-            <div class="logo-emblem">T</div>
-            <div class="logo-text">
-                <div class="brand">TSANGARIDES</div>
-                <div class="sub">Winery &amp; Estate</div>
-            </div>
+            <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
         </a>
 
         <ul class="nav-links">
             <li><a href="{% url 'shop' %}" class="active">Shop Wines</a></li>
             <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
             <li><a href="{% url 'our-story' %}">Our Story</a></li>
-            <li><a href="{% url 'events' %}">events</a></li>
+            <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
 
@@ -1036,7 +1032,7 @@
             <a href="{% url 'shop' %}">Shop Wines <span class="arrow">›</span></a>
             <a href="{% url 'visit-us' %}">Stay with us <span class="arrow">›</span></a>
             <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank">Book a Tasting <span class="arrow">›</span></a>
-            <a href="{% url 'events' %}">Events <span class="arrow">›</span></a>
+            <a href="{% url 'who-we-are' %}">Who We Are <span class="arrow">›</span></a>
             <a href="{% url 'our-story' %}">Our Story <span class="arrow">›</span></a>
             <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
         </nav>
@@ -1206,10 +1202,9 @@
         <div class="footer-top">
             <div class="footer-brand">
                 <div class="logo-mark">
-                    <div class="logo-emblem" style="border-color:rgba(201,168,76,0.5);color:var(--gold);">T</div>
-                    <div class="logo-text">
-                        <div class="brand" style="color:#F5F0E8;">TSANGARIDES</div>
-                        <div class="sub" style="color:#8a7a5a;">Winery &amp; Estate</div>
+                    <a href="{% url 'index' %}" class="logo-mark">
+                        <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
+                    </a>
                     </div>
                 </div>
                 <p>Family owned &amp; estate grown in Lemona, Paphos, Cyprus. Crafting organic wines with passion since
@@ -1227,13 +1222,13 @@
                 </ul>
             </div>
             <div>
-                <div class="footer-col-title">EVENTS</div>
+                <div class="footer-col-title">Who We Are</div>
                 <ul class="footer-links">
-                    <li><a href="{% url 'events' %}">Wine Tastings</a></li>
-                    <li><a href="{% url 'events' %}">Winery Tours</a></li>
-                    <li><a href="{% url 'events' %}">Events</a></li>
-                    <li><a href="{% url 'events' %}">Accommodation</a></li>
-                    <li><a href="{% url 'events' %}">Restaurant</a></li>
+                    <li><a href="{% url 'who-we-are' %}">Wine Tastings</a></li>
+                    <li><a href="{% url 'who-we-are' %}">Winery Tours</a></li>
+                    <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
+                    <li><a href="{% url 'who-we-are' %}">Accommodation</a></li>
+                    <li><a href="{% url 'who-we-are' %}">Restaurant</a></li>
                 </ul>
             </div>
             <div>
