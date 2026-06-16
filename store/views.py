@@ -23,6 +23,9 @@ def who_we_are(request):
 def story(request):
     return render(request, 'story.html')
 
+def events(request):
+    return render(request, 'events.html')
+
 def privacy(request):
     return render(request, 'index.html')
 

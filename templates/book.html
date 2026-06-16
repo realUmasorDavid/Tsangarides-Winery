@@ -149,7 +149,76 @@
             width: 100%;
         }
 
-        /* Hamburger */
+        /* ── Nav right icons ── */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-right svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--charcoal);
+            cursor: pointer;
+            transition: stroke .2s;
+        }
+
+        .nav-right svg:hover {
+            stroke: var(--gold);
+        }
+
+        /* ── Cart toggle button ── */
+        #cart-toggle-btn {
+            position: relative;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cart-toggle-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--charcoal);
+            transition: stroke .2s;
+        }
+
+        #cart-toggle-btn:hover svg {
+            stroke: var(--gold);
+        }
+
+        #cart-item-count {
+            display: none;
+            position: absolute;
+            top: -7px;
+            right: -8px;
+            background: var(--gold);
+            color: var(--dark);
+            font-family: 'Cinzel', serif;
+            font-size: 0.5rem;
+            font-weight: 700;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        #cart-item-count.visible {
+            display: flex;
+        }
+
+        .shopify-buy__cart-toggle {
+            display: none !important;
+        }
+
+        /* ── Hamburger button ── */
         #hamburger-btn {
             display: none;
             background: none;
@@ -158,6 +227,7 @@
             padding: 4px;
             flex-direction: column;
             gap: 5px;
+            justify-content: center;
         }
 
         #hamburger-btn span {
@@ -166,6 +236,20 @@
             height: 1.5px;
             background: var(--charcoal);
             transition: all .3s ease;
+            transform-origin: center;
+        }
+
+        #hamburger-btn.open span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg);
+        }
+
+        #hamburger-btn.open span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        #hamburger-btn.open span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg);
         }
 
         @media (max-width: 1024px) {
@@ -176,6 +260,171 @@
             .nav-links {
                 display: none;
             }
+        }
+
+        /* ── Mobile drawer overlay ── */
+        #mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(26, 18, 8, 0.55);
+            backdrop-filter: blur(3px);
+            z-index: 300;
+            opacity: 0;
+            transition: opacity .3s ease;
+        }
+
+        #mobile-overlay.open {
+            display: block;
+        }
+
+        #mobile-overlay.visible {
+            opacity: 1;
+        }
+
+        /* ── Mobile drawer panel ── */
+        #mobile-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100dvh;
+            width: min(320px, 85vw);
+            background: var(--dark);
+            z-index: 400;
+            transform: translateX(-100%);
+            transition: transform .38s cubic-bezier(.4, 0, .2, 1);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        #mobile-drawer.open {
+            transform: translateX(0);
+        }
+
+        .drawer-header {
+            padding: 24px 28px 20px;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .drawer-logo .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.22em;
+            color: #F5F0E8;
+        }
+
+        .drawer-logo .sub {
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.55rem;
+            letter-spacing: 0.3em;
+            color: #8a7a5a;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        #drawer-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #drawer-close svg {
+            width: 18px;
+            height: 18px;
+            stroke: #bfae94;
+            transition: stroke .2s;
+        }
+
+        #drawer-close:hover svg {
+            stroke: var(--gold-light);
+        }
+
+        .drawer-nav {
+            padding: 16px 0;
+            margin: 8px 0px;
+            flex: 1;
+            flex-direction: column;
+        }
+
+        .drawer-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: #bfae94;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+            transition: color .2s, background .2s;
+        }
+
+        .drawer-nav a:hover {
+            color: var(--gold-light);
+            background: rgba(201, 168, 76, 0.06);
+        }
+
+        .drawer-nav a .arrow {
+            font-size: 0.6rem;
+            color: rgba(201, 168, 76, 0.4);
+            transition: color .2s;
+        }
+
+        .drawer-nav a:hover .arrow {
+            color: var(--gold-light);
+        }
+
+        .drawer-footer {
+            padding: 24px 28px;
+            border-top: 1px solid rgba(201, 168, 76, 0.15);
+            flex-shrink: 0;
+        }
+
+        .drawer-footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .drawer-footer-links a {
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.15em;
+            color: #8a7a5a;
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .drawer-footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .drawer-copy {
+            font-size: 0.62rem;
+            color: #5a4c30;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.08em;
+        }
+
+        /* ── Gold divider line ── */
+        .drawer-section-label {
+            padding: 16px 28px 8px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.52rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            opacity: 0.7;
         }
 
         /* ── Hero ── */
@@ -415,27 +664,70 @@
         <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
     </div>
 
-    <!-- Navigation -->
+    <!-- ── Navigation ── -->
     <nav>
+        <!-- Logo -->
         <a href="{% url 'index' %}" class="logo-mark">
-            <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
+            <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
         </a>
 
+        <!-- Desktop nav links -->
         <ul class="nav-links">
             <li><a href="{% url 'shop' %}">Shop Wines</a></li>
             <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
-            <li><a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" class="text-[var(--gold)]">Book Tasting</a></li>
+            <li><a href="{% url 'events' %}">Events</a></li>
             <li><a href="{% url 'our-story' %}">Our Story</a></li>
             <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
 
+        <!-- Right-side icons -->
         <div class="nav-right">
-            <button id="hamburger-btn" aria-label="Open menu">
-                <span></span><span></span><span></span>
+            <!-- Hamburger — mobile/tablet only -->
+            <button id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
         </div>
     </nav>
+
+    <!-- ── Mobile overlay ── -->
+    <div id="mobile-overlay" aria-hidden="true"></div>
+
+    <!-- ── Mobile drawer ── -->
+    <aside id="mobile-drawer" aria-label="Navigation menu" aria-hidden="true">
+        <div class="drawer-header">
+            <div class="drawer-logo">
+                <div class="brand">TSANGARIDES</div>
+                <div class="sub">Winery &amp; Estate</div>
+            </div>
+            <button id="drawer-close" aria-label="Close menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <nav class="drawer-nav" aria-label="Mobile navigation">
+            <a href="{% url 'shop' %}">Shop Wines <span class="arrow">›</span></a>
+            <a href="{% url 'visit-us' %}">Stay with us <span class="arrow">›</span></a>
+            <a href="{% url 'events' %}">Events <span class="arrow">›</span></a>
+            <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank">Book a Tasting <span class="arrow">›</span></a>
+            <a href="{% url 'who-we-are' %}">Who We Are <span class="arrow">›</span></a>
+            <a href="{% url 'our-story' %}">Our Story <span class="arrow">›</span></a>
+            <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
+        </nav>
+
+        <div class="drawer-footer">
+            <div class="drawer-footer-links">
+                <a href="{% url 'privacy' %}">Privacy</a>
+                <a href="{% url 'terms' %}">Terms</a>
+                <a href="{% url 'cookies' %}">Cookies</a>
+            </div>
+            <div class="drawer-copy">© <span id="year">2026</span> TSANGARIDES WINERY</div>
+        </div>
+    </aside>
 
     <!-- Hero -->
     <section class="hero">
@@ -517,61 +809,109 @@
         </a>
     </div>
 
-    <!-- Footer -->
-    <footer style="background: var(--dark); color: #bfae94;">
-        <div class="footer-top"
-            style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding: 64px 80px 48px; border-bottom: 1px solid rgba(201, 168, 76, 0.15);">
+    <footer>
+        <div class="footer-top">
             <div class="footer-brand">
                 <div class="logo-mark">
                     <a href="{% url 'index' %}" class="logo-mark">
-                        <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
+                        <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
                     </a>
                 </div>
-                <p style="font-size:0.8rem; line-height:1.7; color:#8a7a5a; margin-top:16px; max-width:280px;">
-                    Family owned &amp; estate grown in Lemona, Paphos, Cyprus.
-                </p>
+                <p>Family owned &amp; estate grown in Lemona, Paphos, Cyprus. Crafting organic wines with passion since
+                    2005.</p>
             </div>
             <div>
-                <div class="footer-col-title"
-                    style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.25em; color:var(--gold); margin-bottom:20px;">
-                    WINES</div>
-                <ul class="footer-links" style="list-style:none; display:flex; flex-direction:column; gap:10px;">
-                    <li><a href="{% url 'shop' %}" style="color:#8a7a5a; text-decoration:none;">Red Wines</a></li>
-                    <li><a href="{% url 'shop' %}" style="color:#8a7a5a; text-decoration:none;">White Wines</a></li>
-                    <li><a href="{% url 'shop' %}" style="color:#8a7a5a; text-decoration:none;">Organic Range</a></li>
+                <div class="footer-col-title">WINES</div>
+                <ul class="footer-links">
+                    <li><a href="{% url 'shop' %}">Red Wines</a></li>
+                    <li><a href="{% url 'shop' %}">White Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Rosé Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Organic Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Wine Accessories</a></li>
                 </ul>
             </div>
             <div>
-                <div class="footer-col-title"
-                    style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.25em; color:var(--gold); margin-bottom:20px;">
-                    EXPERIENCES</div>
-                <ul class="footer-links" style="list-style:none; display:flex; flex-direction:column; gap:10px;">
-                    <li><a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" style="color:#8a7a5a; text-decoration:none;">Wine
-                            Tastings</a></li>
-                    <li><a href="{% url 'visit-us' %}" style="color:#8a7a5a; text-decoration:none;">Stay with Us</a>
-                    </li>
+                <div class="footer-col-title">Who We Are</div>
+                <ul class="footer-links">
+                    <li><a href="{% url 'who-we-are' %}">Wine Tastings</a></li>
+                    <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
+                    <li><a href="{% url 'visit-us' %}">Accommodation</a></li>
                 </ul>
             </div>
             <div>
-                <div class="footer-col-title"
-                    style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.25em; color:var(--gold); margin-bottom:20px;">
-                    CONTACT</div>
-                <ul class="footer-links" style="list-style:none; display:flex; flex-direction:column; gap:10px;">
-                    <li><a href="mailto:info@tsangarideswinery.com"
-                            style="color:#8a7a5a; text-decoration:none;">info@tsangarideswinery.com</a></li>
-                    <li><a href="tel:+35726722777" style="color:#8a7a5a; text-decoration:none;">+357 26 722 777</a></li>
+                <div class="footer-col-title">CONTACT</div>
+                <ul class="footer-links">
+                    <li><a href="mailto:info@tsangarideswinery.com">info@tsangarideswinery.com</a></li>
+                    <li><a href="tel:+35726722777">+357 26 722 777</a></li>
+                    <li><a href="https://maps.app.goo.gl/79rim1Pa48aP5Zsw5" style="color:#8a7a5a; font-size:.75rem; line-height:1.5;">Lemona Village,<br>Paphos
+                            8545,<br>Cyprus</a></li>
                 </ul>
             </div>
         </div>
-        <div class="footer-bottom"
-            style="padding:24px 80px; display:flex; justify-content:space-between; align-items:center; font-size:0.68rem; color:#5a4c30; font-family:'Cinzel',serif; letter-spacing:0.1em; flex-wrap:wrap; gap:12px;">
+        <div class="footer-bottom">
             <span>© <span id="year">2026</span> TSANGARIDES WINERY. ALL RIGHTS RESERVED.</span>
+            <div style="display:flex;gap:24px;flex-wrap:wrap;">
+                <a href="{% url 'privacy' %}"
+                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
+                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">PRIVACY POLICY</a>
+                <a href="{% url 'terms' %}"
+                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
+                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">TERMS OF USE</a>
+                <a href="{% url 'cookies' %}"
+                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
+                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">COOKIE POLICY</a>
+            </div>
         </div>
     </footer>
 
-    <script>
+    <!-- ── Page scripts (drawer + year) ── -->
+    <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
+
             document.getElementById('year').textContent = new Date().getFullYear();
+
+            // ── Mobile drawer logic ───────────────────────────────────────
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const drawerClose = document.getElementById('drawer-close');
+            const overlay = document.getElementById('mobile-overlay');
+            const drawer = document.getElementById('mobile-drawer');
+            const body = document.body;
+
+            function openDrawer() {
+                overlay.classList.add('open');
+                requestAnimationFrame(() => {
+                    overlay.classList.add('visible');
+                    drawer.classList.add('open');
+                });
+                hamburgerBtn.classList.add('open');
+                hamburgerBtn.setAttribute('aria-expanded', 'true');
+                drawer.setAttribute('aria-hidden', 'false');
+                overlay.setAttribute('aria-hidden', 'false');
+                body.style.overflow = 'hidden';
+            }
+
+            function closeDrawer() {
+                overlay.classList.remove('visible');
+                drawer.classList.remove('open');
+                hamburgerBtn.classList.remove('open');
+                hamburgerBtn.setAttribute('aria-expanded', 'false');
+                drawer.setAttribute('aria-hidden', 'true');
+                overlay.setAttribute('aria-hidden', 'true');
+                body.style.overflow = '';
+                overlay.addEventListener('transitionend', () => overlay.classList.remove('open'), { once: true });
+            }
+
+            hamburgerBtn.addEventListener('click', openDrawer);
+            drawerClose.addEventListener('click', closeDrawer);
+            overlay.addEventListener('click', closeDrawer);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 1024 && drawer.classList.contains('open')) closeDrawer();
+            });
         });
     </script>
 </body>

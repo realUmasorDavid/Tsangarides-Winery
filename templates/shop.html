@@ -271,6 +271,7 @@
         }
 
         /* Mobile overlay */
+        /* ── Mobile drawer overlay ── */
         #mobile-overlay {
             display: none;
             position: fixed;
@@ -290,7 +291,7 @@
             opacity: 1;
         }
 
-        /* Mobile drawer */
+        /* ── Mobile drawer panel ── */
         #mobile-drawer {
             position: fixed;
             top: 0;
@@ -358,7 +359,9 @@
 
         .drawer-nav {
             padding: 16px 0;
+            margin: 8px 0px;
             flex: 1;
+            flex-direction: column;
         }
 
         .drawer-nav a {
@@ -421,6 +424,16 @@
             color: #5a4c30;
             font-family: 'Cinzel', serif;
             letter-spacing: 0.08em;
+        }
+
+        /* ── Gold divider line ── */
+        .drawer-section-label {
+            padding: 16px 28px 8px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.52rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            opacity: 0.7;
         }
 
         /* ─── SHOP HERO BANNER ─── */
@@ -995,12 +1008,13 @@
     <!-- ─── NAV ─── -->
     <nav>
         <a href="{% url 'index' %}" class="logo-mark">
-            <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
+            <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
         </a>
 
         <ul class="nav-links">
             <li><a href="{% url 'shop' %}" class="active">Shop Wines</a></li>
             <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
+            <li><a href="{% url 'events' %}">Events</a></li>
             <li><a href="{% url 'our-story' %}">Our Story</a></li>
             <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
@@ -1014,8 +1028,10 @@
         </div>
     </nav>
 
-    <!-- ─── MOBILE OVERLAY + DRAWER ─── -->
+    <!-- ── Mobile overlay ── -->
     <div id="mobile-overlay" aria-hidden="true"></div>
+    
+    <!-- ── Mobile drawer ── -->
     <aside id="mobile-drawer" aria-label="Navigation menu" aria-hidden="true">
         <div class="drawer-header">
             <div class="drawer-logo">
@@ -1028,21 +1044,25 @@
                 </svg>
             </button>
         </div>
+    
         <nav class="drawer-nav" aria-label="Mobile navigation">
             <a href="{% url 'shop' %}">Shop Wines <span class="arrow">›</span></a>
             <a href="{% url 'visit-us' %}">Stay with us <span class="arrow">›</span></a>
-            <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank">Book a Tasting <span class="arrow">›</span></a>
+            <a href="{% url 'events' %}">Events <span class="arrow">›</span></a>
+            <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank">Book a Tasting
+                <span class="arrow">›</span></a>
             <a href="{% url 'who-we-are' %}">Who We Are <span class="arrow">›</span></a>
             <a href="{% url 'our-story' %}">Our Story <span class="arrow">›</span></a>
             <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
         </nav>
+    
         <div class="drawer-footer">
             <div class="drawer-footer-links">
                 <a href="{% url 'privacy' %}">Privacy</a>
                 <a href="{% url 'terms' %}">Terms</a>
                 <a href="{% url 'cookies' %}">Cookies</a>
             </div>
-            <div class="drawer-copy">© <span class="year-placeholder">2026</span> TSANGARIDES WINERY</div>
+            <div class="drawer-copy">© <span id="year">2026</span> TSANGARIDES WINERY</div>
         </div>
     </aside>
 
@@ -1203,9 +1223,8 @@
             <div class="footer-brand">
                 <div class="logo-mark">
                     <a href="{% url 'index' %}" class="logo-mark">
-                        <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
+                        <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
                     </a>
-                    </div>
                 </div>
                 <p>Family owned &amp; estate grown in Lemona, Paphos, Cyprus. Crafting organic wines with passion since
                     2005.</p>
@@ -1216,19 +1235,16 @@
                     <li><a href="{% url 'shop' %}">Red Wines</a></li>
                     <li><a href="{% url 'shop' %}">White Wines</a></li>
                     <li><a href="{% url 'shop' %}">Rosé Wines</a></li>
-                    <li><a href="{% url 'shop' %}">Organic Range</a></li>
-                    <li><a href="{% url 'shop' %}">Reserve Collection</a></li>
-                    <li><a href="{% url 'shop' %}">Gift Sets</a></li>
+                    <li><a href="{% url 'shop' %}">Organic Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Wine Accessories</a></li>
                 </ul>
             </div>
             <div>
                 <div class="footer-col-title">Who We Are</div>
                 <ul class="footer-links">
                     <li><a href="{% url 'who-we-are' %}">Wine Tastings</a></li>
-                    <li><a href="{% url 'who-we-are' %}">Winery Tours</a></li>
                     <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
-                    <li><a href="{% url 'who-we-are' %}">Accommodation</a></li>
-                    <li><a href="{% url 'who-we-are' %}">Restaurant</a></li>
+                    <li><a href="{% url 'visit-us' %}">Accommodation</a></li>
                 </ul>
             </div>
             <div>
@@ -1236,13 +1252,14 @@
                 <ul class="footer-links">
                     <li><a href="mailto:info@tsangarideswinery.com">info@tsangarideswinery.com</a></li>
                     <li><a href="tel:+35726722777">+357 26 722 777</a></li>
-                    <li><a href="https://maps.app.goo.gl/79rim1Pa48aP5Zsw5" style="color:#8a7a5a;font-size:.75rem;line-height:1.5;">Lemona Village,<br>Paphos
+                    <li><a href="https://maps.app.goo.gl/79rim1Pa48aP5Zsw5"
+                            style="color:#8a7a5a; font-size:.75rem; line-height:1.5;">Lemona Village,<br>Paphos
                             8545,<br>Cyprus</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <span>© <span class="year-placeholder">2026</span> TSANGARIDES WINERY. ALL RIGHTS RESERVED.</span>
+            <span>© <span id="year">2026</span> TSANGARIDES WINERY. ALL RIGHTS RESERVED.</span>
             <div style="display:flex;gap:24px;flex-wrap:wrap;">
                 <a href="{% url 'privacy' %}"
                     style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"

@@ -665,12 +665,13 @@
     <!-- Navigation -->
     <nav>
         <a href="{% url 'index' %}" class="logo-mark">
-            <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
+            <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
         </a>
 
         <ul class="nav-links">
             <li><a href="{% url 'shop' %}">Shop Wines</a></li>
             <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
+            <li><a href="{% url 'events' %}">Events</a></li>
             <li><a href="{% url 'our-story' %}">Our Story</a></li>
             <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
             <li><a href="{% url 'contact' %}" class="text-[var(--gold)]">Contact</a></li>
@@ -705,8 +706,9 @@
         <nav class="drawer-nav" aria-label="Mobile navigation">
             <a href="{% url 'shop' %}">Shop Wines <span class="arrow">›</span></a>
             <a href="{% url 'visit-us' %}">Stay with us <span class="arrow">›</span></a>
+            <a href="{% url 'events' %}">Events <span class="arrow">›</span></a>
             <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank">Book a Tasting <span
-                    class="arrow">›</span></a>
+                class="arrow">›</span></a>
             <a href="{% url 'who-we-are' %}">Who We Are <span class="arrow">›</span></a>
             <a href="{% url 'our-story' %}">Our Story <span class="arrow">›</span></a>
             <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
@@ -797,15 +799,15 @@
                 <div class="info-item">
                     <strong>OPENING HOURS</strong>
                     <p style="line-height:1.8;">
-                        Wednesday – Sunday: 10:00 – 18:00<br>
-                        Monday &amp; Tuesday: By appointment only
+                        Monday – Sunday: 10:00AM – 18:00PM<br>
                     </p>
                 </div>
 
                 <div class="map-container">
                     <iframe class="w-full h-full rounded"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26193.443835640912!2d32.542651143502354!3d34.85169218169457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14e7118b997fa13f%3A0x4f6603d7915a5312!2sLemona%208545%2C%20Cyprus!5e0!3m2!1sen!2sng!4v1780902025034!5m2!1sen!2sng"
-                        style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3273.804919186719!2d32.5580518!3d34.861128799999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14e7121f3dad3015%3A0x45c98d1dceb5b52a!2sTsangarides%20Winery!5e0!3m2!1sen!2sng!4v1781621878997!5m2!1sen!2sng"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
                 <div style="margin-top:40px;">
@@ -824,7 +826,7 @@
             <div class="footer-brand">
                 <div class="logo-mark">
                     <a href="{% url 'index' %}" class="logo-mark">
-                        <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
+                        <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
                     </a>
                 </div>
                 <p>Family owned &amp; estate grown in Lemona, Paphos, Cyprus. Crafting organic wines with passion since
@@ -836,14 +838,15 @@
                     <li><a href="{% url 'shop' %}">Red Wines</a></li>
                     <li><a href="{% url 'shop' %}">White Wines</a></li>
                     <li><a href="{% url 'shop' %}">Rosé Wines</a></li>
-                    <li><a href="{% url 'shop' %}">Organic Range</a></li>
+                    <li><a href="{% url 'shop' %}">Organic Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Wine Accessories</a></li>
                 </ul>
             </div>
             <div>
-                <div class="footer-col-title">EVENTS</div>
+                <div class="footer-col-title">EXPERIENCES</div>
                 <ul class="footer-links">
                     <li><a href="{% url 'visit-us' %}">Wine Tastings</a></li>
-                    <li><a href="{% url 'visit-us' %}">Vineyard Tours</a></li>
+                    <li><a href="{% url 'visit-us' %}">Accommodation</a></li>
                     <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
                 </ul>
             </div>

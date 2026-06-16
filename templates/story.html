@@ -665,12 +665,13 @@
     <!-- Navigation -->
     <nav>
         <a href="{% url 'index' %}" class="logo-mark">
-            <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
+            <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
         </a>
 
         <ul class="nav-links">
             <li><a href="{% url 'shop' %}">Shop Wines</a></li>
             <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
+            <li><a href="{% url 'events' %}">Events</a></li>
             <li><a href="{% url 'our-story' %}" class="active">Our Story</a></li>
             <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
@@ -705,8 +706,9 @@
         <nav class="drawer-nav" aria-label="Mobile navigation">
             <a href="{% url 'shop' %}">Shop Wines <span class="arrow">›</span></a>
             <a href="{% url 'visit-us' %}">Stay with us <span class="arrow">›</span></a>
+            <a href="{% url 'events' %}">Events <span class="arrow">›</span></a>
             <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank">Book a Tasting <span
-                    class="arrow">›</span></a>
+                class="arrow">›</span></a>
             <a href="{% url 'who-we-are' %}">Who We Are <span class="arrow">›</span></a>
             <a href="{% url 'our-story' %}">Our Story <span class="arrow">›</span></a>
             <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
@@ -739,7 +741,7 @@
         <h2 class="section-title">A Legacy Rooted in the Land</h2>
 
         <p class="story-text">
-            Tsangarides Winery was founded in 2005 by Andreas Tsangarides, continuing a family tradition of farming and
+            Tsangarides Winery was founded in 2005 by Angelos Tsangarides, continuing a family tradition of farming and
             winemaking that stretches back four generations.
             What began as a small family vineyard in the village of Lemona has grown into one of Cyprus’s most respected
             organic wine estates.
@@ -755,7 +757,7 @@
                     Beginning</h3>
                 <p style="line-height:1.85; color:#5a4c30;">
                     Our family has lived and worked the land in Paphos for over a century. In 2005 we took the bold step
-                    of planting our first dedicated vineyards with the vision of creating world-class Cypriot wines
+                    of creating the winery with the vision of creating world-class Cypriot wines
                     while respecting the environment.
                 </p>
             </div>
@@ -851,7 +853,7 @@
             <div class="footer-brand">
                 <div class="logo-mark">
                     <a href="{% url 'index' %}" class="logo-mark">
-                        <img src="{% static 'logo.png' %}" class="w-36 h-16" alt="Tsangarides Winery Logo">
+                        <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
                     </a>
                 </div>
                 <p>Family owned &amp; estate grown in Lemona, Paphos, Cyprus. Crafting organic wines with passion since
@@ -863,7 +865,8 @@
                     <li><a href="{% url 'shop' %}">Red Wines</a></li>
                     <li><a href="{% url 'shop' %}">White Wines</a></li>
                     <li><a href="{% url 'shop' %}">Rosé Wines</a></li>
-                    <li><a href="{% url 'shop' %}">Organic Range</a></li>
+                    <li><a href="{% url 'shop' %}">Organic Wines</a></li>
+                    <li><a href="{% url 'shop' %}">Wines Accessories</a></li>
                 </ul>
             </div>
             <div>
