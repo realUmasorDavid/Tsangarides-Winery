@@ -126,6 +126,81 @@
             width: 100%;
         }
 
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .dropdown-trigger {
+            background: none;
+            border: 0;
+            padding: 0;
+            font: inherit;
+            color: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .dropdown-caret {
+            font-size: 0.55rem;
+            transition: transform .2s ease;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) translateY(6px);
+            min-width: 210px;
+            background: #fffdf7;
+            border: 1px solid rgba(201, 168, 76, 0.18);
+            border-radius: 6px;
+            box-shadow: 0 18px 40px rgba(26, 18, 8, 0.12);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+            z-index: 20;
+            overflow: hidden;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 16px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.18em;
+            color: var(--charcoal);
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(201, 168, 76, 0.08);
+            color: var(--gold);
+        }
+
+        .nav-dropdown:hover .dropdown-menu,
+        .nav-dropdown:focus-within .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .nav-dropdown:hover .dropdown-caret,
+        .nav-dropdown:focus-within .dropdown-caret {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 1024px) {
+            .nav-dropdown:hover .dropdown-menu,
+            .nav-dropdown:focus-within .dropdown-menu {
+                opacity: 0;
+                visibility: hidden;
+                transform: translateX(-50%) translateY(6px);
+            }
+        }
+
         .nav-right {
             display: flex;
             align-items: center;
@@ -307,6 +382,40 @@
 
         .drawer-nav a:hover .arrow {
             color: var(--gold-light);
+        }
+
+        .drawer-parent {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background: none;
+            border: 0;
+            padding: 14px 28px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: #bfae94;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .drawer-subnav {
+            padding: 0 28px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .drawer-subnav a {
+            padding: 10px 0;
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.76rem;
+            letter-spacing: 0.08em;
+            color: #d9c79f;
+            text-transform: none;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
         }
 
         .drawer-footer {
@@ -654,12 +763,21 @@
         <ul class="nav-links">
             <li><a href="{% url 'shop' %}">Shop Wines</a></li>
             <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
-            <li><a href="{% url 'events' %}" class="text-[var(--gold)]">Events</a></li>
-            <li><a href="{% url 'our-story' %}">Our Story</a></li>
-            <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
+            <li><a href="{% url 'events' %}">Events</a></li>
+            <li class="nav-dropdown">
+                <button type="button" class="dropdown-trigger">
+                    <span>About</span>
+                    <span class="dropdown-caret">▾</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="{% url 'winery' %}">The Winery</a>
+                    <a href="{% url 'who-we-are' %}">Who We Are</a>
+                    <a href="{% url 'our-story' %}">Our Story</a>
+                    <a href="{% url 'vineyard' %}">The Vineyard</a>
+                </div>
+            </li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
-
         <div class="nav-right">
             <button id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
                 <span></span>
@@ -690,11 +808,16 @@
             <a href="{% url 'shop' %}">Shop Wines <span class="arrow">›</span></a>
             <a href="{% url 'visit-us' %}">Stay with us <span class="arrow">›</span></a>
             <a href="{% url 'events' %}">Events <span class="arrow">›</span></a>
-            <a href="{% url 'our-story' %}">Our Story <span class="arrow">›</span></a>
-            <a href="{% url 'who-we-are' %}">Who We Are <span class="arrow">›</span></a>
+            <button type="button" class="drawer-parent">About <span class="arrow">›</span></button>
+            <div class="drawer-subnav">
+                <a href="{% url 'winery' %}">The Winery</a>
+                <a href="{% url 'who-we-are' %}">Who We Are</a>
+                <a href="{% url 'our-story' %}">Our Story</a>
+                <a href="{% url 'vineyard' %}">The Vineyard</a>
+            </div>
+            <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank">Book a Tasting <span class="arrow">›</span></a>
             <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
         </nav>
-
         <div class="drawer-footer">
             <div class="drawer-footer-links">
                 <a href="{% url 'privacy' %}">Privacy</a>

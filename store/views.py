@@ -26,6 +26,13 @@ def story(request):
 def events(request):
     return render(request, 'events.html')
 
+def winery(request):
+    return render(request, 'winery.html')
+
+
+def vineyard(request):
+    return render(request, 'vineyard.html')
+
 def privacy(request):
     return render(request, 'index.html')
 
