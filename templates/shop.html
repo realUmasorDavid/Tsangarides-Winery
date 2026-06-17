@@ -688,11 +688,10 @@
             letter-spacing: 0.15em;
             color: #8a7a5a;
             cursor: pointer;
-            padding: 6px 0;
-            background: none;
-            border: none;
-            text-align: left;
-            transition: color .2s;
+            padding: 8px 14px;
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            border-radius: 4px;
+            transition: all .2s;
         }
 
         @media (max-width: 1024px) {
@@ -704,13 +703,14 @@
             }
 
             .filter-pill.active {
-                background: var(--gold);
-                color: var(--dark);
-                border-color: var(--gold);
-            }
+            background: var(--gold);
+            color: var(--dark);
+            border-color: var(--gold);
+        }
         }
 
         .filter-pill:hover {
+            border-color: var(--gold);
             color: var(--gold);
         }
 
@@ -1207,29 +1207,24 @@
     </section>
 
     <!-- ─── SHOP LAYOUT ─── -->
+    <!-- ─── SHOP LAYOUT ─── -->
     <div class="shop-layout">
-
+    
         <!-- ── SIDEBAR ── -->
         <aside class="shop-sidebar">
-
-            <!-- Active filters summary (shown only if filters active) -->
-            <div id="active-filter-summary" style="display:none; margin-bottom:28px;">
-                <div class="sidebar-title" style="margin-bottom:10px;">ACTIVE FILTERS</div>
-                <div id="active-filter-tags" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
-                <button id="clear-all-filters"
-                    style="margin-top:12px; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em; color:#8a7a5a; background:none; border:none; cursor:pointer; padding:0; text-decoration:underline; text-underline-offset:3px;">CLEAR
-                    ALL</button>
-            </div>
-
+    
             <div class="sidebar-section">
                 <div class="sidebar-title">WINE TYPE</div>
-                <div class="filter-group" id="filter-type">
-                    <button class="filter-pill active" data-filter="type" data-value="all">
-                        <span class="dot"></span> All Wines
-                    </button>
+                <div class="filter-group" id="wine-type-filters">
+                    <button class="filter-pill active" data-collection="all">All Wines</button>
+                    <button class="filter-pill" data-collection="red">Red Wines</button>
+                    <button class="filter-pill" data-collection="white">White Wines</button>
+                    <button class="filter-pill" data-collection="rose">Rosé Wines</button>
+                    <button class="filter-pill" data-collection="organic">Organic Wines</button>
+                    <button class="filter-pill" data-collection="accessories">Wine Accessories</button>
                 </div>
             </div>
-
+    
             <div class="sidebar-section">
                 <div class="sidebar-title">SORT BY</div>
                 <div class="filter-group" id="filter-sort">
@@ -1247,18 +1242,21 @@
                     </button>
                 </div>
             </div>
-
+    
             <div class="sidebar-section">
                 <div class="sidebar-title">NEED HELP?</div>
-                <p style="font-size:0.78rem;line-height:1.7;color:#8a7a5a;margin-bottom:14px;">Not sure which wine to
-                    choose? Our team is happy to guide you.</p>
-                <a href="{% url 'contact' %}" class="btn-gold" style="font-size:0.55rem;padding:10px 20px;">CONTACT US</a>
+                <p style="font-size:0.78rem;line-height:1.7;color:#8a7a5a;margin-bottom:14px;">
+                    Not sure which wine to choose? Our team is happy to guide you.
+                </p>
+                <a href="{% url 'contact' %}" class="btn-gold" style="font-size:0.55rem;padding:10px 20px;">
+                    CONTACT US
+                </a>
             </div>
         </aside>
-
+    
         <!-- ── MAIN CONTENT ── -->
         <main>
-            <!-- Mobile filter pills -->
+            <!-- Mobile filter bar -->
             <div class="mobile-filter-bar">
                 <span class="mobile-filter-label">FILTER BY</span>
                 <select class="sort-select" id="mobile-sort-select">
@@ -1268,12 +1266,7 @@
                     <option value="title-asc">Name A–Z</option>
                 </select>
             </div>
-
-            <!-- Mobile type filters -->
-            <div style="display:none;" id="mobile-type-filters" class="filter-group"
-                style="margin-bottom:24px; flex-wrap:wrap; gap:8px;">
-            </div>
-
+    
             <!-- Results header -->
             <div class="results-header">
                 <span class="results-count" id="results-count">LOADING WINES…</span>
@@ -1287,52 +1280,17 @@
                     </select>
                 </div>
             </div>
-
-            <!-- Loading skeleton (hidden once Shopify loads) -->
+    
+            <!-- Loading skeleton -->
             <div id="collection-skeleton" class="collection-loading">
-                <div class="skeleton-card">
-                    <div class="skeleton-img"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line"></div>
-                        <div class="skeleton-line short"></div>
-                        <div class="skeleton-line price"></div>
-                        <div class="skeleton-btn"></div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-img"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line"></div>
-                        <div class="skeleton-line short"></div>
-                        <div class="skeleton-line price"></div>
-                        <div class="skeleton-btn"></div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-img"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line"></div>
-                        <div class="skeleton-line short"></div>
-                        <div class="skeleton-line price"></div>
-                        <div class="skeleton-btn"></div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-img"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line"></div>
-                        <div class="skeleton-line short"></div>
-                        <div class="skeleton-line price"></div>
-                        <div class="skeleton-btn"></div>
-                    </div>
-                </div>
+                <!-- Your 4 skeleton cards here (keep as is) -->
+                <div class="skeleton-card">...</div>
+                <div class="skeleton-card">...</div>
+                <div class="skeleton-card">...</div>
+                <div class="skeleton-card">...</div>
             </div>
-
-            <!--
-                ✅ SHOPIFY COLLECTION GRID TARGET
-                The Buy Button JS mounts the product grid here.
-                Grid columns and gap are set in the JS options below.
-            -->
+    
+            <!-- Shopify Collection Grid -->
             <div id="shopify-collection-grid"></div>
         </main>
     </div>
@@ -1412,29 +1370,36 @@
 
             function openDrawer() {
                 overlay.classList.add('open');
-                requestAnimationFrame(() => { overlay.classList.add('visible'); drawer.classList.add('open'); });
+                requestAnimationFrame(() => {
+                    overlay.classList.add('visible');
+                    drawer.classList.add('open');
+                });
                 hamburgerBtn.classList.add('open');
                 hamburgerBtn.setAttribute('aria-expanded', 'true');
                 drawer.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';
             }
+
             function closeDrawer() {
-                overlay.classList.remove('visible'); drawer.classList.remove('open');
-                hamburgerBtn.classList.remove('open'); hamburgerBtn.setAttribute('aria-expanded', 'false');
-                drawer.setAttribute('aria-hidden', 'true'); document.body.style.overflow = '';
+                overlay.classList.remove('visible');
+                drawer.classList.remove('open');
+                hamburgerBtn.classList.remove('open');
+                hamburgerBtn.setAttribute('aria-expanded', 'false');
+                drawer.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
                 overlay.addEventListener('transitionend', () => overlay.classList.remove('open'), { once: true });
             }
+
             hamburgerBtn.addEventListener('click', openDrawer);
             drawerClose.addEventListener('click', closeDrawer);
             overlay.addEventListener('click', closeDrawer);
             document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
             window.addEventListener('resize', () => { if (window.innerWidth >= 1024) closeDrawer(); });
 
-            /* ── Filter / Sort state ── */
-            let activeType = 'all';
+            /* ── Filter State ── */
             let activeSort = 'default';
+            let currentCollectionKey = 'all';
 
-            /* Map sort values to Shopify sortKey + reverse */
             const sortMap = {
                 'default': { sortKey: 'COLLECTION_DEFAULT', reverse: false },
                 'price-asc': { sortKey: 'PRICE', reverse: false },
@@ -1442,60 +1407,32 @@
                 'title-asc': { sortKey: 'TITLE', reverse: false }
             };
 
-            /* ── Sidebar filter pills ── */
-            document.querySelectorAll('.filter-pill').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const group = btn.dataset.filter;
-                    const val = btn.dataset.value;
+            /* UPDATE THESE WITH YOUR REAL SHOPIFY COLLECTION IDs */
+            const collectionMap = {
+                'all': '574777786634',
+                'red': '577135083786',      // ← Update if needed
+                'white': '577135116554',
+                'rose': '577135149322',
+                'organic': '577135182090',
+                'accessories': '577135214858'
+            };
 
-                    // Deactivate siblings in same group
-                    document.querySelectorAll(`.filter-pill[data-filter="${group}"]`).forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-
-                    if (group === 'type') {
-                        activeType = val;
-                        reloadCollection();
-                    } else if (group === 'sort') {
-                        activeSort = val;
-                        document.getElementById('desktop-sort-select').value = val;
-                        document.getElementById('mobile-sort-select').value = val;
-                        reloadCollection();
-                    }
-                });
-            });
-
-            /* ── Sort dropdowns (desktop + mobile) ── */
-            ['desktop-sort-select', 'mobile-sort-select'].forEach(id => {
-                document.getElementById(id).addEventListener('change', function () {
-                    activeSort = this.value;
-                    // Sync sidebar pills
-                    document.querySelectorAll('.filter-pill[data-filter="sort"]').forEach(b => {
-                        b.classList.toggle('active', b.dataset.value === activeSort);
-                    });
-                    // Sync the other select
-                    const other = id === 'desktop-sort-select' ? 'mobile-sort-select' : 'desktop-sort-select';
-                    document.getElementById(other).value = activeSort;
-                    reloadCollection();
-                });
-            });
-
-            /* ── Shopify ── */
+            /* Shopify Setup */
             const client = ShopifyBuy.buildClient({
                 domain: 'tommys2000.myshopify.com',
                 storefrontAccessToken: 'bbc2c3d95d8ecc7895e08d8448e7f28f',
             });
+
             const ui = ShopifyBuy.UI.init(client);
 
-            /* Cart badge */
+            /* Cart Badge */
             function updateCartBadge(cart) {
                 const badge = document.getElementById('cart-item-count');
                 if (!badge) return;
-                const count = cart ? cart.lineItems.reduce((s, i) => s + i.quantity, 0) : 0;
+                const count = cart ? cart.lineItems.reduce((sum, item) => sum + item.quantity, 0) : 0;
                 badge.textContent = count;
                 count > 0 ? badge.classList.add('visible') : badge.classList.remove('visible');
             }
-
-            let cartComponent = null;
 
             ui.createComponent('cart', {
                 node: document.getElementById('shopify-cart'),
@@ -1503,51 +1440,41 @@
                     cart: {
                         startOpen: false,
                         styles: {
-                            button: { 'background-color': '#C9A84C', 'color': '#1A1208', 'font-family': 'Cinzel, serif', ':hover': { 'background-color': '#b0923d' } }
+                            button: {
+                                'background-color': '#C9A84C',
+                                'color': '#1A1208',
+                                'font-family': 'Cinzel, serif',
+                                ':hover': { 'background-color': '#b0923d' }
+                            }
                         },
                         events: {
-                            afterInit: c => { cartComponent = c; updateCartBadge(c.model); },
-                            updateComplete: c => updateCartBadge(c.model)
+                            afterInit: (c) => updateCartBadge(c.model),
+                            updateComplete: (c) => updateCartBadge(c.model)
                         }
                     }
                 }
-            }).then(c => { cartComponent = c; });
+            });
 
-            /* ── Collection loader ── */
-            let collectionComponent = null;
-
+            /* Collection Loader */
             function getCollectionOptions() {
-                const { sortKey, reverse } = sortMap[activeSort];
+                const { sortKey, reverse } = sortMap[activeSort] || sortMap.default;
                 return {
                     product: {
                         buttonDestination: 'cart',
                         layout: 'vertical',
                         contents: { img: true, title: true, price: true, button: true },
                         styles: {
-                            product: { 'text-align': 'center', 'margin-bottom': '0' },
+                            product: { 'text-align': 'center' },
                             title: { 'font-family': 'Cinzel, serif', 'color': '#1A1208', 'font-size': '0.75rem', 'letter-spacing': '0.12em' },
                             price: { 'color': '#C9A84C', 'font-family': 'Cormorant Garamond, serif', 'font-size': '1.1rem' },
                             button: {
                                 'background-color': '#C9A84C', 'color': '#1A1208',
                                 'font-family': 'Cinzel, serif', 'font-size': '0.6rem',
-                                'letter-spacing': '0.15em', 'border-radius': '0',
-                                ':hover': { 'background-color': '#b0923d' }
-                            }
-                        },
-                        events: {
-                            afterInit: () => {
-                                hideSkeleton();
-                            },
-                            addToCart: () => {
-                                if (cartComponent) updateCartBadge(cartComponent.model);
+                                'letter-spacing': '0.15em'
                             }
                         }
                     },
                     collection: {
-                        /*
-                            sortKey + reverse drive the Shopify Storefront API query.
-                            The grid layout is set here so it's responsive and matches the page design.
-                        */
                         sortKey: sortKey,
                         reverse: reverse,
                         styles: {
@@ -1561,36 +1488,50 @@
                 };
             }
 
-            function hideSkeleton() {
-                const sk = document.getElementById('collection-skeleton');
-                if (sk) sk.style.display = 'none';
-                document.getElementById('results-count').textContent = 'SHOWING ALL WINES';
-            }
-
-            function reloadCollection() {
-                /* Destroy existing component and re-create with new options */
+            function loadCollection() {
                 const grid = document.getElementById('shopify-collection-grid');
-                grid.innerHTML = ''; // clear previous iframe
+                grid.innerHTML = '';
 
-                /* Show skeleton again briefly */
-                const sk = document.getElementById('collection-skeleton');
-                if (sk) sk.style.display = 'grid';
-                document.getElementById('results-count').textContent = 'LOADING WINES…';
+                const skeleton = document.getElementById('collection-skeleton');
+                if (skeleton) skeleton.style.display = 'grid';
+
+                const collectionId = collectionMap[currentCollectionKey] || collectionMap.all;
 
                 ui.createComponent('collection', {
-                    id: '574777786634',
+                    id: collectionId,
                     node: grid,
                     options: getCollectionOptions()
-                }).then(c => { collectionComponent = c; });
+                }).then(() => {
+                    if (skeleton) skeleton.style.display = 'none';
+                    document.getElementById('results-count').textContent =
+                        `SHOWING ${currentCollectionKey === 'all' ? 'ALL' : currentCollectionKey.toUpperCase()} WINES`;
+                });
             }
 
-            /* Initial load */
-            ui.createComponent('collection', {
-                id: '574777786634',
-                node: document.getElementById('shopify-collection-grid'),
-                options: getCollectionOptions()
-            }).then(c => { collectionComponent = c; });
+            /* Wine Type Filters */
+            document.querySelectorAll('#wine-type-filters .filter-pill').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('#wine-type-filters .filter-pill').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
 
+                    currentCollectionKey = btn.dataset.collection;
+                    loadCollection();
+                });
+            });
+
+            /* Sort Selects */
+            ['desktop-sort-select', 'mobile-sort-select'].forEach(id => {
+                const select = document.getElementById(id);
+                if (select) {
+                    select.addEventListener('change', function () {
+                        activeSort = this.value;
+                        loadCollection();
+                    });
+                }
+            });
+
+            /* Initial Load */
+            loadCollection();
         });
     </script>
 
