@@ -682,6 +682,15 @@
         }
 
         @media (max-width: 600px) {
+            .event-grid {
+                display: grid;
+                /* On mobile, columns take up 100% of the available width */
+                grid-template-columns: 1fr; 
+                /* Tighten gaps and padding so the content doesn't feel cramped on small screens */
+                gap: 24px;
+                padding: 40px 20px;
+            }
+
             .footer-top {
                 grid-template-columns: 1fr;
                 gap: 32px;
