@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact Us — Tsangarides Winery</title>
+    <title>Adopt a Vine — Tsangarides Winery</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Raleway:wght@300;400;500&display=swap"
@@ -17,7 +17,6 @@
             --gold-light: #E8C96A;
             --dark: #1A1208;
             --charcoal: #2C2318;
-            --cream: #F5F0E8;
             --warm-white: #FAF7F2;
         }
 
@@ -25,6 +24,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -33,7 +33,7 @@
             color: var(--dark);
         }
 
-        /* Reusing core styles from indexpage */
+        /* Top bar, Nav, Mobile Drawer, Buttons, Hero — consistent with your other pages */
         .topbar {
             background: var(--dark);
             color: #bfae94;
@@ -41,19 +41,9 @@
             font-size: 0.65rem;
             letter-spacing: 0.18em;
             padding: 8px 48px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            text-align: center;
         }
 
-        @media (max-width: 768px) {
-            .topbar {
-                padding: 8px 20px;
-                font-size: 0.55rem;
-            }
-        }
-
-        /* Navigation */
         nav {
             background: rgba(250, 247, 242, 0.97);
             backdrop-filter: blur(8px);
@@ -65,12 +55,6 @@
             top: 0;
             z-index: 200;
             border-bottom: 1px solid rgba(201, 168, 76, 0.18);
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                padding: 14px 20px;
-            }
         }
 
         .logo-mark {
@@ -91,22 +75,6 @@
             font-family: 'Cinzel', serif;
             font-size: 1.3rem;
             color: var(--gold);
-            flex-shrink: 0;
-        }
-
-        .logo-text .brand {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            letter-spacing: 0.22em;
-            color: var(--dark);
-        }
-
-        .logo-text .sub {
-            font-family: 'Raleway', sans-serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.35em;
-            color: #8a7a5a;
-            text-transform: uppercase;
         }
 
         .nav-links {
@@ -122,8 +90,10 @@
             color: var(--charcoal);
             text-decoration: none;
             position: relative;
-            padding-bottom: 3px;
-            transition: color .2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
         }
 
         .nav-links a::after {
@@ -137,12 +107,60 @@
             transition: width .3s ease;
         }
 
-        .nav-links a:hover {
-            color: var(--gold);
-        }
-
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        .hero {
+            position: relative;
+            height: 85vh;
+            min-height: 620px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 24px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(26, 18, 8, 0.65), rgba(26, 18, 8, 0.45)),
+            url("{% static 'adpothero.jpeg' %}") center/cover no-repeat;
+            animation: slowzoom 25s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowzoom {
+            from {
+                transform: scale(1.08);
+            }
+
+            to {
+                transform: scale(1.00);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            color: #fff;
+            max-width: 760px;
+        }
+
+        .hero-eyebrow {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.35em;
+            color: var(--gold-light);
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.05;
+            margin-bottom: 24px;
         }
 
         .nav-dropdown {
@@ -152,7 +170,6 @@
         .dropdown-trigger {
             background: none;
             border: 0;
-            padding: 0;
             font: inherit;
             color: inherit;
             display: inline-flex;
@@ -244,6 +261,7 @@
             padding: 4px;
             flex-direction: column;
             gap: 5px;
+            justify-content: center;
         }
 
         #hamburger-btn span {
@@ -252,6 +270,7 @@
             height: 1.5px;
             background: var(--charcoal);
             transition: all .3s ease;
+            transform-origin: center;
         }
 
         #hamburger-btn.open span:nth-child(1) {
@@ -277,7 +296,6 @@
             }
         }
 
-        /* ── Mobile drawer overlay ── */
         #mobile-overlay {
             display: none;
             position: fixed;
@@ -297,7 +315,6 @@
             opacity: 1;
         }
 
-        /* ── Mobile drawer panel ── */
         #mobile-drawer {
             position: fixed;
             top: 0;
@@ -466,176 +483,18 @@
             letter-spacing: 0.08em;
         }
 
-        /* ── Gold divider line ── */
-        .drawer-section-label {
-            padding: 16px 28px 8px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.52rem;
-            letter-spacing: 0.3em;
-            color: var(--gold);
-            opacity: 0.7;
-        }
-
-        /* Hero */
-        .hero {
-            position: relative;
-            height: 78vh;
-            min-height: 580px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 24px;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(rgba(26, 18, 8, 0.7), rgba(26, 18, 8, 0.5)),
-            url("{% static 'Photo-100.jpeg' %}") center/cover no-repeat;
-            animation: slowzoom 24s ease-in-out infinite alternate;
-        }
-
-        @keyframes slowzoom {
-            from {
-                transform: scale(1.06);
-            }
-
-            to {
-                transform: scale(1.00);
-            }
-        }
-
-        .hero-content {
-            position: relative;
-            max-width: 680px;
-            color: #fff;
-        }
-
-        .hero-eyebrow {
-            font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.35em;
-            color: var(--gold-light);
-            margin-bottom: 12px;
-        }
-
-        .hero-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.8rem, 6.5vw, 5.2rem);
-            font-weight: 300;
-            line-height: 1.05;
-            margin-bottom: 20px;
-        }
-
-        .hero-sub {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            max-width: 480px;
-            margin: 0 auto;
-        }
-
-        /* Main Content */
-        .contact-section {
-            padding: 80px 48px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 768px) {
-            .contact-section {
-                padding: 48px 20px;
-            }
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-        }
-
-        @media (max-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 60px;
-            }
-        }
-
-        .contact-info h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
-            margin-bottom: 24px;
-            color: var(--dark);
-        }
-
-        .info-item {
-            margin-bottom: 32px;
-        }
-
-        .info-item strong {
-            display: block;
-            font-family: 'Cinzel', serif;
-            font-size: 0.95rem;
-            letter-spacing: 0.05em;
-            color: var(--gold);
-            margin-bottom: 6px;
-        }
-
-        .contact-form {
-            background: white;
-            padding: 48px;
-            border-radius: 4px;
-            box-shadow: 0 10px 40px rgba(26, 18, 8, 0.07);
-        }
-
-        .form-group {
-            margin-bottom: 28px;
-        }
-
-        label {
-            display: block;
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            margin-bottom: 8px;
-            color: #6b5c3e;
-        }
-
-        input,
-        textarea,
-        select {
-            width: 100%;
-            padding: 14px 20px;
-            border: 1px solid #d4c9b0;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: border-color .3s;
-        }
-
-        input:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--gold);
-        }
-
-        textarea {
-            min-height: 160px;
-            resize: vertical;
-        }
-
         .btn-gold {
             font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             letter-spacing: 0.2em;
-            padding: 16px 48px;
+            padding: 14px 36px;
             background: var(--gold);
             color: var(--dark);
             border: none;
             cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
             transition: all .25s;
-            width: 100%;
         }
 
         .btn-gold:hover {
@@ -643,133 +502,88 @@
             transform: translateY(-2px);
         }
 
-        /* Map */
-        .map-container {
-            height: 420px;
-            background: #e5e0d8;
-            border-radius: 8px;
-            margin-top: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #8a7a5a;
+        .section-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 100px 48px;
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: #5a4c30;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 40px 32px;
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            border-radius: 4px;
+            transition: all .3s;
+            box-shadow: 0 10px 30px rgba(26, 18, 8, 0.06);
+        }
+
+        .benefit-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(201, 168, 76, 0.12);
+        }
+
+        .benefit-number {
             font-family: 'Cinzel', serif;
-            border: 1px solid rgba(201, 168, 76, 0.2);
-        }
-
-        /* Section Headers */
-        .section-rule {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 16px;
-        }
-
-        .section-rule::before,
-        .section-rule::after {
-            content: '';
-            flex: 1;
-            max-width: 80px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--gold));
-        }
-
-        .section-rule::after {
-            background: linear-gradient(to left, transparent, var(--gold));
-        }
-
-        .section-rule span {
-            font-family: 'Cinzel', serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.3em;
+            font-size: 2.8rem;
             color: var(--gold);
+            margin-bottom: 16px;
+            opacity: 0.9;
         }
 
-        /* Footer */
         footer {
             background: var(--dark);
             color: #bfae94;
+            padding: 56px 48px 40px;
         }
 
-        .footer-top {
+        .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 48px;
-            padding: 64px 80px 48px;
-            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+            grid-template-columns: 1.2fr 1fr 1fr;
+            gap: 36px;
+            max-width: 1180px;
+            margin: 0 auto;
         }
 
-        @media (max-width: 1024px) {
-            .footer-top {
-                grid-template-columns: 1fr 1fr;
-                gap: 32px;
-                padding: 48px 40px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .footer-top {
+        @media (max-width: 900px) {
+            .footer-grid {
                 grid-template-columns: 1fr;
-                gap: 32px;
-                padding: 40px 24px;
             }
         }
 
-        .footer-brand p {
-            font-size: 0.8rem;
-            line-height: 1.7;
-            color: #8a7a5a;
-            margin-top: 16px;
-            max-width: 280px;
-        }
-
-        .footer-col-title {
+        .footer-title {
             font-family: 'Cinzel', serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.25em;
-            color: var(--gold);
-            margin-bottom: 20px;
-        }
-
-        .footer-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            font-size: 0.72rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-bottom: 16px;
         }
 
         .footer-links a {
-            font-size: 0.78rem;
-            color: #8a7a5a;
-            text-decoration: none;
-            transition: color .2s;
-        }
-
-        .footer-links a:hover {
-            color: var(--gold-light);
+            display: block;
+            color: #d6c89d;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
         }
 
         .footer-bottom {
-            padding: 24px 80px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.68rem;
-            color: #5a4c30;
-            font-family: 'Cinzel', serif;
-            letter-spacing: 0.1em;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        @media (max-width: 768px) {
-            .footer-bottom {
-                padding: 20px 24px;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
+            max-width: 1180px;
+            margin: 32px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid rgba(201, 168, 76, 0.15);
+            font-size: 0.75rem;
+            color: #7d6843;
         }
     </style>
 </head>
@@ -777,9 +591,7 @@
 <body>
 
     <!-- Top bar -->
-    <div class="topbar text-center">
-        <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
-    </div>
+    <div class="topbar">FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</div>
 
     <!-- Navigation -->
     <nav>
@@ -791,6 +603,7 @@
             <li><a href="{% url 'shop' %}">Shop Wines</a></li>
             <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
             <li><a href="{% url 'events' %}">Events</a></li>
+            <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
             <li class="nav-dropdown">
                 <button type="button" class="dropdown-trigger">
                     <span class="text">About</span>
@@ -803,22 +616,17 @@
                     <a href="{% url 'vineyard' %}">The Vineyard</a>
                 </div>
             </li>
-            <li><a href="{% url 'adopt-vine' %}">Adopt a Vine</a></li>
+            <li><a href="{% url 'adopt-vine' %}" class="text-[var(--gold)]">Adopt a Vine</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
-        <div class="nav-right">
-            <button id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+
+        <button id="hamburger-btn" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
 
-    <!-- ── Mobile overlay ── -->
     <div id="mobile-overlay" aria-hidden="true"></div>
     
-    <!-- ── Mobile drawer ── -->
     <aside id="mobile-drawer" aria-label="Navigation menu" aria-hidden="true">
         <div class="drawer-header">
             <div class="drawer-logo">
@@ -843,7 +651,8 @@
                 <a href="{% url 'our-story' %}">Our Story</a>
                 <a href="{% url 'vineyard' %}">The Vineyard</a>
             </div>
-            <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank">Book a Tasting <span class="arrow">›</span></a>
+            <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank">Book a Tasting
+                <span class="arrow">›</span></a>
             <a href="{% url 'adopt-vine' %}">Adopt a Vine <span class="arrow">›</span></a>
             <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
         </nav>
@@ -861,160 +670,92 @@
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-content">
-            <p class="hero-eyebrow">LET'S CONNECT</p>
-            <h1 class="hero-title">Get in Touch</h1>
-            <p class="hero-sub">Whether you're planning a visit, interested in our wines, or have a question — we're
-                here to help.</p>
+            <p class="hero-eyebrow">BECOME PART OF OUR FAMILY</p>
+            <h1 class="hero-title">Adopt a Vine</h1>
+            <p class="hero-sub">Own a piece of our vineyard. Watch your vine grow, receive the wine made from it, and
+                create lasting memories with every harvest.</p>
+            <a href="#how-it-works" class="btn-gold">HOW IT WORKS</a>
         </div>
     </section>
 
-    <!-- Contact Content -->
-    <div class="contact-section">
-        <div class="contact-grid">
-            <!-- Contact Form -->
-            <div>
-                <div class="section-rule"><span>✦</span></div>
-                <h2
-                    style="font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:300; margin-bottom:32px;">
-                    Send us a Message</h2>
+    <!-- Content -->
+    <div class="section-content">
+        <div style="text-align:center; max-width:720px; margin:0 auto 80px;">
+            <p style="font-size:1.15rem;">
+                Tsangarides Winery offers you a unique opportunity to adopt your own vine in one of our beautiful
+                organic vineyards in Lemona.
+                Become a part of our story and enjoy the fruits of your own vine for years to come.
+            </p>
+        </div>
 
-                <form class="contact-form" action="#" method="POST">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <select id="subject" name="subject">
-                            <option value="">Select an option</option>
-                            <option value="tasting">Wine Tasting / Visit Inquiry</option>
-                            <option value="wholesale">Wholesale / Trade Inquiry</option>
-                            <option value="event">Private Event Booking</option>
-                            <option value="general">General Question</option>
-                            <option value="press">Press &amp; Media</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" required
-                            placeholder="How can we help you today?"></textarea>
-                    </div>
-                    <button type="submit" class="btn-gold">SEND MESSAGE</button>
-                </form>
-
-                <img src="{% static 'winery-map.png' %}" class="my-4" alt="">
+        <div class="benefits-grid" id="how-it-works">
+            <div class="benefit-card">
+                <div class="benefit-number">01</div>
+                <h3 style="font-family:'Cinzel',serif; font-size:1.45rem; margin-bottom:12px;">Your Personal Vine</h3>
+                <p>We plant a plaque with your name (or the name of your loved one) on a selected vine in our vineyard.
+                </p>
             </div>
 
-            <!-- Contact Info -->
-            <div class="contact-info">
-                <h3>Visit or Reach Us</h3>
-
-                <div class="info-item">
-                    <strong>ADDRESS</strong>
-                    Tsangarides Winery<br>
-                    Lemona Village<br>
-                    Paphos 8545, Cyprus
-                </div>
-
-                <div class="info-item">
-                    <strong>PHONE</strong>
-                    <a href="tel:+35726722777" style="color:var(--dark); text-decoration:none;">+357 26 722 777</a>
-                </div>
-
-                <div class="info-item">
-                    <strong>EMAIL</strong>
-                    <a href="mailto:info@tsangarideswinery.com"
-                        style="color:var(--dark); text-decoration:none;">info@tsangarideswinery.com</a>
-                </div>
-
-                <div class="info-item">
-                    <strong>OPENING HOURS</strong>
-                    <p style="line-height:1.8;">
-                        Monday – Sunday: 10:00AM – 18:00PM<br>
-                    </p>
-                </div>
-
-                <div class="map-container">
-                    <iframe class="w-full h-full rounded"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3273.804919186719!2d32.5580518!3d34.861128799999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14e7121f3dad3015%3A0x45c98d1dceb5b52a!2sTsangarides%20Winery!5e0!3m2!1sen!2sng!4v1781621878997!5m2!1sen!2sng"
-                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-
-                <div style="margin-top:40px;">
-                    <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank" class="btn-gold"
-                        style="display:inline-block; width:auto; text-align:center;">
-                        BOOK A TASTING
-                    </a>
-                </div>
+            <div class="benefit-card">
+                <div class="benefit-number">02</div>
+                <h3 style="font-family:'Cinzel',serif; font-size:1.45rem; margin-bottom:12px;">Annual Wine Allocation
+                </h3>
+                <p>Receive one case (6 bottles) of wine produced from your own vine every year, delivered to your door.
+                </p>
             </div>
+
+            <div class="benefit-card">
+                <div class="benefit-number">03</div>
+                <h3 style="font-family:'Cinzel',serif; font-size:1.45rem; margin-bottom:12px;">Exclusive Experiences
+                </h3>
+                <p>Invitation to harvest your grapes, private tours, 10% discount on all wines, and a beautiful
+                    membership certificate.</p>
+            </div>
+        </div>
+
+        <div style="text-align:center; margin:100px 0 60px;">
+            <h2 style="font-family:'Cormorant Garamond',serif; font-size:2.6rem; font-weight:300; margin-bottom:20px;">
+                Perfect as a Gift</h2>
+            <p style="max-width:620px; margin:0 auto 40px; font-size:1.1rem;">
+                Give the gift of wine, nature, and lasting memories. Ideal for birthdays, anniversaries, weddings, or
+                corporate gifts.
+            </p>
+            <a href="{% url 'contact' %}" class="btn-gold" style="font-size:0.75rem; padding:16px 48px;">ADOPT A VINE
+                TODAY</a>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-top">
-            <div class="footer-brand">
-                <div class="logo-mark">
-                    <a href="{% url 'index' %}" class="logo-mark">
-                        <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
-                    </a>
+        <div class="footer-grid">
+            <div>
+                <div class="footer-title">Tsangarides Winery</div>
+                <p style="color:#d6c89d; max-width: 420px;">Lemona, Cyprus — crafting wines with respect for the land, the
+                    season, and the generations that came before us.</p>
+            </div>
+            <div>
+                <div class="footer-title">Explore</div>
+                <div class="footer-links">
+                    <a href="{% url 'winery' %}">The Winery</a>
+                    <a href="{% url 'our-story' %}">Our Story</a>
+                    <a href="{% url 'visit-us' %}">Visit</a>
                 </div>
-                <p>Family owned &amp; estate grown in Lemona, Paphos, Cyprus. Crafting organic wines with passion since
-                    2005.</p>
             </div>
             <div>
-                <div class="footer-col-title">WINES</div>
-                <ul class="footer-links">
-                    <li><a href="{% url 'shop' %}">Red Wines</a></li>
-                    <li><a href="{% url 'shop' %}">White Wines</a></li>
-                    <li><a href="{% url 'shop' %}">Rosé Wines</a></li>
-                    <li><a href="{% url 'shop' %}">Organic Wines</a></li>
-                    <li><a href="{% url 'shop' %}">Wine Accessories</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="footer-col-title">EXPERIENCES</div>
-                <ul class="footer-links">
-                    <li><a href="{% url 'visit-us' %}">Wine Tastings</a></li>
-                    <li><a href="{% url 'visit-us' %}">Accommodation</a></li>
-                    <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="footer-col-title">CONTACT</div>
-                <ul class="footer-links">
-                    <li><a href="{% url 'contact' %}">Get in Touch</a></li>
-                    <li><a href="mailto:info@tsangarideswinery.com">info@tsangarideswinery.com</a></li>
-                    <li><a href="tel:+35726722777">+357 26 722 777</a></li>
-                </ul>
+                <div class="footer-title">Contact</div>
+                <div class="footer-links">
+                    <a href="{% url 'contact' %}">Get in touch</a>
+                    <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank">Book a
+                        tasting</a>
+                </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <span>© <span id="year">2026</span> TSANGARIDES WINERY. ALL RIGHTS RESERVED.</span>
-            <div style="display:flex;gap:24px;flex-wrap:wrap;">
-                <a href="{% url 'privacy' %}"
-                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
-                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">PRIVACY POLICY</a>
-                <a href="{% url 'terms' %}"
-                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
-                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">TERMS OF USE</a>
-                <a href="{% url 'cookies' %}"
-                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
-                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">COOKIE POLICY</a>
-            </div>
-        </div>
+        <div class="footer-bottom">© <span id="year">2026</span> Tsangarides Winery. All rights reserved.</div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('year').textContent = new Date().getFullYear();
 
-            // Mobile drawer logic
             const hamburgerBtn = document.getElementById('hamburger-btn');
             const drawerClose = document.getElementById('drawer-close');
             const overlay = document.getElementById('mobile-overlay');
@@ -1056,27 +797,8 @@
             window.addEventListener('resize', () => {
                 if (window.innerWidth >= 1024 && drawer.classList.contains('open')) closeDrawer();
             });
-
-            // Optional: Form submission feedback
-            const form = document.querySelector('form');
-            if (form) {
-                form.addEventListener('submit', function (e) {
-                    // In real project this would submit via AJAX or Django
-                    // For now just show success message
-                    const btn = form.querySelector('button');
-                    const originalText = btn.textContent;
-                    btn.textContent = 'MESSAGE SENT ✓';
-                    btn.style.backgroundColor = '#5a6b4a';
-                    setTimeout(() => {
-                        btn.textContent = originalText;
-                        btn.style.backgroundColor = '';
-                        form.reset();
-                    }, 3000);
-                });
-            }
         });
     </script>
-
 </body>
 
 </html>

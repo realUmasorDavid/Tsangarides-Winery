@@ -163,6 +163,16 @@
             cursor: pointer;
         }
 
+        .dropdown-trigger .text {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.18em;
+            color: var(--charcoal);
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
         .dropdown-caret {
             font-size: 0.55rem;
             transition: transform .2s ease;
@@ -795,6 +805,7 @@
                     <a href="{% url 'vineyard' %}">The Vineyard</a>
                 </div>
             </li>
+            <li><a href="{% url 'adopt-vine' %}">Adopt a Vine</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
         <div class="nav-right">
@@ -835,6 +846,7 @@
                 <a href="{% url 'vineyard' %}">The Vineyard</a>
             </div>
             <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank">Book a Tasting <span class="arrow">›</span></a>
+            <a href="{% url 'adopt-vine' %}">Adopt a Vine <span class="arrow">›</span></a>
             <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
         </nav>
         <div class="drawer-footer">

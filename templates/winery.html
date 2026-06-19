@@ -143,6 +143,16 @@
             cursor: pointer;
         }
 
+        .dropdown-trigger .text {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.18em;
+            color: var(--charcoal);
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
         .dropdown-caret {
             font-size: 0.55rem;
             transition: transform .2s ease;
@@ -410,7 +420,7 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(rgba(26, 18, 8, 0.65), rgba(26, 18, 8, 0.45)),
-            url("{% static 'Photo-150.jpeg' %}") top/cover no-repeat;
+            url("{% static 'winery-one.jpeg' %}") top/cover no-repeat;
         }
 
         .hero-content {
@@ -630,6 +640,7 @@
                     <a href="{% url 'vineyard' %}">The Vineyard</a>
                 </div>
             </li>
+            <li><a href="{% url 'adopt-vine' %}">Adopt a Vine</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
         <div class="nav-right">
@@ -668,6 +679,7 @@
                 <a href="{% url 'vineyard' %}">The Vineyard</a>
             </div>
             <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank">Book a Tasting <span class="arrow">›</span></a>
+            <a href="{% url 'adopt-vine' %}">Adopt a Vine <span class="arrow">›</span></a>
             <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
         </nav>
         <div class="drawer-footer">
@@ -690,7 +702,7 @@
 
     <div class="content-grid">
         <div class="section-image relative">
-            <img src="{% static 'Photo-150.jpeg' %}" alt="Tsangarides Winery Exterior">
+            <img src="{% static 'winery-four.jpeg' %}" alt="Tsangarides Winery Exterior">
             <div class="overlay-caption">Our Home in Lemona</div>
         </div>
         <div class="section-text">
@@ -715,7 +727,11 @@
                 youthful energy and enthusiasm that we feel for winemaking.</p>
         </div>
         <div class="section-image relative order-1 md:order-2">
-            <img src="{% static 'cellar.jpeg' %}" class="w-full h-80 object-cover" alt="Winery Cellar">
+            <img src="{% static 'winery-three.jpeg' %}" class="w-full h-80 object-cover" alt="Winery Cellar">
+            <div class="overlay-caption">Inside the Cellar</div>
+        </div>
+        <div class="section-image relative order-1 md:order-2">
+            <img src="{% static 'winery-two.jpeg' %}" class="w-full h-80 object-cover" alt="Winery Cellar">
             <div class="overlay-caption">Inside the Cellar</div>
         </div>
     </div>

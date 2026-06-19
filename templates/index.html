@@ -188,6 +188,16 @@
             cursor: pointer;
         }
 
+        .dropdown-trigger .text {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.18em;
+            color: var(--charcoal);
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
         .dropdown-caret {
             font-size: 0.55rem;
             transition: transform .2s ease;
@@ -582,7 +592,7 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(110deg, rgba(9, 5, 1, 0.90) 0%, rgba(9, 5, 1, 0.65) 55%, rgba(9, 5, 1, 0.40) 100%),
-            url("{% static 'Photo-147.jpeg' %}") center/cover no-repeat;
+            url("{% static 'home-hero.jpeg' %}") center/cover no-repeat;
             transform: scale(1.04);
             opacity: 1;
             animation: slowzoom 18s ease-in-out infinite alternate;
@@ -1356,6 +1366,7 @@
                     <a href="{% url 'vineyard' %}">The Vineyard</a>
                 </div>
             </li>
+            <li><a href="{% url 'adopt-vine' %}">Adopt a Vine</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
 
@@ -1415,6 +1426,7 @@
                 <a href="{% url 'vineyard' %}">The Vineyard</a>
             </div>
             <a href="https://tommys2000.myshopify.com/products/book-tasting?view=booking" target="_blank">Book a Tasting <span class="arrow">›</span></a>
+            <a href="{% url 'adopt-vine' %}">Adopt a Vine <span class="arrow">›</span></a>
             <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
         </nav>
         <div class="drawer-footer">

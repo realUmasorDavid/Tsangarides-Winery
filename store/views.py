@@ -29,9 +29,11 @@ def events(request):
 def winery(request):
     return render(request, 'winery.html')
 
-
 def vineyard(request):
     return render(request, 'vineyard.html')
+
+def adopt_a_vine(request):
+    return render(request, 'adopt_a_vine.html')
 
 def privacy(request):
     return render(request, 'index.html')

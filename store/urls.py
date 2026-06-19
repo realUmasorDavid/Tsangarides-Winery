@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import contact, winery, vineyard, index, shop, book, story, visit, privacy, terms, cookies, who_we_are, events
+from .views import contact, winery, vineyard, index, shop, book, story, visit, privacy, terms, cookies, who_we_are, events, adopt_a_vine
 
 urlpatterns = [
     path('', index, name='index'),
@@ -12,6 +12,7 @@ urlpatterns = [
     path('events/', events, name='events'),
     path('winery/', winery, name='winery'),
     path('vineyard/', vineyard, name='vineyard'),
+    path('adopt-a-vine/', adopt_a_vine, name='adopt-vine'),
     path('privacy/', privacy, name='privacy'),
     path('terms/', terms, name='terms'),
     path('cookies/', cookies, name='cookies'),
