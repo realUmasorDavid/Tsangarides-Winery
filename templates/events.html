@@ -33,7 +33,7 @@
             color: var(--dark);
         }
 
-        /* Top bar, Nav, Mobile drawer, Buttons, Hero — same as previous pages */
+        
         .topbar {
             background: var(--dark);
             color: #bfae94;
@@ -272,7 +272,7 @@
             }
         }
 
-        /* ── Mobile drawer overlay ── */
+        
         #mobile-overlay {
             display: none;
             position: fixed;
@@ -292,7 +292,7 @@
             opacity: 1;
         }
 
-        /* ── Mobile drawer panel ── */
+        
         #mobile-drawer {
             position: fixed;
             top: 0;
@@ -461,7 +461,7 @@
             letter-spacing: 0.08em;
         }
 
-        /* ── Gold divider line ── */
+        
         .drawer-section-label {
             padding: 16px 28px 8px;
             font-family: 'Cinzel', serif;
@@ -471,7 +471,7 @@
             opacity: 0.7;
         }
 
-        /* Hero */
+        
         .hero {
             position: relative;
             height: 85vh;
@@ -551,7 +551,7 @@
             transform: translateY(-2px);
         }
 
-        /* Events Section */
+        
         .events-section {
             padding: 80px 48px;
             background: white;
@@ -654,7 +654,7 @@
             margin-bottom: 24px;
         }
 
-        /* CTA */
+        
         .events-cta {
             background: var(--dark);
             color: #F5F0E8;
@@ -669,7 +669,7 @@
             margin-bottom: 24px;
         }
 
-        /* ── Footer ── */
+        
         footer {
             background: var(--dark);
             color: #bfae94;
@@ -694,9 +694,9 @@
         @media (max-width: 600px) {
             .event-grid {
                 display: grid;
-                /* On mobile, columns take up 100% of the available width */
+                
                 grid-template-columns: 1fr; 
-                /* Tighten gaps and padding so the content doesn't feel cramped on small screens */
+                
                 gap: 24px;
                 padding: 40px 20px;
             }
@@ -768,12 +768,12 @@
 
 <body>
 
-    <!-- Top bar -->
+    
     <div class="topbar text-center">
         <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
     </div>
 
-    <!-- Navigation -->
+    
     <nav>
         <a href="{% url 'index' %}" class="logo-mark">
             <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
@@ -807,10 +807,10 @@
         </div>
     </nav>
 
-    <!-- ── Mobile overlay ── -->
+    
     <div id="mobile-overlay" aria-hidden="true"></div>
 
-    <!-- ── Mobile drawer ── -->
+    
     <aside id="mobile-drawer" aria-label="Navigation menu" aria-hidden="true">
         <div class="drawer-header">
             <div class="drawer-logo">
@@ -849,7 +849,7 @@
         </div>
     </aside>
 
-    <!-- Hero -->
+    
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-content">
@@ -861,7 +861,7 @@
         </div>
     </section>
 
-    <!-- Events -->
+    
     <div id="upcoming-events" class="events-section">
         <div class="section-header">
             <div class="section-rule"><span>✦</span></div>
@@ -869,7 +869,7 @@
         </div>
 
         <div class="event-grid">
-            <!-- Event 1 -->
+            
             <div class="event-card">
                 <img src="{% static 'Photo-131.jpeg' %}"
                     alt="Wine Tasting Dinner">
@@ -883,7 +883,7 @@
                 </div>
             </div>
 
-            <!-- Event 2 -->
+            
             <div class="event-card">
                 <img src="{% static 'Photo-123.jpg' %}"
                     alt="Harvest Festival">
@@ -897,7 +897,7 @@
                 </div>
             </div>
 
-            <!-- Event 3 -->
+            
             <div class="event-card">
                 <img src="{% static 'events-end.jpg' %}" alt="Private Dinner">
                 <div class="event-content">
@@ -912,7 +912,7 @@
         </div>
     </div>
 
-    <!-- CTA -->
+    
     <div class="events-cta">
         <h2>Host Your Event With Us</h2>
         <p style="max-width:520px; margin:0 auto 32px; font-size:1.05rem; opacity:0.9;">
@@ -922,7 +922,7 @@
         <a href="{% url 'contact' %}" class="btn-gold" style="font-size:0.75rem; padding:16px 48px;">GET IN TOUCH</a>
     </div>
 
-    <!-- ── Footer ── -->
+    
     <footer>
         <div class="footer-top">
             <div class="footer-brand">
@@ -978,7 +978,7 @@
         </div>
     </footer>
 
-    <!-- ── Mobile drawer logic ── -->
+    
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('year').textContent = new Date().getFullYear();

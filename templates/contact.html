@@ -33,7 +33,7 @@
             color: var(--dark);
         }
 
-        /* Reusing core styles from indexpage */
+
         .topbar {
             background: var(--dark);
             color: #bfae94;
@@ -53,7 +53,7 @@
             }
         }
 
-        /* Navigation */
+
         nav {
             background: rgba(250, 247, 242, 0.97);
             backdrop-filter: blur(8px);
@@ -222,6 +222,7 @@
         }
 
         @media (max-width: 1024px) {
+
             .nav-dropdown:hover .dropdown-menu,
             .nav-dropdown:focus-within .dropdown-menu {
                 opacity: 0;
@@ -277,7 +278,7 @@
             }
         }
 
-        /* ── Mobile drawer overlay ── */
+
         #mobile-overlay {
             display: none;
             position: fixed;
@@ -297,7 +298,7 @@
             opacity: 1;
         }
 
-        /* ── Mobile drawer panel ── */
+
         #mobile-drawer {
             position: fixed;
             top: 0;
@@ -466,7 +467,7 @@
             letter-spacing: 0.08em;
         }
 
-        /* ── Gold divider line ── */
+
         .drawer-section-label {
             padding: 16px 28px 8px;
             font-family: 'Cinzel', serif;
@@ -476,7 +477,7 @@
             opacity: 0.7;
         }
 
-        /* Hero */
+
         .hero {
             position: relative;
             height: 78vh;
@@ -536,7 +537,7 @@
             margin: 0 auto;
         }
 
-        /* Main Content */
+
         .contact-section {
             padding: 80px 48px;
             max-width: 1200px;
@@ -643,7 +644,13 @@
             transform: translateY(-2px);
         }
 
-        /* Map */
+        .btn-gold:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+
         .map-container {
             height: 420px;
             background: #e5e0d8;
@@ -657,7 +664,7 @@
             border: 1px solid rgba(201, 168, 76, 0.2);
         }
 
-        /* Section Headers */
+
         .section-rule {
             display: flex;
             align-items: center;
@@ -686,7 +693,7 @@
             color: var(--gold);
         }
 
-        /* Footer */
+
         footer {
             background: var(--dark);
             color: #bfae94;
@@ -776,12 +783,12 @@
 
 <body>
 
-    <!-- Top bar -->
+
     <div class="topbar text-center">
         <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
     </div>
 
-    <!-- Navigation -->
+
     <nav>
         <a href="{% url 'index' %}" class="logo-mark">
             <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
@@ -815,10 +822,10 @@
         </div>
     </nav>
 
-    <!-- ── Mobile overlay ── -->
+
     <div id="mobile-overlay" aria-hidden="true"></div>
-    
-    <!-- ── Mobile drawer ── -->
+
+
     <aside id="mobile-drawer" aria-label="Navigation menu" aria-hidden="true">
         <div class="drawer-header">
             <div class="drawer-logo">
@@ -831,7 +838,7 @@
                 </svg>
             </button>
         </div>
-    
+
         <nav class="drawer-nav" aria-label="Mobile navigation">
             <a href="{% url 'shop' %}">Shop Wines <span class="arrow">›</span></a>
             <a href="{% url 'visit-us' %}">Stay with us <span class="arrow">›</span></a>
@@ -843,7 +850,8 @@
                 <a href="{% url 'our-story' %}">Our Story</a>
                 <a href="{% url 'vineyard' %}">The Vineyard</a>
             </div>
-            <a href="https://www.tsangarideswinery.com.co/products/book-tasting?view=booking" target="_blank">Book a Tasting <span class="arrow">›</span></a>
+            <a href="https://www.tsangarideswinery.com.co/products/book-tasting?view=booking" target="_blank">Book a
+                Tasting <span class="arrow">›</span></a>
             <a href="{% url 'adopt-vine' %}">Adopt a Vine <span class="arrow">›</span></a>
             <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
         </nav>
@@ -857,7 +865,7 @@
         </div>
     </aside>
 
-    <!-- Hero -->
+
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-content">
@@ -868,17 +876,24 @@
         </div>
     </section>
 
-    <!-- Contact Content -->
+
     <div class="contact-section">
         <div class="contact-grid">
-            <!-- Contact Form -->
+
             <div>
                 <div class="section-rule"><span>✦</span></div>
                 <h2
                     style="font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:300; margin-bottom:32px;">
                     Send us a Message</h2>
 
-                <form class="contact-form" action="#" method="POST">
+                <form class="contact-form" id="contact-form">
+
+                    <input type="hidden" name="access_key" value="53999e7c-63a1-4113-bff5-d62dca3c3d8f">
+                    <input type="hidden" name="subject" value="New inquiry from Tsangarides Winery website">
+                    <input type="hidden" name="from_name" value="Tsangarides Winery Website">
+
+                    <input type="checkbox" name="botcheck" style="display:none">
+
                     <div class="form-group">
                         <label for="name">Full Name</label>
                         <input type="text" id="name" name="name" required>
@@ -888,8 +903,8 @@
                         <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <select id="subject" name="subject">
+                        <label for="inquiry-type">Subject</label>
+                        <select id="inquiry-type" name="inquiry_type">
                             <option value="">Select an option</option>
                             <option value="tasting">Wine Tasting / Visit Inquiry</option>
                             <option value="wholesale">Wholesale / Trade Inquiry</option>
@@ -903,13 +918,15 @@
                         <textarea id="message" name="message" required
                             placeholder="How can we help you today?"></textarea>
                     </div>
+                    <div id="form-status" style="display:none; margin-bottom:20px; font-size:0.85rem; line-height:1.6;">
+                    </div>
                     <button type="submit" class="btn-gold">SEND MESSAGE</button>
                 </form>
 
                 <img src="{% static 'winery-map.png' %}" class="my-4" alt="">
             </div>
 
-            <!-- Contact Info -->
+
             <div class="contact-info">
                 <h3>Visit or Reach Us</h3>
 
@@ -946,8 +963,8 @@
                 </div>
 
                 <div style="margin-top:40px;">
-                    <a href="https://www.tsangarideswinery.com.co/products/book-tasting?view=booking" target="_blank" class="btn-gold"
-                        style="display:inline-block; width:auto; text-align:center;">
+                    <a href="https://www.tsangarideswinery.com.co/products/book-tasting?view=booking" target="_blank"
+                        class="btn-gold" style="display:inline-block; width:auto; text-align:center;">
                         BOOK A TASTING
                     </a>
                 </div>
@@ -955,7 +972,7 @@
         </div>
     </div>
 
-    <!-- Footer -->
+
     <footer>
         <div class="footer-top">
             <div class="footer-brand">
@@ -1014,7 +1031,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('year').textContent = new Date().getFullYear();
 
-            // Mobile drawer logic
             const hamburgerBtn = document.getElementById('hamburger-btn');
             const drawerClose = document.getElementById('drawer-close');
             const overlay = document.getElementById('mobile-overlay');
@@ -1057,21 +1073,60 @@
                 if (window.innerWidth >= 1024 && drawer.classList.contains('open')) closeDrawer();
             });
 
-            // Optional: Form submission feedback
-            const form = document.querySelector('form');
+
+            const form = document.getElementById('contact-form');
+            const statusBox = document.getElementById('form-status');
+
             if (form) {
-                form.addEventListener('submit', function (e) {
-                    // In real project this would submit via AJAX or Django
-                    // For now just show success message
-                    const btn = form.querySelector('button');
+                form.addEventListener('submit', async function (e) {
+                    e.preventDefault();
+
+                    const btn = form.querySelector('button[type="submit"]');
                     const originalText = btn.textContent;
-                    btn.textContent = 'MESSAGE SENT ✓';
-                    btn.style.backgroundColor = '#5a6b4a';
-                    setTimeout(() => {
+                    const formData = new FormData(form);
+                    const payload = Object.fromEntries(formData.entries());
+
+                    // Honeypot: if this hidden field got filled, silently drop the submission
+                    if (payload.botcheck) {
+                        return;
+                    }
+
+                    btn.disabled = true;
+                    btn.textContent = 'SENDING...';
+                    statusBox.style.display = 'none';
+
+                    try {
+                        const response = await fetch('https://api.web3forms.com/submit', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok && result.success) {
+                            btn.textContent = 'MESSAGE SENT ✓';
+                            btn.style.backgroundColor = '#5a6b4a';
+                            statusBox.textContent = "Thank you — we've received your message and will be in touch soon.";
+                            statusBox.style.color = '#5a6b4a';
+                            statusBox.style.display = 'block';
+                            form.reset();
+
+                            setTimeout(() => {
+                                btn.textContent = originalText;
+                                btn.style.backgroundColor = '';
+                                btn.disabled = false;
+                            }, 3000);
+                        } else {
+                            throw new Error(result.message || 'Submission failed');
+                        }
+                    } catch (err) {
                         btn.textContent = originalText;
-                        btn.style.backgroundColor = '';
-                        form.reset();
-                    }, 3000);
+                        btn.disabled = false;
+                        statusBox.textContent = 'Something went wrong sending your message. Please try again, or email us directly at info@tsangarideswinery.com.';
+                        statusBox.style.color = '#b3261e';
+                        statusBox.style.display = 'block';
+                    }
                 });
             }
         });

@@ -33,7 +33,6 @@
             color: var(--dark);
         }
 
-        /* ── Top bar ── */
         .topbar {
             background: var(--dark);
             color: #bfae94;
@@ -53,7 +52,6 @@
             }
         }
 
-        /* ── Nav ── */
         nav {
             background: rgba(250, 247, 242, 0.97);
             backdrop-filter: blur(8px);
@@ -234,7 +232,6 @@
             }
         }
 
-        /* Hamburger button */
         #hamburger-btn {
             display: none;
             background: none;
@@ -278,7 +275,6 @@
             }
         }
 
-        /* ── Mobile drawer overlay ── */
         #mobile-overlay {
             display: none;
             position: fixed;
@@ -298,7 +294,6 @@
             opacity: 1;
         }
 
-        /* ── Mobile drawer panel ── */
         #mobile-drawer {
             position: fixed;
             top: 0;
@@ -467,7 +462,6 @@
             letter-spacing: 0.08em;
         }
 
-        /* ── Gold divider line ── */
         .drawer-section-label {
             padding: 16px 28px 8px;
             font-family: 'Cinzel', serif;
@@ -477,7 +471,6 @@
             opacity: 0.7;
         }
 
-        /* ── Hero ── */
         .hero {
             position: relative;
             height: 85vh;
@@ -557,7 +550,6 @@
             transform: translateY(-2px);
         }
 
-        /* ── Story Section ── */
         .story-section {
             padding: 100px 48px;
             background: white;
@@ -592,7 +584,6 @@
             color: var(--charcoal);
         }
 
-        /* ── Family Section ── */
         .family-section {
             padding: 100px 48px;
             background: var(--warm-white);
@@ -629,7 +620,6 @@
             margin-bottom: 12px;
         }
 
-        /* Footer */
         footer {
             background: var(--dark);
             color: #bfae94;
@@ -756,20 +746,20 @@
 
 <body>
 
-    <!-- Top bar -->
+    
     <div class="topbar text-center">
         <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
     </div>
 
-    <!-- Navigation -->
-    <!-- ── Navigation ── -->
+    
+    
     <nav>
-        <!-- Logo -->
+        
         <a href="{% url 'index' %}" class="logo-mark">
             <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
         </a>
     
-        <!-- Desktop nav links -->
+        
         <ul class="nav-links">
             <li><a href="{% url 'shop' %}">Shop Wines</a></li>
             <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
@@ -790,25 +780,10 @@
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
 
-        <!-- Right-side icons -->
+        
         <div class="nav-right">
-            <!-- <svg class="hidden lg:block" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
-                    <circle cx="11" cy="11" r="7" />
-                    <path d="M21 21l-4.35-4.35" />
-                </svg>
-                <svg class="hidden lg:block" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
-                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                </svg>
-                <button id="cart-toggle-btn" aria-label="Open cart">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
-                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-                        <line x1="3" y1="6" x2="21" y2="6" />
-                        <path d="M16 10a4 4 0 01-8 0" />
-                    </svg>
-                    <span id="cart-item-count" aria-live="polite">0</span>
-                </button> -->
-            <!-- Hamburger — mobile/tablet only -->
+            
+            
             <button id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
                 <span></span>
                 <span></span>
@@ -817,10 +792,10 @@
         </div>
     </nav>
     
-    <!-- ── Mobile overlay ── -->
+    
     <div id="mobile-overlay" aria-hidden="true"></div>
     
-    <!-- ── Mobile drawer ── -->
+    
     <aside id="mobile-drawer" aria-label="Navigation menu" aria-hidden="true">
         <div class="drawer-header">
             <div class="drawer-logo">
@@ -859,7 +834,7 @@
         </div>
     </aside>
 
-    <!-- Hero -->
+    
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-content">
@@ -870,7 +845,7 @@
         </div>
     </section>
 
-    <!-- Our Story -->
+    
     <div class="story-section">
         <div class="story-text">
             <p>The Tsangarides winery is the next generation of Cypriot wines. Our philosophy is to blend old school
@@ -896,7 +871,7 @@
         </div>
     </div>
 
-    <!-- Family / Legacy -->
+    
     <div class="family-section">
         <div style="text-align:center; margin-bottom:60px;">
             <div class="section-rule"><span>✦</span></div>
@@ -932,7 +907,7 @@
         </div>
     </div>
 
-    <!-- Footer -->
+    
     <footer>
         <div class="footer-top">
             <div class="footer-brand">

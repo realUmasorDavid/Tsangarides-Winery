@@ -34,7 +34,6 @@
             color: var(--dark);
         }
 
-        /* ─── TOP BAR ─── */
         .topbar {
             background: var(--dark);
             color: #bfae94;
@@ -52,7 +51,6 @@
             }
         }
 
-        /* ─── NAV ─── */
         nav {
             background: rgba(250, 247, 242, 0.97);
             backdrop-filter: blur(8px);
@@ -263,7 +261,6 @@
             stroke: var(--gold);
         }
 
-        /* Cart button */
         #cart-toggle-btn {
             position: relative;
             background: none;
@@ -313,7 +310,6 @@
             display: none !important;
         }
 
-        /* Hamburger */
         #hamburger-btn {
             display: none;
             background: none;
@@ -357,8 +353,6 @@
             }
         }
 
-        /* Mobile overlay */
-        /* ── Mobile drawer overlay ── */
         #mobile-overlay {
             display: none;
             position: fixed;
@@ -378,7 +372,6 @@
             opacity: 1;
         }
 
-        /* ── Mobile drawer panel ── */
         #mobile-drawer {
             position: fixed;
             top: 0;
@@ -547,7 +540,6 @@
             letter-spacing: 0.08em;
         }
 
-        /* ── Gold divider line ── */
         .drawer-section-label {
             padding: 16px 28px 8px;
             font-family: 'Cinzel', serif;
@@ -557,7 +549,6 @@
             opacity: 0.7;
         }
 
-        /* ─── SHOP HERO BANNER ─── */
         .shop-hero {
             position: relative;
             height: 42vh;
@@ -602,7 +593,6 @@
             color: var(--gold-light);
         }
 
-        /* Breadcrumb */
         .breadcrumb {
             display: flex;
             align-items: center;
@@ -628,7 +618,6 @@
             color: var(--gold);
         }
 
-        /* ─── SHOP LAYOUT ─── */
         .shop-layout {
             display: grid;
             grid-template-columns: 240px 1fr;
@@ -646,7 +635,6 @@
             }
         }
 
-        /* ─── SIDEBAR FILTERS ─── */
         .shop-sidebar {
             position: sticky;
             top: 96px;
@@ -675,7 +663,6 @@
             border-bottom: 1px solid rgba(201, 168, 76, 0.2);
         }
 
-        /* Filter pills */
         .filter-group {
             display: flex;
             flex-direction: column;
@@ -749,7 +736,6 @@
             }
         }
 
-        /* Sort dropdown (mobile filter bar) */
         .mobile-filter-bar {
             display: none;
             align-items: center;
@@ -789,7 +775,6 @@
             background-position: right 0 center;
         }
 
-        /* Result count */
         .results-header {
             display: flex;
             align-items: center;
@@ -838,18 +823,11 @@
             }
         }
 
-        /* ─── SHOPIFY COLLECTION GRID ─── */
-        /*
-            The Buy Button JS injects an iframe + its own CSS.
-            We override the wrapper grid via the options.collection.styles block
-            in the JS below, and add padding/min-height here for layout stability.
-        */
         #shopify-collection-grid {
             min-height: 400px;
             width: 100%;
         }
 
-        /* Loading skeleton while Shopify loads */
         .collection-loading {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -906,7 +884,6 @@
             }
         }
 
-        /* ─── SECTION RULE (reused from homepage) ─── */
         .section-rule {
             display: flex;
             align-items: center;
@@ -935,7 +912,6 @@
             color: var(--gold);
         }
 
-        /* ─── PROMO BANNER ─── */
         .promo-banner {
             background: var(--dark);
             padding: 48px;
@@ -1031,7 +1007,6 @@
             }
         }
 
-        /* ─── FOOTER ─── */
         footer {
             background: var(--dark);
             color: #bfae94;
@@ -1121,12 +1096,12 @@
 
 <body>
 
-    <!-- ─── TOP BAR ─── -->
+    
     <div class="topbar">
         <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
     </div>
 
-    <!-- ─── NAV ─── -->
+    
     <nav>
         <a href="{% url 'index' %}" class="logo-mark">
             <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
@@ -1152,17 +1127,17 @@
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
         <div class="nav-right">
-            <!-- Hamburger -->
+            
             <button id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
 
-    <!-- ── Mobile overlay ── -->
+    
     <div id="mobile-overlay" aria-hidden="true"></div>
     
-    <!-- ── Mobile drawer ── -->
+    
     <aside id="mobile-drawer" aria-label="Navigation menu" aria-hidden="true">
         <div class="drawer-header">
             <div class="drawer-logo">
@@ -1200,7 +1175,7 @@
         </div>
     </aside>
 
-    <!-- ─── SHOP HERO BANNER ─── -->
+    
     <section class="shop-hero">
         <div class="shop-hero-bg"></div>
         <div class="shop-hero-content">
@@ -1217,11 +1192,11 @@
         </div>
     </section>
 
-    <!-- ─── SHOP LAYOUT ─── -->
-    <!-- ─── SHOP LAYOUT ─── -->
+    
+    
     <div class="shop-layout">
     
-        <!-- ── SIDEBAR ── -->
+        
         <aside class="shop-sidebar">
     
             <div class="sidebar-section">
@@ -1265,9 +1240,9 @@
             </div>
         </aside>
     
-        <!-- ── MAIN CONTENT ── -->
+        
         <main>
-            <!-- Mobile filter bar -->
+            
             <div class="mobile-filter-bar">
                 <span class="mobile-filter-label">FILTER BY</span>
                 <select class="sort-select" id="mobile-sort-select">
@@ -1278,7 +1253,7 @@
                 </select>
             </div>
     
-            <!-- Results header -->
+            
             <div class="results-header">
                 <span class="results-count" id="results-count">LOADING WINES…</span>
                 <div class="results-sort">
@@ -1292,24 +1267,24 @@
                 </div>
             </div>
     
-            <!-- Loading skeleton -->
+            
             <div id="collection-skeleton" class="collection-loading">
-                <!-- Your 4 skeleton cards here (keep as is) -->
+                
                 <div class="skeleton-card">...</div>
                 <div class="skeleton-card">...</div>
                 <div class="skeleton-card">...</div>
                 <div class="skeleton-card">...</div>
             </div>
     
-            <!-- Shopify Collection Grid -->
+            
             <div id="shopify-collection-grid"></div>
         </main>
     </div>
 
-    <!-- Shopify cart mount point -->
+    
     <div id="shopify-cart"></div>
 
-    <!-- ─── FOOTER ─── -->
+    
     <footer>
         <div class="footer-top">
             <div class="footer-brand">
@@ -1366,14 +1341,12 @@
         </div>
     </footer>
 
-    <!-- ─── SCRIPTS ─── -->
+    
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
 
-            /* ── Year ── */
             document.querySelectorAll('.year-placeholder').forEach(el => el.textContent = new Date().getFullYear());
 
-            /* ── Mobile drawer ── */
             const hamburgerBtn = document.getElementById('hamburger-btn');
             const drawerClose = document.getElementById('drawer-close');
             const overlay = document.getElementById('mobile-overlay');
@@ -1407,7 +1380,6 @@
             document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
             window.addEventListener('resize', () => { if (window.innerWidth >= 1024) closeDrawer(); });
 
-            /* ── Filter State ── */
             let activeSort = 'default';
             let currentCollectionKey = 'all';
 
@@ -1418,17 +1390,15 @@
                 'title-asc': { sortKey: 'TITLE', reverse: false }
             };
 
-            /* UPDATE THESE WITH YOUR REAL SHOPIFY COLLECTION IDs */
             const collectionMap = {
                 'all': '574777786634',
-                'red': '577135083786',      // ← Update if needed
+                'red': '577135083786',
                 'white': '577135116554',
                 'rose': '577135149322',
                 'organic': '577135182090',
                 'accessories': '577135214858'
             };
 
-            /* Shopify Setup */
             const client = ShopifyBuy.buildClient({
                 domain: 'tsangarideswinery.com.co',
                 storefrontAccessToken: 'bbc2c3d95d8ecc7895e08d8448e7f28f',
@@ -1436,7 +1406,7 @@
 
             const ui = ShopifyBuy.UI.init(client);
 
-            /* Cart Badge */
+            // Cart Badge
             function updateCartBadge(cart) {
                 const badge = document.getElementById('cart-item-count');
                 if (!badge) return;
@@ -1466,7 +1436,7 @@
                 }
             });
 
-            /* Collection Loader */
+            // Collection Loader
             function getCollectionOptions() {
                 const { sortKey, reverse } = sortMap[activeSort] || sortMap.default;
                 return {
@@ -1519,7 +1489,7 @@
                 });
             }
 
-            /* Wine Type Filters */
+            // Wine Type Filters
             document.querySelectorAll('#wine-type-filters .filter-pill').forEach(btn => {
                 btn.addEventListener('click', () => {
                     document.querySelectorAll('#wine-type-filters .filter-pill').forEach(b => b.classList.remove('active'));
@@ -1530,7 +1500,7 @@
                 });
             });
 
-            /* Sort Selects */
+            // Sort Selects
             ['desktop-sort-select', 'mobile-sort-select'].forEach(id => {
                 const select = document.getElementById(id);
                 if (select) {
@@ -1541,7 +1511,7 @@
                 }
             });
 
-            /* Initial Load */
+            // Initial Load
             loadCollection();
         });
     </script>

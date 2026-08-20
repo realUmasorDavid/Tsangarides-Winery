@@ -35,7 +35,6 @@
             color: var(--dark);
         }
 
-        /* ── Top bar ── */
         .topbar {
             background: var(--dark);
             color: #bfae94;
@@ -65,7 +64,6 @@
             color: var(--gold-light);
         }
 
-        /* ── Nav ── */
         nav {
             background: rgba(250, 247, 242, 0.97);
             backdrop-filter: blur(8px);
@@ -254,7 +252,6 @@
             }
         }
 
-        /* ── Nav right icons ── */
         .nav-right {
             display: flex;
             align-items: center;
@@ -273,7 +270,6 @@
             stroke: var(--gold);
         }
 
-        /* Hamburger button */
         #hamburger-btn {
             display: none;
             background: none;
@@ -317,7 +313,6 @@
             }
         }
 
-        /* Mobile drawer */
         #mobile-overlay {
             display: none;
             position: fixed;
@@ -505,7 +500,6 @@
             letter-spacing: 0.08em;
         }
 
-        /* ── Hero ── */
         .hero {
             position: relative;
             height: 85vh;
@@ -609,7 +603,6 @@
             color: var(--gold-light);
         }
 
-        /* ── Stay Cards ── */
         .stay-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -695,7 +688,6 @@
             margin-bottom: 20px;
         }
 
-        /* ── Booking CTA ── */
         .booking-cta {
             background: var(--dark);
             color: #F5F0E8;
@@ -716,7 +708,6 @@
             margin-bottom: 24px;
         }
 
-        /* ── Location Section ── */
         .location-section {
             padding: 80px 48px;
             background: var(--warm-white);
@@ -755,7 +746,6 @@
             border: 1px solid rgba(201, 168, 76, 0.2);
         }
 
-        /* Footer (same as index) */
         footer {
             background: var(--dark);
             color: #bfae94;
@@ -780,9 +770,7 @@
         @media (max-width: 600px) {
             .stay-grid {
                 display: grid;
-                /* On mobile, columns take up 100% of the available width */
                 grid-template-columns: 1fr; 
-                /* Tighten gaps and padding so the content doesn't feel cramped on small screens */
                 gap: 24px;
                 padding: 40px 20px;
             }
@@ -854,12 +842,12 @@
 
 <body>
 
-    <!-- Top bar -->
+    
     <div class="topbar text-center">
         <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
     </div>
 
-    <!-- Navigation -->
+    
     <nav>
         <a href="{% url 'index' %}" class="logo-mark">
             <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
@@ -893,10 +881,10 @@
         </div>
     </nav>
 
-    <!-- Mobile overlay -->
+    
     <div id="mobile-overlay" aria-hidden="true"></div>
 
-    <!-- Mobile drawer -->
+    
     <aside id="mobile-drawer" aria-label="Navigation menu" aria-hidden="true">
         <div class="drawer-header">
             <div class="drawer-logo">
@@ -935,7 +923,7 @@
         </div>
     </aside>
 
-    <!-- Hero -->
+    
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-content">
@@ -950,9 +938,9 @@
         </div>
     </section>
 
-    <!-- Stay Villas -->
+    
     <div id="our-villas" class="stay-grid">
-        <!-- Villa 1 -->
+        
         <div class="stay-card">
             <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1607751144185647813/original/a530c2e0-03cc-488b-9bc7-99b53861ccf5.jpeg?im_w=960" alt="The Vineyard Villa">
             <div class="stay-content">
@@ -969,13 +957,13 @@
                     <span class="amenity-tag">Complimentary Wine Tasting</span>
                 </div>
 
-                <!-- <div class="price">From €180 / night</div> -->
+                
                 <a href="https://www.airbnb.co.uk/rooms/1607751144185647813?unique_share_id=2920c5c1-d375-4200-b97c-68ba0d7244f6&viralityEntryPoint=1&s=76&source_impression_id=p3_1781191182_P3rvM1_RR2qpiZ0y" target="_blank" class="btn-gold"
                     style="width:100%; text-align:center;">Book on Airbnb</a>
             </div>
         </div>
 
-        <!-- Villa 2 -->
+        
         <div class="stay-card">
             <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1592424064671699836/original/82e018d1-8f04-4d64-a584-5faaba13fe35.jpeg?im_w=720" alt="The Vineyard Villa">
             <div class="stay-content">
@@ -992,13 +980,13 @@
                     <span class="amenity-tag">Complimentary Wine Tasting</span>
                 </div>
 
-                <!-- <div class="price">From €180 / night</div> -->
+                
                 <a href="https://www.airbnb.co.uk/rooms/1592424064671699836?unique_share_id=5339c01c-6a4f-4ca4-b978-0c0f81424958&viralityEntryPoint=1&s=76&source_impression_id=p3_1781191183_P3bo_Dxoi5AwVy8N" target="_blank" class="btn-gold"
                     style="width:100%; text-align:center;">Book on Airbnb</a>
             </div>
         </div>
 
-        <!-- Villa 3 -->
+        
         <div class="stay-card">
             <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1590911936465854271/original/a1a8d349-a6fc-416a-a3b8-4c8787d446f6.jpeg?im_w=720" alt="The Vineyard Villa">
             <div class="stay-content">
@@ -1015,7 +1003,7 @@
                     <span class="amenity-tag">Complimentary Wine Tasting</span>
                 </div>
 
-                <!-- <div class="price">From €180 / night</div> -->
+                
                 <a href="https://www.airbnb.co.uk/rooms/1590911936465854271?unique_share_id=261bc2ee-1b22-4475-8c9e-e6ee77d617e4&viralityEntryPoint=1&s=76&source_impression_id=p3_1781191186_P3x6g3o2aBFJfjXF" target="_blank" class="btn-gold"
                     style="width:100%; text-align:center;">Book on Airbnb</a>
             </div>
@@ -1024,7 +1012,7 @@
         
     </div>
 
-    <!-- Booking CTA -->
+    
     <div class="booking-cta">
         <h2>Ready for an unforgettable stay?</h2>
         <p style="max-width:520px; margin:0 auto 32px; font-size:1.05rem; opacity:0.9;">All villas include complimentary
@@ -1032,7 +1020,7 @@
         <a href="#our-villas" class="btn-gold" style="font-size:0.75rem; padding:16px 48px;">BROWSE VILLAS</a>
     </div>
 
-    <!-- Location -->
+    
     <div id="location" class="location-section">
         <div class="location-grid">
             <div>
@@ -1054,7 +1042,7 @@
         </div>
     </div>
 
-    <!-- Footer -->
+    
     <footer>
         <div class="footer-top">
             <div class="footer-brand">

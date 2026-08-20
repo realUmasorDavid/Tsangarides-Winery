@@ -33,7 +33,6 @@
             color: var(--dark);
         }
 
-        /* Core reusable styles */
         .topbar {
             background: var(--dark);
             color: #bfae94;
@@ -280,8 +279,7 @@
                 display: none;
             }
         }
-
-        /* ── Mobile drawer overlay ── */
+        
         #mobile-overlay {
             display: none;
             position: fixed;
@@ -301,7 +299,6 @@
             opacity: 1;
         }
 
-        /* ── Mobile drawer panel ── */
         #mobile-drawer {
             position: fixed;
             top: 0;
@@ -470,7 +467,6 @@
             letter-spacing: 0.08em;
         }
 
-        /* ── Gold divider line ── */
         .drawer-section-label {
             padding: 16px 28px 8px;
             font-family: 'Cinzel', serif;
@@ -480,7 +476,6 @@
             opacity: 0.7;
         }
 
-        /* Hero */
         .hero {
             position: relative;
             height: 82vh;
@@ -540,7 +535,6 @@
             margin: 0 auto;
         }
 
-        /* Content Sections */
         .story-content {
             max-width: 1100px;
             margin: 0 auto;
@@ -657,7 +651,6 @@
             margin-top: 8px;
         }
 
-        /* Awards */
         .awards {
             background: var(--dark);
             color: #F5F0E8;
@@ -688,7 +681,6 @@
             margin-bottom: 16px;
         }
 
-        /* Footer */
         footer {
             background: var(--dark);
             color: #bfae94;
@@ -778,12 +770,12 @@
 
 <body>
 
-    <!-- Top bar -->
+    
     <div class="topbar text-center">
         <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
     </div>
 
-    <!-- Navigation -->
+    
     <nav>
         <a href="{% url 'index' %}" class="logo-mark">
             <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
@@ -817,10 +809,10 @@
         </div>
     </nav>
 
-    <!-- ── Mobile overlay ── -->
+    
     <div id="mobile-overlay" aria-hidden="true"></div>
     
-    <!-- ── Mobile drawer ── -->
+    
     <aside id="mobile-drawer" aria-label="Navigation menu" aria-hidden="true">
         <div class="drawer-header">
             <div class="drawer-logo">
@@ -859,7 +851,7 @@
         </div>
     </aside>
 
-    <!-- Hero -->
+    
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-content">
@@ -870,7 +862,7 @@
         </div>
     </section>
 
-    <!-- Main Story Content -->
+    
     <div class="story-content">
         <div class="section-rule"><span>✦</span></div>
         <h2 class="section-title">A Legacy Rooted in the Land</h2>
@@ -882,7 +874,7 @@
             organic wine estates.
         </p>
 
-        <!-- Story Grid 1 -->
+        
         <div class="story-grid">
             <div class="story-image">
                 <img src="{% static 'Photo-10.jpeg' %}" alt="Vineyard heritage">
@@ -898,7 +890,7 @@
             </div>
         </div>
 
-        <!-- Stats -->
+        
         <div class="stat-row">
             <div>
                 <div class="stat-num">2005</div>
@@ -918,7 +910,7 @@
             </div>
         </div>
 
-        <!-- Story Grid 2 -->
+        
         <div class="story-grid">
             <div class="highlight-box">
                 <h3 style="font-family:'Cinzel',serif; font-size:1.45rem; margin-bottom:20px; color:var(--dark);">Our
@@ -942,7 +934,7 @@
         </div>
     </div>
 
-    <!-- Awards Section -->
+    
     <div class="awards">
         <div class="section-rule" style="justify-content:center;">
             <span style="color:#E8C96A;">✦</span>
@@ -955,20 +947,20 @@
 
         <div class="awards-grid">
             <div class="award-item">
-                <!-- <div class="icon">🥇</div> -->
+                
                 <div style="font-family:'Cinzel',serif; font-size:0.95rem; letter-spacing:0.05em;">DECANTER WORLD WINE
                     AWARDS</div>
                 <div style="margin-top:8px; opacity:0.8;">Silver and Bronze Medal</div>
             </div>
             <div class="award-item">
-                <!-- <div class="icon">🏆</div> -->
+                
                 <div style="font-family:'Cinzel',serif; font-size:0.95rem; letter-spacing:0.05em;">CYPRUS WINE AWARDS</div>
                 <div style="margin-top:8px; opacity:0.8;">Gold, Silver and Bronze Medal</div>
             </div>
         </div>
     </div>
 
-    <!-- Final CTA -->
+    
     <div style="background:var(--warm-white); padding:80px 48px; text-align:center;">
         <h3 style="font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:300; margin-bottom:24px;">Come
             Experience Our Story</h3>
@@ -976,7 +968,7 @@
             style="font-size:0.75rem; padding:16px 48px; display:inline-block;">BOOK A TASTING</a>
     </div>
 
-    <!-- Footer -->
+    
     <footer>
         <div class="footer-top">
             <div class="footer-brand">
