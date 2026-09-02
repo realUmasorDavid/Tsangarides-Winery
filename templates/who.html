@@ -1,1009 +1,215 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Our Story — Tsangarides Winery</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Raleway:wght@300;400;500&display=swap"
-        rel="stylesheet">
-
-    <style>
-        :root {
-            --gold: #C9A84C;
-            --gold-light: #E8C96A;
-            --dark: #1A1208;
-            --charcoal: #2C2318;
-            --cream: #F5F0E8;
-            --warm-white: #FAF7F2;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Raleway', sans-serif;
-            background: var(--warm-white);
-            color: var(--dark);
-        }
-
-        .topbar {
-            background: var(--dark);
-            color: #bfae94;
-            font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.18em;
-            padding: 8px 48px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        @media (max-width: 768px) {
-            .topbar {
-                padding: 8px 20px;
-                font-size: 0.55rem;
-            }
-        }
-
-        nav {
-            background: rgba(250, 247, 242, 0.97);
-            backdrop-filter: blur(8px);
-            padding: 18px 48px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 200;
-            border-bottom: 1px solid rgba(201, 168, 76, 0.18);
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                padding: 14px 20px;
-            }
-        }
-
-        .logo-mark {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .logo-emblem {
-            width: 52px;
-            height: 52px;
-            border: 1.5px solid var(--gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
-            color: var(--gold);
-            flex-shrink: 0;
-        }
-
-        .logo-text {
-            line-height: 1.1;
-        }
-
-        .logo-text .brand {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            letter-spacing: 0.22em;
-            color: var(--dark);
-        }
-
-        .logo-text .sub {
-            font-family: 'Raleway', sans-serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.35em;
-            color: #8a7a5a;
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 36px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.18em;
-            color: var(--charcoal);
-            text-decoration: none;
-            position: relative;
-            padding-bottom: 3px;
-            transition: color .2s;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--gold);
-            transition: width .3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--gold);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-dropdown {
-            position: relative;
-        }
-
-        .dropdown-trigger {
-            background: none;
-            border: 0;
-            padding: 0;
-            font: inherit;
-            color: inherit;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-        }
-
-        .dropdown-trigger .text {
-            display: block;
-            font-family: 'Cinzel', serif;
-            font-size: 0.58rem;
-            letter-spacing: 0.18em;
-            color: var(--charcoal);
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        .dropdown-caret {
-            font-size: 0.55rem;
-            transition: transform .2s ease;
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: calc(100% + 10px);
-            left: 50%;
-            transform: translateX(-50%) translateY(6px);
-            min-width: 210px;
-            background: #fffdf7;
-            border: 1px solid rgba(201, 168, 76, 0.18);
-            border-radius: 6px;
-            box-shadow: 0 18px 40px rgba(26, 18, 8, 0.12);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
-            z-index: 20;
-            overflow: hidden;
-        }
-
-        .dropdown-menu a {
-            display: block;
-            padding: 12px 16px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.58rem;
-            letter-spacing: 0.18em;
-            color: var(--charcoal);
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        .dropdown-menu a:hover {
-            background: rgba(201, 168, 76, 0.08);
-            color: var(--gold);
-        }
-
-        .nav-dropdown:hover .dropdown-menu,
-        .nav-dropdown:focus-within .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .nav-dropdown:hover .dropdown-caret,
-        .nav-dropdown:focus-within .dropdown-caret {
-            transform: rotate(180deg);
-        }
-
-        @media (max-width: 1024px) {
-            .nav-dropdown:hover .dropdown-menu,
-            .nav-dropdown:focus-within .dropdown-menu {
-                opacity: 0;
-                visibility: hidden;
-                transform: translateX(-50%) translateY(6px);
-            }
-        }
-
-        #hamburger-btn {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-            flex-direction: column;
-            gap: 5px;
-            justify-content: center;
-        }
-
-        #hamburger-btn span {
-            display: block;
-            width: 22px;
-            height: 1.5px;
-            background: var(--charcoal);
-            transition: all .3s ease;
-            transform-origin: center;
-        }
-
-        #hamburger-btn.open span:nth-child(1) {
-            transform: translateY(6.5px) rotate(45deg);
-        }
-
-        #hamburger-btn.open span:nth-child(2) {
-            opacity: 0;
-            transform: scaleX(0);
-        }
-
-        #hamburger-btn.open span:nth-child(3) {
-            transform: translateY(-6.5px) rotate(-45deg);
-        }
-
-        @media (max-width: 1024px) {
-            #hamburger-btn {
-                display: flex;
-            }
-
-            .nav-links {
-                display: none;
-            }
-        }
-
-        #mobile-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(26, 18, 8, 0.55);
-            backdrop-filter: blur(3px);
-            z-index: 300;
-            opacity: 0;
-            transition: opacity .3s ease;
-        }
-
-        #mobile-overlay.open {
-            display: block;
-        }
-
-        #mobile-overlay.visible {
-            opacity: 1;
-        }
-
-        #mobile-drawer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100dvh;
-            width: min(320px, 85vw);
-            background: var(--dark);
-            z-index: 400;
-            transform: translateX(-100%);
-            transition: transform .38s cubic-bezier(.4, 0, .2, 1);
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-        }
-
-        #mobile-drawer.open {
-            transform: translateX(0);
-        }
-
-        .drawer-header {
-            padding: 24px 28px 20px;
-            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-shrink: 0;
-        }
-
-        .drawer-logo .brand {
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            letter-spacing: 0.22em;
-            color: #F5F0E8;
-        }
-
-        .drawer-logo .sub {
-            font-family: 'Raleway', sans-serif;
-            font-size: 0.55rem;
-            letter-spacing: 0.3em;
-            color: #8a7a5a;
-            text-transform: uppercase;
-            margin-top: 2px;
-        }
-
-        #drawer-close {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #drawer-close svg {
-            width: 18px;
-            height: 18px;
-            stroke: #bfae94;
-            transition: stroke .2s;
-        }
-
-        #drawer-close:hover svg {
-            stroke: var(--gold-light);
-        }
-
-        .drawer-nav {
-            padding: 16px 0;
-            margin: 8px 0px;
-            flex: 1;
-            flex-direction: column;
-        }
-
-        .drawer-nav a {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 28px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            color: #bfae94;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
-            transition: color .2s, background .2s;
-        }
-
-        .drawer-nav a:hover {
-            color: var(--gold-light);
-            background: rgba(201, 168, 76, 0.06);
-        }
-
-        .drawer-nav a .arrow {
-            font-size: 0.6rem;
-            color: rgba(201, 168, 76, 0.4);
-            transition: color .2s;
-        }
-
-        .drawer-nav a:hover .arrow {
-            color: var(--gold-light);
-        }
-
-        .drawer-parent {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            background: none;
-            border: 0;
-            padding: 14px 28px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            color: #bfae94;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-
-        .drawer-subnav {
-            padding: 0 28px 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .drawer-subnav a {
-            padding: 10px 0;
-            font-family: 'Raleway', sans-serif;
-            font-size: 0.76rem;
-            letter-spacing: 0.08em;
-            color: #d9c79f;
-            text-transform: none;
-            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
-        }
-
-        .drawer-footer {
-            padding: 24px 28px;
-            border-top: 1px solid rgba(201, 168, 76, 0.15);
-            flex-shrink: 0;
-        }
-
-        .drawer-footer-links {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-        }
-
-        .drawer-footer-links a {
-            font-family: 'Cinzel', serif;
-            font-size: 0.58rem;
-            letter-spacing: 0.15em;
-            color: #8a7a5a;
-            text-decoration: none;
-            transition: color .2s;
-        }
-
-        .drawer-footer-links a:hover {
-            color: var(--gold);
-        }
-
-        .drawer-copy {
-            font-size: 0.62rem;
-            color: #5a4c30;
-            font-family: 'Cinzel', serif;
-            letter-spacing: 0.08em;
-        }
-
-        .drawer-section-label {
-            padding: 16px 28px 8px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.52rem;
-            letter-spacing: 0.3em;
-            color: var(--gold);
-            opacity: 0.7;
-        }
-
-        .hero {
-            position: relative;
-            height: 85vh;
-            min-height: 620px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 24px;
-        }
-
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(rgba(26, 18, 8, 0.65), rgba(26, 18, 8, 0.45)),
-            url("{% static '8.jpg' %}") center/cover no-repeat;
-            animation: slowzoom 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes slowzoom {
-            from {
-                transform: scale(1.05);
-            }
-
-            to {
-                transform: scale(1.00);
-            }
-        }
-
-        .hero-content {
-            position: relative;
-            max-width: 760px;
-            color: #fff;
-        }
-
-        .hero-eyebrow {
-            font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.35em;
-            color: var(--gold-light);
-            margin-bottom: 16px;
-        }
-
-        .hero-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.8rem, 7vw, 5.5rem);
-            font-weight: 300;
-            line-height: 1.05;
-            margin-bottom: 24px;
-        }
-
-        .hero-sub {
-            font-size: 1.05rem;
-            line-height: 1.65;
-            max-width: 520px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
-        }
-
-        .btn-gold {
-            font-family: 'Cinzel', serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.2em;
-            padding: 14px 36px;
-            background: var(--gold);
-            color: var(--dark);
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all .25s;
-            display: inline-block;
-        }
-
-        .btn-gold:hover {
-            background: var(--gold-light);
-            transform: translateY(-2px);
-        }
-
+{% block title %}Who We Are — Tsangarides Winery{% endblock %}
+
+{% block extra_head %}
+<style>
+    .hero {
+        position: relative;
+        height: 85vh;
+        min-height: 620px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0 24px;
+    }
+
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(rgba(26, 18, 8, 0.65), rgba(26, 18, 8, 0.45)),
+        url("{% static '8.jpg' %}") center/cover no-repeat;
+        animation: slowzoom 22s ease-in-out infinite alternate;
+    }
+
+    @keyframes slowzoom {
+        from {
+            transform: scale(1.05);
+        }
+
+        to {
+            transform: scale(1.00);
+        }
+    }
+
+    .hero-content {
+        position: relative;
+        max-width: 760px;
+        color: #fff;
+    }
+
+    .hero-eyebrow {
+        font-family: 'Cinzel', serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.35em;
+        color: var(--gold-light);
+        margin-bottom: 16px;
+    }
+
+    .hero-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(2.8rem, 7vw, 5.5rem);
+        font-weight: 300;
+        line-height: 1.05;
+        margin-bottom: 24px;
+    }
+
+    .hero-sub {
+        font-size: 1.05rem;
+        line-height: 1.65;
+        max-width: 520px;
+        margin: 0 auto 40px;
+        opacity: 0.9;
+    }
+
+    .story-section {
+        padding: 100px 48px;
+        background: white;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
         .story-section {
-            padding: 100px 48px;
-            background: white;
-            max-width: 1100px;
-            margin: 0 auto;
+            padding: 60px 20px;
         }
+    }
 
-        @media (max-width: 768px) {
-            .story-section {
-                padding: 60px 20px;
-            }
-        }
+    .story-text {
+        font-size: 1.05rem;
+        line-height: 1.85;
+        color: #5a4c30;
+        max-width: 780px;
+        margin: 0 auto;
+    }
 
-        .story-text {
-            font-size: 1.05rem;
-            line-height: 1.85;
-            color: #5a4c30;
-            max-width: 780px;
-            margin: 0 auto;
-        }
+    .story-text p {
+        margin-bottom: 28px;
+    }
 
-        .story-text p {
-            margin-bottom: 28px;
-        }
+    .highlight {
+        background: rgba(201, 168, 76, 0.08);
+        padding: 32px;
+        border-left: 5px solid var(--gold);
+        margin: 48px 0;
+        font-style: italic;
+        color: var(--charcoal);
+    }
 
-        .highlight {
-            background: rgba(201, 168, 76, 0.08);
-            padding: 32px;
-            border-left: 5px solid var(--gold);
-            margin: 48px 0;
-            font-style: italic;
-            color: var(--charcoal);
-        }
+    .family-section {
+        padding: 100px 48px;
+        background: var(--warm-white);
+    }
 
+    @media (max-width: 768px) {
         .family-section {
-            padding: 100px 48px;
-            background: var(--warm-white);
+            padding: 60px 20px;
         }
+    }
 
-        .family-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 48px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+    .family-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 48px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
 
-        .family-card {
-            background: white;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(26, 18, 8, 0.08);
-        }
+    .family-card {
+        background: white;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(26, 18, 8, 0.08);
+    }
 
-        .family-card img {
-            width: 100%;
-            height: 320px;
-            object-fit: cover;
-        }
+    .family-card img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+    }
 
-        .family-content {
-            padding: 32px;
-        }
+    .family-content {
+        padding: 32px;
+    }
 
-        .family-content h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-        }
+    .family-content h3 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.5rem;
+        margin-bottom: 12px;
+    }
+</style>
+{% endblock %}
 
-        footer {
-            background: var(--dark);
-            color: #bfae94;
-        }
+{% block content %}
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+        <p class="hero-eyebrow">GENERATIONS OF PASSION</p>
+        <h1 class="hero-title">Who We Are</h1>
+        <p class="hero-sub">A family legacy rooted in the vineyards of Lemona, blending tradition with innovation to
+            create wines of character and distinction.</p>
+    </div>
+</section>
 
-        .footer-top {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 48px;
-            padding: 64px 80px 48px;
-            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
-        }
+<div class="story-section">
+    <div class="story-text">
+        <p>The Tsangarides winery is the next generation of Cypriot wines. Our philosophy is to blend old school
+            traditions with new school style. Our youth, energy, and passion, coupled with the distinct sense of
+            place that wine brings to our lives, allow us to produce wines of great character and distinction.</p>
 
-        @media (max-width: 1024px) {
-            .footer-top {
-                grid-template-columns: 1fr 1fr;
-                gap: 32px;
-                padding: 48px 40px;
-            }
-        }
+        <p>We are extremely proud to be considered one of the key wineries at the leading edge of the long-awaited
+            revival of Cyprus's wine industry.</p>
 
-        .footer-brand p {
-            font-size: 0.8rem;
-            line-height: 1.7;
-            color: #8a7a5a;
-            margin-top: 16px;
-            max-width: 280px;
-        }
+        <div class="highlight">
+            "The Tsangarides heritage is one that has enormous respect for the craft as a living breathing art, with
+            the vines being both our livelihood as well as our passion."
+        </div>
 
-        .footer-col-title {
-            font-family: 'Cinzel', serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.25em;
-            color: var(--gold);
-            margin-bottom: 20px;
-        }
+        <p>The Tsangarides winery is situated in the lovely old village of Lemona. It is here that our
+            great-great-grandfather prepared the land and planted the first vineyards. The knowledge passed down
+            through generations, enriched by travel and collaboration with foreign winemakers, has helped us become
+            one of the best examples of a boutique winery in Cyprus.</p>
 
-        .footer-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        <p>Today, The family continue this legacy, carrying the mantle passed on by
+            their father. With deep roots in winemaking running through their veins, they strive to open new "wine
+            frontiers" while facing the challenges of modern winemaking.</p>
+    </div>
+</div>
 
-        .footer-links a {
-            font-size: 0.78rem;
-            color: #8a7a5a;
-            text-decoration: none;
-            transition: color .2s;
-        }
-
-        .footer-links a:hover {
-            color: var(--gold-light);
-        }
-
-        .footer-bottom {
-            padding: 24px 80px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.68rem;
-            color: #5a4c30;
-            font-family: 'Cinzel', serif;
-            letter-spacing: 0.1em;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        @media (max-width: 768px) {
-            .footer-bottom {
-                padding: 20px 24px;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .hero {
-                min-height: 520px;
-                padding: 60px 20px;
-            }
-
-            .hero-bg {
-                background-position: center top;
-            }
-
-            .hero-content {
-                max-width: 100%;
-            }
-
-            .hero-title {
-                font-size: clamp(2.5rem, 10vw, 4rem);
-            }
-
-            .story-section,
-            .family-section {
-                padding: 60px 20px;
-            }
-
-            .family-grid {
-                gap: 28px;
-            }
-
-            .logo-mark img {
-                max-width: 140px;
-                height: auto;
-            }
-
-            .nav-links {
-                gap: 20px;
-            }
-
-            .footer-top {
-                grid-template-columns: 1fr;
-                gap: 28px;
-                padding: 40px 24px 32px;
-            }
-
-            .footer-bottom {
-                padding: 20px 24px;
-                justify-content: flex-start;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    
-    <div class="topbar text-center">
-        <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
+<div class="family-section">
+    <div style="text-align:center; margin-bottom:60px;">
+        <div class="section-rule"><span>✦</span></div>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight:300;">A
+            Family Legacy</h2>
     </div>
 
-    
-    
-    <nav>
-        
-        <a href="{% url 'index' %}" class="logo-mark">
-            <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
-        </a>
-    
-        
-        <ul class="nav-links">
-            <li><a href="{% url 'shop' %}">Shop Wines</a></li>
-            <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
-            <li><a href="{% url 'events' %}">Events</a></li>
-            <li class="nav-dropdown">
-                <button type="button" class="dropdown-trigger">
-                    <span>About</span>
-                    <span class="dropdown-caret">▾</span>
-                </button>
-                <div class="dropdown-menu">
-                    <a href="{% url 'winery' %}">The Winery</a>
-                    <a href="{% url 'who-we-are' %}">Who We Are</a>
-                    <a href="{% url 'our-story' %}">Our Story</a>
-                    <a href="{% url 'vineyard' %}">The Vineyard</a>
-                </div>
-            </li>
-            <li><a href="{% url 'adopt-vine' %}">Adopt a Vine</a></li>
-            <li><a href="{% url 'contact' %}">Contact</a></li>
-        </ul>
-
-        
-        <div class="nav-right">
-            
-            
-            <button id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
-    
-    
-    <div id="mobile-overlay" aria-hidden="true"></div>
-    
-    
-    <aside id="mobile-drawer" aria-label="Navigation menu" aria-hidden="true">
-        <div class="drawer-header">
-            <div class="drawer-logo">
-                <div class="brand">TSANGARIDES</div>
-                <div class="sub">Winery &amp; Estate</div>
+    <div class="family-grid">
+        <div class="family-card">
+            <img src="{% static '9.jpg' %}" alt="Vineyards in Lemona">
+            <div class="family-content">
+                <p>From our great-great-grandfather who first planted the vines in Lemona, to the present day — five
+                    generations of passionate winemakers.</p>
             </div>
-            <button id="drawer-close" aria-label="Close menu">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
-                    <path d="M18 6L6 18M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-    
-        <nav class="drawer-nav" aria-label="Mobile navigation">
-            <a href="{% url 'shop' %}">Shop Wines <span class="arrow">›</span></a>
-            <a href="{% url 'visit-us' %}">Stay with us <span class="arrow">›</span></a>
-            <a href="{% url 'events' %}">Events <span class="arrow">›</span></a>
-            <button type="button" class="drawer-parent">About <span class="arrow">›</span></button>
-            <div class="drawer-subnav">
-                <a href="{% url 'winery' %}">The Winery</a>
-                <a href="{% url 'who-we-are' %}">Who We Are</a>
-                <a href="{% url 'our-story' %}">Our Story</a>
-                <a href="{% url 'vineyard' %}">The Vineyard</a>
-            </div>
-            <a href="https://www.tsangarideswinery.com.co/products/book-tasting?view=booking" target="_blank">Book a Tasting <span class="arrow">›</span></a>
-            <a href="{% url 'adopt-vine' %}">Adopt a Vine <span class="arrow">›</span></a>
-            <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
-        </nav>
-        <div class="drawer-footer">
-            <div class="drawer-footer-links">
-                <a href="{% url 'privacy' %}">Privacy</a>
-                <a href="{% url 'terms' %}">Terms</a>
-                <a href="{% url 'cookies' %}">Cookies</a>
-            </div>
-            <div class="drawer-copy">© <span id="year">2026</span> TSANGARIDES WINERY</div>
-        </div>
-    </aside>
-
-    
-    <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-content">
-            <p class="hero-eyebrow">GENERATIONS OF PASSION</p>
-            <h1 class="hero-title">Who We Are</h1>
-            <p class="hero-sub">A family legacy rooted in the vineyards of Lemona, blending tradition with innovation to
-                create wines of character and distinction.</p>
-        </div>
-    </section>
-
-    
-    <div class="story-section">
-        <div class="story-text">
-            <p>The Tsangarides winery is the next generation of Cypriot wines. Our philosophy is to blend old school
-                traditions with new school style. Our youth, energy, and passion, coupled with the distinct sense of
-                place that wine brings to our lives, allow us to produce wines of great character and distinction.</p>
-
-            <p>We are extremely proud to be considered one of the key wineries at the leading edge of the long-awaited
-                revival of Cyprus’s wine industry.</p>
-
-            <div class="highlight">
-                “The Tsangarides heritage is one that has enormous respect for the craft as a living breathing art, with
-                the vines being both our livelihood as well as our passion.”
-            </div>
-
-            <p>The Tsangarides winery is situated in the lovely old village of Lemona. It is here that our
-                great-great-grandfather prepared the land and planted the first vineyards. The knowledge passed down
-                through generations, enriched by travel and collaboration with foreign winemakers, has helped us become
-                one of the best examples of a boutique winery in Cyprus.</p>
-
-            <p>Today, The family continue this legacy, carrying the mantle passed on by
-                their father. With deep roots in winemaking running through their veins, they strive to open new “wine
-                frontiers” while facing the challenges of modern winemaking.</p>
-        </div>
-    </div>
-
-    
-    <div class="family-section">
-        <div style="text-align:center; margin-bottom:60px;">
-            <div class="section-rule"><span>✦</span></div>
-            <h2 style="font-family:'Cormorant Garamond',serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight:300;">A
-                Family Legacy</h2>
         </div>
 
-        <div class="family-grid">
-            <div class="family-card">
-                <img src="{% static '9.jpg' %}" alt="Vineyards in Lemona">
-                <div class="family-content">
-                    <p>From our great-great-grandfather who first planted the vines in Lemona, to the present day — five
-                        generations of passionate winemakers.</p>
-                </div>
+        <div class="family-card">
+            <img src="{% static '10.jpg' %}" alt="The family">
+            <div class="family-content">
+                <p>Current stewards of the family winery, committed to excellence, innovation, and preserving the
+                    authentic character of Cypriot wines.</p>
             </div>
+        </div>
 
-            <div class="family-card">
-                <img src="{% static '10.jpg' %}"
-                    alt="The family">
-                <div class="family-content">
-                    <p>Current stewards of the family winery, committed to excellence, innovation, and preserving the
-                        authentic character of Cypriot wines.</p>
-                </div>
-            </div>
-
-            <div class="family-card">
-                <img src="{% static 'Photo-150.jpeg' %}" alt="Winemaking">
-                <div class="family-content">
-                    <p>Respect for tradition, sustainable practices, and a relentless pursuit of quality — creating
-                        wines that tell the story of Lemona.</p>
-                </div>
+        <div class="family-card">
+            <img src="{% static 'Photo-150.jpeg' %}" alt="Winemaking">
+            <div class="family-content">
+                <p>Respect for tradition, sustainable practices, and a relentless pursuit of quality — creating
+                    wines that tell the story of Lemona.</p>
             </div>
         </div>
     </div>
-
-    
-    <footer>
-        <div class="footer-top">
-            <div class="footer-brand">
-                <div class="logo-mark">
-                    <a href="{% url 'index' %}" class="logo-mark">
-                        <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
-                    </a>
-                </div>
-                <p>Family owned &amp; estate grown in Lemona, Paphos, Cyprus. Crafting organic wines with passion since
-                    2005.</p>
-            </div>
-            <div>
-                <div class="footer-col-title">WINES</div>
-                <ul class="footer-links">
-                    <li><a href="{% url 'shop' %}">Red Wines</a></li>
-                    <li><a href="{% url 'shop' %}">White Wines</a></li>
-                    <li><a href="{% url 'shop' %}">Rosé Wines</a></li>
-                    <li><a href="{% url 'shop' %}">Organic Wines</a></li>
-                    <li><a href="{% url 'shop' %}">Wines Accessories</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="footer-col-title">EXPLORE</div>
-                <ul class="footer-links">
-                    <li><a href="{% url 'visit-us' %}">Stay with Us</a></li>
-                    <li><a href="https://www.tsangarideswinery.com.co/products/book-tasting?view=booking">Book a Tasting</a></li>
-                    <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="footer-col-title">CONTACT</div>
-                <ul class="footer-links">
-                    <li><a href="mailto:info@tsangarideswinery.com">info@tsangarideswinery.com</a></li>
-                    <li><a href="tel:+35726722777">+357 26 722 777</a></li>
-                    <li><a href="https://maps.app.goo.gl/79rim1Pa48aP5Zsw5" target="_blank">Lemona Village, Paphos
-                            8545</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <span>© <span id="year">2026</span> TSANGARIDES WINERY. ALL RIGHTS RESERVED.</span>
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('year').textContent = new Date().getFullYear();
-
-            // ── Mobile drawer logic ───────────────────────────────────────
-            const hamburgerBtn = document.getElementById('hamburger-btn');
-            const drawerClose = document.getElementById('drawer-close');
-            const overlay = document.getElementById('mobile-overlay');
-            const drawer = document.getElementById('mobile-drawer');
-            const body = document.body;
-
-            function openDrawer() {
-                // Show overlay (display:block), then next frame add visible for opacity transition
-                overlay.classList.add('open');
-                requestAnimationFrame(() => {
-                    overlay.classList.add('visible');
-                    drawer.classList.add('open');
-                });
-                hamburgerBtn.classList.add('open');
-                hamburgerBtn.setAttribute('aria-expanded', 'true');
-                drawer.setAttribute('aria-hidden', 'false');
-                overlay.setAttribute('aria-hidden', 'false');
-                body.style.overflow = 'hidden'; // prevent background scroll
-            }
-
-            function closeDrawer() {
-                overlay.classList.remove('visible');
-                drawer.classList.remove('open');
-                hamburgerBtn.classList.remove('open');
-                hamburgerBtn.setAttribute('aria-expanded', 'false');
-                drawer.setAttribute('aria-hidden', 'true');
-                overlay.setAttribute('aria-hidden', 'true');
-                body.style.overflow = '';
-                // Remove display:block after transition ends
-                overlay.addEventListener('transitionend', () => overlay.classList.remove('open'), { once: true });
-            }
-
-            hamburgerBtn.addEventListener('click', openDrawer);
-            drawerClose.addEventListener('click', closeDrawer);
-            overlay.addEventListener('click', closeDrawer);
-
-            // Close on Escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
-            });
-
-            // Close drawer if window resized to desktop
-            window.addEventListener('resize', () => {
-                if (window.innerWidth >= 1024 && drawer.classList.contains('open')) closeDrawer();
-            });
-        });
-    </script>
-</body>
-
-</html>
+</div>
+{% endblock %}

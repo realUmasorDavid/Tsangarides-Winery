@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'store',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,20 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'anymail.backends.brevo.EmailBackend'
+
+ANYMAIL = {
+    'BREVO_API_KEY': os.getenv('BREVO_API_KEY'),
+}
+
+DEFAULT_FROM_EMAIL = 'tsangarideswinerydev@outlook.com'
+WINE_CLUB_ADMIN_EMAIL = 'tsangarideswinerydev@outlook.com'
+SITE_URL = 'https://tsangarideswinery.com'
+
+BREVO_LISTS = {
+    'wine-shop': 4,
+    'wine-tasting': 5,
+    'adopt-a-vine': 6,
+    'wine-club': 7,
+}

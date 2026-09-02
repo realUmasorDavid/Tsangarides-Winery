@@ -1,0 +1,35 @@
+{% comment %}
+Usage:
+
+Single-topic (contextual page), pre-selects one interest:
+{% include 'partials/newsletter_signup.html' with newsletter_mode='single' newsletter_interest='wine-shop' newsletter_heading='Never Miss a New Release' newsletter_body='Get our latest wines and offers straight to your inbox.' %}
+
+Multi-topic (e.g. footer), lets the visitor pick any combination:
+{% include 'partials/newsletter_signup.html' with newsletter_mode='multi' newsletter_heading='Stay in the Loop' newsletter_body='Choose what you would like to hear about.' %}
+
+Valid interest values: wine-shop, wine-tasting, adopt-a-vine, wine-club
+{% endcomment %}
+<div class="newsletter-box" data-newsletter>
+    <div class="newsletter-heading">{{ newsletter_heading|default:"Stay in the Loop" }}</div>
+    <p class="newsletter-body">{{ newsletter_body|default:"Get updates from Tsangarides Winery straight to your inbox." }}</p>
+
+    <form class="newsletter-form" data-newsletter-form>
+        {% csrf_token %}
+        <input type="email" name="email" class="newsletter-input" placeholder="Your email address" required>
+
+        {% if newsletter_mode == "multi" %}
+        <div class="newsletter-checks">
+            <label><input type="checkbox" name="interest" value="wine-shop" checked> Wine Shop</label>
+            <label><input type="checkbox" name="interest" value="wine-tasting"> Wine Tasting</label>
+            <label><input type="checkbox" name="interest" value="adopt-a-vine"> Adopt a Vine</label>
+            <label><input type="checkbox" name="interest" value="wine-club"> Wine Club</label>
+        </div>
+        {% else %}
+        <input type="hidden" name="interest" value="{{ newsletter_interest }}">
+        {% endif %}
+
+        <button type="submit" class="newsletter-submit">SUBSCRIBE</button>
+    </form>
+
+    <p class="newsletter-message" data-newsletter-message style="display:none;"></p>
+</div>

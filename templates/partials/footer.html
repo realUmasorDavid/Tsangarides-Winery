@@ -1,0 +1,53 @@
+{% load static %}
+<footer>
+    <div style="padding: 56px 48px; border-bottom: 1px solid rgba(201, 168, 76, 0.15);">
+        {% include 'partials/newsletter_signup.html' with newsletter_mode='multi' newsletter_heading='Stay in the Loop' newsletter_body='Choose what you would like to hear about — new releases, tastings, Adopt a Vine, and the Wine Club.' %}
+    </div>
+    <div class="footer-top">
+        <div class="footer-brand">
+            <div class="logo-mark">
+                <a href="{% url 'index' %}" class="logo-mark">
+                    <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
+                </a>
+            </div>
+            <p>Family owned &amp; estate grown in Lemona, Paphos, Cyprus. Crafting organic wines with passion since
+                2005.</p>
+        </div>
+        <div>
+            <div class="footer-col-title">WINES</div>
+            <ul class="footer-links">
+                <li><a href="{% url 'shop' %}">Red Wines</a></li>
+                <li><a href="{% url 'shop' %}">White Wines</a></li>
+                <li><a href="{% url 'shop' %}">Rosé Wines</a></li>
+                <li><a href="{% url 'shop' %}">Organic Wines</a></li>
+                <li><a href="{% url 'shop' %}">Wine Accessories</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-title">Who We Are</div>
+            <ul class="footer-links">
+                <li><a href="{% url 'who-we-are' %}">Wine Tastings</a></li>
+                <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
+                <li><a href="{% url 'visit-us' %}">Accommodation</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-title">CONTACT</div>
+            <ul class="footer-links">
+                <li><a href="mailto:info@tsangarideswinery.com">info@tsangarideswinery.com</a></li>
+                <li><a href="tel:+35726722777">+357 26 722 777</a></li>
+                <li><a href="https://maps.app.goo.gl/79rim1Pa48aP5Zsw5"
+                        style="color:#8a7a5a; font-size:.75rem; line-height:1.5;">Lemona Village,<br>Paphos
+                        8545,<br>Cyprus</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© <span class="year-placeholder">2026</span> TSANGARIDES WINERY. ALL RIGHTS RESERVED.</span>
+        <div style="display:flex;gap:24px;flex-wrap:wrap;">
+            <a href="{% url 'privacy' %}">PRIVACY POLICY</a>
+            <a href="{% url 'terms' %}">TERMS OF USE</a>
+            <a href="{% url 'cookies' %}">COOKIE POLICY</a>
+        </div>
+    </div>
+</footer>

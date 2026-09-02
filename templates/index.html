@@ -1,1895 +1,886 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tsangarides Winery — Organic Wines</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@shopify/buy-button-js@3.0.6/dist/buybutton.min.js"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Raleway:wght@300;400;500&display=swap"
-        rel="stylesheet">
-
-    <style>
-        :root {
-            --gold: #C9A84C;
-            --gold-light: #E8C96A;
-            --dark: #1A1208;
-            --charcoal: #2C2318;
-            --cream: #F5F0E8;
-            --warm-white: #FAF7F2;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Raleway', sans-serif;
-            background: var(--warm-white);
-            color: var(--dark);
-        }
-
-        
-        .topbar {
-            background: var(--dark);
-            color: #bfae94;
-            font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.18em;
-            padding: 8px 48px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        @media (max-width: 768px) {
-            .topbar {
-                padding: 8px 20px;
-                font-size: 0.55rem;
-            }
-
-            .topbar .topbar-links {
-                display: none;
-            }
-        }
-
-        .topbar a {
-            color: #bfae94;
-            text-decoration: none;
-            transition: color .2s;
-        }
-
-        .topbar a:hover {
-            color: var(--gold-light);
-        }
-
-        
-        nav {
-            background: rgba(250, 247, 242, 0.97);
-            backdrop-filter: blur(8px);
-            padding: 18px 48px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 200;
-            border-bottom: 1px solid rgba(201, 168, 76, 0.18);
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                padding: 14px 20px;
-            }
-        }
-
-        .logo-mark {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .logo-emblem {
-            width: 52px;
-            height: 52px;
-            border: 1.5px solid var(--gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
-            color: var(--gold);
-            flex-shrink: 0;
-        }
-
-        @media (max-width: 768px) {
-            .logo-emblem {
-                width: 42px;
-                height: 42px;
-                font-size: 1.1rem;
-            }
-        }
-
-        .logo-text {
-            line-height: 1.1;
-        }
-
-        .logo-text .brand {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            letter-spacing: 0.22em;
-            color: var(--dark);
-        }
-
-        .logo-text .sub {
-            font-family: 'Raleway', sans-serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.35em;
-            color: #8a7a5a;
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 36px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.18em;
-            color: var(--charcoal);
-            text-decoration: none;
-            position: relative;
-            padding-bottom: 3px;
-            transition: color .2s;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--gold);
-            transition: width .3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--gold);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-dropdown {
-            position: relative;
-        }
-
-        .dropdown-trigger {
-            background: none;
-            border: 0;
-            padding: 0;
-            font: inherit;
-            color: inherit;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-        }
-
-        .dropdown-trigger .text {
-            display: block;
-            font-family: 'Cinzel', serif;
-            font-size: 0.58rem;
-            letter-spacing: 0.18em;
-            color: var(--charcoal);
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        .dropdown-caret {
-            font-size: 0.55rem;
-            transition: transform .2s ease;
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: calc(100% + 10px);
-            left: 50%;
-            transform: translateX(-50%) translateY(6px);
-            min-width: 210px;
-            background: #fffdf7;
-            border: 1px solid rgba(201, 168, 76, 0.18);
-            border-radius: 6px;
-            box-shadow: 0 18px 40px rgba(26, 18, 8, 0.12);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
-            z-index: 20;
-            overflow: hidden;
-        }
-
-        .dropdown-menu a {
-            display: block;
-            padding: 12px 16px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.58rem;
-            letter-spacing: 0.18em;
-            color: var(--charcoal);
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        .dropdown-menu a:hover {
-            background: rgba(201, 168, 76, 0.08);
-            color: var(--gold);
-        }
-
-        .nav-dropdown:hover .dropdown-menu,
-        .nav-dropdown:focus-within .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .nav-dropdown:hover .dropdown-caret,
-        .nav-dropdown:focus-within .dropdown-caret {
-            transform: rotate(180deg);
-        }
-
-        @media (max-width: 1024px) {
-            .nav-dropdown:hover .dropdown-menu,
-            .nav-dropdown:focus-within .dropdown-menu {
-                opacity: 0;
-                visibility: hidden;
-                transform: translateX(-50%) translateY(6px);
-            }
-        }
-
-        
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .nav-right svg {
-            width: 18px;
-            height: 18px;
-            stroke: var(--charcoal);
-            cursor: pointer;
-            transition: stroke .2s;
-        }
-
-        .nav-right svg:hover {
-            stroke: var(--gold);
-        }
-
-        
-        #cart-toggle-btn {
-            position: relative;
-            background: none;
-            border: none;
-            padding: 0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #cart-toggle-btn svg {
-            width: 18px;
-            height: 18px;
-            stroke: var(--charcoal);
-            transition: stroke .2s;
-        }
-
-        #cart-toggle-btn:hover svg {
-            stroke: var(--gold);
-        }
-
-        #cart-item-count {
-            display: none;
-            position: absolute;
-            top: -7px;
-            right: -8px;
-            background: var(--gold);
-            color: var(--dark);
-            font-family: 'Cinzel', serif;
-            font-size: 0.5rem;
-            font-weight: 700;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            pointer-events: none;
-        }
-
-        #cart-item-count.visible {
-            display: flex;
-        }
-
-        .shopify-buy__cart-toggle {
-            display: none !important;
-        }
-
-        
-        #hamburger-btn {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-            flex-direction: column;
-            gap: 5px;
-            justify-content: center;
-        }
-
-        #hamburger-btn span {
-            display: block;
-            width: 22px;
-            height: 1.5px;
-            background: var(--charcoal);
-            transition: all .3s ease;
-            transform-origin: center;
-        }
-
-        #hamburger-btn.open span:nth-child(1) {
-            transform: translateY(6.5px) rotate(45deg);
-        }
-
-        #hamburger-btn.open span:nth-child(2) {
-            opacity: 0;
-            transform: scaleX(0);
-        }
-
-        #hamburger-btn.open span:nth-child(3) {
-            transform: translateY(-6.5px) rotate(-45deg);
-        }
-
-        @media (max-width: 1024px) {
-            #hamburger-btn {
-                display: flex;
-            }
-
-            .nav-links {
-                display: none;
-            }
-        }
-
-        
-        #mobile-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(26, 18, 8, 0.55);
-            backdrop-filter: blur(3px);
-            z-index: 300;
-            opacity: 0;
-            transition: opacity .3s ease;
-        }
-
-        #mobile-overlay.open {
-            display: block;
-        }
-
-        #mobile-overlay.visible {
-            opacity: 1;
-        }
-
-        
-        #mobile-drawer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100dvh;
-            width: min(320px, 85vw);
-            background: var(--dark);
-            z-index: 400;
-            transform: translateX(-100%);
-            transition: transform .38s cubic-bezier(.4, 0, .2, 1);
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-        }
-
-        #mobile-drawer.open {
-            transform: translateX(0);
-        }
-
-        .drawer-header {
-            padding: 24px 28px 20px;
-            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-shrink: 0;
-        }
-
-        .drawer-logo .brand {
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            letter-spacing: 0.22em;
-            color: #F5F0E8;
-        }
-
-        .drawer-logo .sub {
-            font-family: 'Raleway', sans-serif;
-            font-size: 0.55rem;
-            letter-spacing: 0.3em;
-            color: #8a7a5a;
-            text-transform: uppercase;
-            margin-top: 2px;
-        }
-
-        #drawer-close {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #drawer-close svg {
-            width: 18px;
-            height: 18px;
-            stroke: #bfae94;
-            transition: stroke .2s;
-        }
-
-        #drawer-close:hover svg {
-            stroke: var(--gold-light);
-        }
-
-        .drawer-nav {
-            padding: 16px 0;
-            margin: 8px 0px;
-            flex: 1;
-            flex-direction: column;
-        }
-
-        .drawer-nav a {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 28px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            color: #bfae94;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
-            transition: color .2s, background .2s;
-        }
-
-        .drawer-nav a:hover {
-            color: var(--gold-light);
-            background: rgba(201, 168, 76, 0.06);
-        }
-
-        .drawer-nav a .arrow {
-            font-size: 0.6rem;
-            color: rgba(201, 168, 76, 0.4);
-            transition: color .2s;
-        }
-
-        .drawer-nav a:hover .arrow {
-            color: var(--gold-light);
-        }
-
-        .drawer-parent {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            background: none;
-            border: 0;
-            padding: 14px 28px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            color: #bfae94;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-
-        .drawer-subnav {
-            padding: 0 28px 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .drawer-subnav a {
-            padding: 10px 0;
-            font-family: 'Raleway', sans-serif;
-            font-size: 0.76rem;
-            letter-spacing: 0.08em;
-            color: #d9c79f;
-            text-transform: none;
-            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
-        }
-
-        .drawer-footer {
-            padding: 24px 28px;
-            border-top: 1px solid rgba(201, 168, 76, 0.15);
-            flex-shrink: 0;
-        }
-
-        .drawer-footer-links {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-        }
-
-        .drawer-footer-links a {
-            font-family: 'Cinzel', serif;
-            font-size: 0.58rem;
-            letter-spacing: 0.15em;
-            color: #8a7a5a;
-            text-decoration: none;
-            transition: color .2s;
-        }
-
-        .drawer-footer-links a:hover {
-            color: var(--gold);
-        }
-
-        .drawer-copy {
-            font-size: 0.62rem;
-            color: #5a4c30;
-            font-family: 'Cinzel', serif;
-            letter-spacing: 0.08em;
-        }
-
-        
-        .drawer-section-label {
-            padding: 16px 28px 8px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.52rem;
-            letter-spacing: 0.3em;
-            color: var(--gold);
-            opacity: 0.7;
-        }
-
-        
-        .hero {
-            position: relative;
-            height: 88vh;
-            min-height: 600px;
-            overflow: hidden;
-            display: flex;
-            align-items: flex-end;
-            padding: 72px 80px;
-        }
-
-        @media (max-width: 768px) {
-            .hero {
-                height: 85svh;
-                padding: 40px 24px;
-                min-height: 500px;
-            }
-        }
-
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(110deg, rgba(9, 5, 1, 0.90) 0%, rgba(9, 5, 1, 0.65) 55%, rgba(9, 5, 1, 0.40) 100%),
-            url("{% static 'home-hero.jpeg' %}") center/cover no-repeat;
-            transform: scale(1.04);
-            opacity: 1;
-            animation: slowzoom 18s ease-in-out infinite alternate;
-        }
-
-        @keyframes slowzoom {
-            from {
-                transform: scale(1.04);
-            }
-
-            to {
-                transform: scale(1.00);
-            }
-        }
-
-        .hero-content {
-            position: relative;
-            max-width: 600px;
-        }
-
-        .hero-eyebrow {
-            font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.35em;
-            color: var(--gold-light);
-            margin-bottom: 16px;
-            opacity: 0;
-            animation: fadeup .8s .3s forwards;
-        }
-
-        @media (max-width: 768px) {
-            .hero-eyebrow {
-                font-size: 0.55rem;
-            }
-        }
-
-        .hero-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.6rem, 6vw, 5.2rem);
-            font-weight: 300;
-            line-height: 1.05;
-            color: #fff;
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: fadeup .9s .5s forwards;
-        }
-
-        .hero-title em {
-            font-style: italic;
-            color: var(--gold-light);
-        }
-
-        .hero-sub {
-            font-size: 0.85rem;
-            line-height: 1.7;
-            color: rgba(255, 255, 255, 0.78);
-            margin-bottom: 36px;
-            max-width: 420px;
-            opacity: 0;
-            animation: fadeup .9s .7s forwards;
-        }
-
-        @media (max-width: 768px) {
-            .hero-sub {
-                font-size: 0.8rem;
-            }
-        }
-
-        .hero-btns {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeup .9s .9s forwards;
-        }
-
-        @media (max-width: 480px) {
-            .hero-btns {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-
-        .hero-awards {
-            position: absolute;
-            right: 60px;
-            bottom: 60px;
-            display: flex;
-            gap: 14px;
-            align-items: center;
-        }
-
-        @media (max-width: 768px) {
-            .hero-awards {
-                display: none;
-            }
-        }
-
-        .btn-gold {
-            font-family: 'Cinzel', serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.2em;
-            padding: 14px 32px;
-            background: var(--gold);
-            color: var(--dark);
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background .25s, transform .2s;
-            display: inline-block;
-        }
-
-        .btn-gold:hover {
-            background: var(--gold-light);
-            transform: translateY(-1px);
-        }
-
-        @media (max-width: 480px) {
-
-            .btn-gold,
-            .btn-outline {
-                padding: 12px 24px;
-                font-size: 0.55rem;
-            }
-        }
-
-        .btn-outline {
-            font-family: 'Cinzel', serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.2em;
-            padding: 13px 32px;
-            background: transparent;
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            cursor: pointer;
-            text-decoration: none;
-            transition: border-color .25s, color .25s;
-            display: inline-block;
-        }
-
-        .btn-outline:hover {
-            border-color: var(--gold-light);
-            color: var(--gold-light);
-        }
-
-        .award-badge {
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(201, 168, 76, 0.5);
-            backdrop-filter: blur(6px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold-light);
-            font-size: 0.52rem;
-            font-family: 'Cinzel', serif;
-            letter-spacing: 0.05em;
-            text-align: center;
-            padding: 6px;
-        }
-
-        .award-badge .award-icon {
-            font-size: 1.1rem;
-            margin-bottom: 2px;
-        }
-
-        .award-label {
-            font-family: 'Cinzel', serif;
-            font-size: 0.55rem;
-            letter-spacing: .12em;
-            color: rgba(255, 255, 255, 0.55);
-            align-self: flex-end;
-            margin-bottom: 6px;
-        }
-
-        @keyframes fadeup {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        
-        .pillars {
-            background: var(--warm-white);
-            border-bottom: 1px solid rgba(201, 168, 76, 0.18);
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        @media (max-width: 768px) {
-            .pillars {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .pillars {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .pillar {
-            padding: 44px 32px;
-            text-align: center;
-            border-right: 1px solid rgba(201, 168, 76, 0.15);
-            transition: background .25s;
-        }
-
-        @media (max-width: 768px) {
-            .pillar {
-                padding: 32px 20px;
-            }
-
-            .pillar:nth-child(2) {
-                border-right: none;
-            }
-
-            .pillar:nth-child(3) {
-                border-right: 1px solid rgba(201, 168, 76, 0.15);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .pillar {
-                border-right: none;
-                border-bottom: 1px solid rgba(201, 168, 76, 0.15);
-            }
-        }
-
-        .pillar:last-child {
-            border-right: none;
-        }
-
-        .pillar:hover {
-            background: rgba(201, 168, 76, 0.06);
-        }
-
-        .pillar-icon {
-            margin: 0 auto 14px;
-            opacity: 0.7;
-        }
-
-        .pillar-title {
-            font-family: 'Cinzel', serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.22em;
-            color: var(--charcoal);
-            margin-bottom: 8px;
-        }
-
-        .pillar-desc {
-            font-size: 0.78rem;
-            line-height: 1.6;
-            color: #6b5c3e;
-        }
-
-        
-        #shopify-collection-section {
-            padding: 0 48px 72px;
-            min-height: 200px;
-        }
-
-        @media (max-width: 768px) {
-            #shopify-collection-section {
-                padding: 0 20px 48px;
-            }
-        }
-
-        
-        .section-header {
-            text-align: center;
-            padding: 72px 48px 48px;
-        }
-
-        @media (max-width: 768px) {
-            .section-header {
-                padding: 48px 20px 32px;
-            }
-        }
-
-        .section-rule {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 16px;
-        }
-
-        .section-rule::before,
-        .section-rule::after {
-            content: '';
-            flex: 1;
-            max-width: 80px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--gold));
-        }
-
-        .section-rule::after {
-            background: linear-gradient(to left, transparent, var(--gold));
-        }
-
-        .section-rule span {
-            font-family: 'Cinzel', serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.3em;
-            color: var(--gold);
-        }
-
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 3.5vw, 3rem);
-            font-weight: 300;
-            color: var(--dark);
-        }
-
-        .section-view-all {
-            font-family: 'Cinzel', serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.18em;
-            color: var(--gold);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            justify-content: flex-end;
-            padding-right: 48px;
-            margin-top: -40px;
-            transition: gap .2s;
-        }
-
-        @media (max-width: 768px) {
-            .section-view-all {
-                padding-right: 20px;
-                margin-top: -24px;
-            }
-        }
-
-        .section-view-all:hover {
-            gap: 14px;
-        }
-
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            
-        }
-
-        @media (max-width: 1024px) {
-            .feature-grid {
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 260px 260px 260px;
-            }
-
-            .feature-card:nth-child(1) {
-                grid-column: 1;
-                grid-row: 1;
-            }
-
-            .feature-card:nth-child(2) {
-                grid-column: 2;
-                grid-row: 1;
-            }
-
-            .feature-card:nth-child(3) {
-                grid-column: 1;
-                grid-row: 2;
-            }
-
-            .feature-card:nth-child(4) {
-                grid-column: 2;
-                grid-row: 2;
-            }
-
-            .feature-card:nth-child(5) {
-                grid-column: 1;
-                grid-row: 3;
-            }
-
-            .feature-card:nth-child(6) {
-                grid-column: 2;
-                grid-row: 3;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .feature-grid {
-                grid-template-columns: 1fr;
-                grid-template-rows: repeat(6, 220px);
-            }
-
-            .feature-card:nth-child(n) {
-                grid-column: 1;
-                grid-row: auto;
-            }
-        }
-
-        .feature-card {
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        @media (min-width: 1025px) {
-            .feature-card:nth-child(1) {
-                grid-column: 1;
-                grid-row: 1 / 3;
-            }
-
-            .feature-card:nth-child(2) {
-                grid-column: 2;
-                grid-row: 1 / 3;
-            }
-
-            .feature-card:nth-child(3) {
-                grid-column: 3;
-                grid-row: 1;
-            }
-
-            .feature-card:nth-child(4) {
-                grid-column: 4;
-                grid-row: 1 / 2;
-            }
-
-            .feature-card:nth-child(5) {
-                grid-column: 3;
-                grid-row: 2;
-            }
-
-            .feature-card:nth-child(6) {
-                grid-column: 4;
-                grid-row: 2;
-            }
-        }
-
-        .feature-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform .6s ease;
-        }
-
-        .feature-card:hover img {
-            transform: scale(1.06);
-        }
-
-        .feature-overlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 28px;
-        }
-
-        .feature-overlay::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.4) 60%);
-            z-index: 0;
-        }
-
-        .feature-overlay > * {
-            position: relative;
-            z-index: 1;
-        }
-
-        @media (max-width: 480px) {
-            .feature-overlay {
-                padding: 20px;
-            }
-        }
-
-        .feature-tag {
-            font-family: 'Cinzel', serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.25em;
-            color: var(--gold-light);
-            margin-bottom: 8px;
-        }
-
-        .feature-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-weight: 300;
-            color: #fff;
-            margin-bottom: 8px;
-        }
-
-        @media (max-width: 480px) {
-            .feature-title {
-                font-size: 1.2rem;
-            }
-        }
-
-        .feature-desc {
-            font-size: 0.75rem;
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.72);
-            margin-bottom: 16px;
-        }
-
-        .feature-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.58rem;
-            letter-spacing: 0.18em;
-            color: var(--gold-light);
-            text-decoration: none;
-            transition: gap .2s;
-        }
-
-        .feature-link:hover {
-            gap: 14px;
-        }
-
-        .feature-link svg {
-            width: 14px;
-            height: 14px;
-            stroke: var(--gold-light);
-        }
-
-        
-        .story-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 520px;
-        }
-
-        @media (max-width: 768px) {
-            .story-section {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .story-image {
-            position: relative;
-            overflow: hidden;
-        }
-
-        @media (max-width: 768px) {
-            .story-image {
-                height: 300px;
-            }
-        }
-
-        .story-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .story-image::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to right, transparent 70%, var(--warm-white));
-        }
-
-        @media (max-width: 768px) {
-            .story-image::after {
-                background: linear-gradient(to bottom, transparent 60%, var(--warm-white));
-            }
-        }
-
-        .story-content {
-            padding: 72px 64px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        @media (max-width: 768px) {
-            .story-content {
-                padding: 40px 24px 48px;
-            }
-        }
-
-        .story-content .section-rule {
-            justify-content: flex-start;
-        }
-
-        .story-content .section-rule::before {
-            display: none;
-        }
-
-        .story-content .section-rule::after {
-            background: linear-gradient(to right, var(--gold), transparent);
-        }
-
-        .story-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 3vw, 2.8rem);
-            font-weight: 300;
-            line-height: 1.15;
-            color: var(--dark);
-            margin-bottom: 20px;
-        }
-
-        .story-title em {
-            font-style: italic;
-            color: var(--gold);
-        }
-
-        .story-body {
-            font-size: 0.85rem;
-            line-height: 1.85;
-            color: #5a4c30;
-            margin-bottom: 32px;
-        }
-
-        .story-stat {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 36px;
-            padding-top: 24px;
-            border-top: 1px solid rgba(201, 168, 76, 0.2);
-            flex-wrap: wrap;
-        }
-
-        .stat-num {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.4rem;
-            font-weight: 300;
-            color: var(--gold);
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-family: 'Cinzel', serif;
-            font-size: 0.55rem;
-            letter-spacing: 0.18em;
-            color: #8a7a5a;
-            margin-top: 4px;
-        }
-
-        
-        footer {
-            background: var(--dark);
-            color: #bfae94;
-        }
-
-        .footer-top {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 48px;
-            padding: 64px 80px 48px;
-            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
-        }
-
-        @media (max-width: 1024px) {
-            .footer-top {
-                grid-template-columns: 1fr 1fr;
-                gap: 32px;
-                padding: 48px 40px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .footer-top {
-                grid-template-columns: 1fr;
-                gap: 32px;
-                padding: 40px 24px;
-            }
-        }
-
-        .footer-brand p {
-            font-size: 0.8rem;
-            line-height: 1.7;
-            color: #8a7a5a;
-            margin-top: 16px;
-            max-width: 280px;
-        }
-
-        .footer-col-title {
-            font-family: 'Cinzel', serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.25em;
-            color: var(--gold);
-            margin-bottom: 20px;
-        }
-
-        .footer-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .footer-links a {
-            font-size: 0.78rem;
-            color: #8a7a5a;
-            text-decoration: none;
-            transition: color .2s;
-        }
-
-        .footer-links a:hover {
-            color: var(--gold-light);
-        }
-
-        .footer-bottom {
-            padding: 24px 80px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.68rem;
-            color: #5a4c30;
-            font-family: 'Cinzel', serif;
-            letter-spacing: 0.1em;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        @media (max-width: 768px) {
-            .footer-bottom {
-                padding: 20px 24px;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
-        }
-
-        
-        #age-gate-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(9, 5, 1, 0.92);
-            backdrop-filter: blur(6px);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            opacity: 0;
-            transition: opacity .4s ease;
-        }
-
-        #age-gate-overlay.visible {
-            opacity: 1;
-        }
-
-        #age-gate-modal {
-            background: var(--dark);
-            border: 1px solid rgba(201, 168, 76, 0.35);
-            max-width: 440px;
-            width: 100%;
-            padding: 48px 40px;
-            text-align: center;
-            transform: translateY(16px);
-            transition: transform .4s ease;
-        }
-
-        #age-gate-overlay.visible #age-gate-modal {
-            transform: translateY(0);
-        }
-
-        .age-gate-emblem {
-            width: 56px;
-            height: 56px;
-            margin: 0 auto 20px;
-            border: 1.5px solid var(--gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
-            color: var(--gold);
-        }
-
-        .age-gate-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.9rem;
-            font-weight: 300;
-            color: #fff;
-            margin-bottom: 12px;
-        }
-
-        .age-gate-title em {
-            font-style: italic;
-            color: var(--gold-light);
-        }
-
-        .age-gate-text {
-            font-size: 0.82rem;
-            line-height: 1.7;
-            color: rgba(255, 255, 255, 0.68);
-            margin-bottom: 32px;
-        }
-
-        .age-gate-btns {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 480px) {
-            .age-gate-btns {
-                flex-direction: column;
-            }
-
-            #age-gate-modal {
-                padding: 40px 24px;
-            }
-        }
-
-        .age-gate-legal {
-            font-family: 'Cinzel', serif;
-            font-size: 0.55rem;
-            letter-spacing: 0.1em;
-            color: #5a4c30;
-        }
-    </style>
-</head>
-
-<body>
-
-    
-    <div id="age-gate-overlay" aria-hidden="true">
-        <div id="age-gate-modal" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
-            <div class="age-gate-emblem">T</div>
-            <h2 class="age-gate-title" id="age-gate-title">Are you of <em>legal drinking age</em>?</h2>
-            <p class="age-gate-text">
-                Tsangarides Winery's website contains information about alcoholic products.
-                By entering, you confirm you are of legal drinking age in your country of residence.
-            </p>
-            <div class="age-gate-btns">
-                <button type="button" id="age-gate-yes" class="btn-gold">YES, I AM</button>
-                <button type="button" id="age-gate-no" class="btn-outline"
-                    style="color:#bfae94; border-color:rgba(191,174,148,0.4);">NO, LEAVE</button>
-            </div>
-            <div class="age-gate-legal">PLEASE DRINK RESPONSIBLY</div>
+{% block title %}Tsangarides Winery — Organic Wines{% endblock %}
+
+{% block age_gate %}
+<div id="age-gate-overlay" aria-hidden="true">
+    <div id="age-gate-modal" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
+        <div class="age-gate-emblem">T</div>
+        <h2 class="age-gate-title" id="age-gate-title">Are you of <em>legal drinking age</em>?</h2>
+        <p class="age-gate-text">
+            Tsangarides Winery's website contains information about alcoholic products.
+            By entering, you confirm you are of legal drinking age in your country of residence.
+        </p>
+        <div class="age-gate-btns">
+            <button type="button" id="age-gate-yes" class="btn-gold">YES, I AM</button>
+            <button type="button" id="age-gate-no" class="btn-outline"
+                style="color:#bfae94; border-color:rgba(191,174,148,0.4);">NO, LEAVE</button>
         </div>
+        <div class="age-gate-legal">PLEASE DRINK RESPONSIBLY</div>
     </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ageOverlay = document.getElementById('age-gate-overlay');
+        const ageYesBtn = document.getElementById('age-gate-yes');
+        const ageNoBtn = document.getElementById('age-gate-no');
+        const AGE_KEY = 'tsangarides_age_verified';
 
-    
-    <div class="topbar text-center">
-        <span>FAMILY OWNED &amp; ESTATE GROWN IN LEMONA, PAPHOS, CYPRUS</span>
-        
-    </div>
+        if (localStorage.getItem(AGE_KEY) !== 'true') {
+            document.body.style.overflow = 'hidden';
+            ageOverlay.setAttribute('aria-hidden', 'false');
+            requestAnimationFrame(() => ageOverlay.classList.add('visible'));
+        } else {
+            ageOverlay.remove();
+        }
 
-    
-    <nav>
-        
-        <a href="{% url 'index' %}" class="logo-mark">
-            <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
-        </a>
-
-        
-        <ul class="nav-links">
-            <li><a href="{% url 'shop' %}">Shop Wines</a></li>
-            <li><a href="{% url 'visit-us' %}">Stay with us</a></li>
-            <li><a href="{% url 'events' %}">Events</a></li>
-            <li class="nav-dropdown">
-                <button type="button" class="dropdown-trigger">
-                    <span>About</span>
-                    <span class="dropdown-caret">▾</span>
-                </button>
-                <div class="dropdown-menu">
-                    <a href="{% url 'winery' %}">The Winery</a>
-                    <a href="{% url 'who-we-are' %}">Who We Are</a>
-                    <a href="{% url 'our-story' %}">Our Story</a>
-                    <a href="{% url 'vineyard' %}">The Vineyard</a>
-                </div>
-            </li>
-            <li><a href="{% url 'adopt-vine' %}">Adopt a Vine</a></li>
-            <li><a href="{% url 'contact' %}">Contact</a></li>
-        </ul>
-
-        
-        <div class="nav-right">
-            
-            
-            <button id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
-
-    
-    <div id="mobile-overlay" aria-hidden="true"></div>
-
-    
-    <aside id="mobile-drawer" aria-label="Navigation menu" aria-hidden="true">
-        <div class="drawer-header">
-            <div class="drawer-logo">
-                <div class="brand">TSANGARIDES</div>
-                <div class="sub">Winery &amp; Estate</div>
-            </div>
-            <button id="drawer-close" aria-label="Close menu">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
-                    <path d="M18 6L6 18M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-
-        <nav class="drawer-nav" aria-label="Mobile navigation">
-            <a href="{% url 'shop' %}">Shop Wines <span class="arrow">›</span></a>
-            <a href="{% url 'visit-us' %}">Stay with us <span class="arrow">›</span></a>
-            <a href="{% url 'events' %}">Events <span class="arrow">›</span></a>
-            <button type="button" class="drawer-parent">About <span class="arrow">›</span></button>
-            <div class="drawer-subnav">
-                <a href="{% url 'winery' %}">The Winery</a>
-                <a href="{% url 'who-we-are' %}">Who We Are</a>
-                <a href="{% url 'our-story' %}">Our Story</a>
-                <a href="{% url 'vineyard' %}">The Vineyard</a>
-            </div>
-            <a href="https://www.tsangarideswinery.com.co/products/book-tasting?view=booking" target="_blank">Book a Tasting <span class="arrow">›</span></a>
-            <a href="{% url 'adopt-vine' %}">Adopt a Vine <span class="arrow">›</span></a>
-            <a href="{% url 'contact' %}">Contact <span class="arrow">›</span></a>
-        </nav>
-        <div class="drawer-footer">
-            <div class="drawer-footer-links">
-                <a href="{% url 'privacy' %}">Privacy</a>
-                <a href="{% url 'terms' %}">Terms</a>
-                <a href="{% url 'cookies' %}">Cookies</a>
-            </div>
-            <div class="drawer-copy">© <span id="year">2026</span> TSANGARIDES WINERY</div>
-        </div>
-    </aside>
-
-    
-    <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">Award-Winning<br><em>Organic Wines</em></h1>
-            <p class="hero-sub">Five generations of winemaking tradition, sustainable vineyards and passionate
-                craftsmanship poured into every bottle.</p>
-            <div class="hero-btns">
-                <a href="{% url 'shop' %}" class="btn-gold">SHOP WINES</a>
-                <a href="https://www.tsangarideswinery.com.co/products/book-tasting?view=booking" class="btn-outline">BOOK A TASTING</a>
-                <a href="{% url 'visit-us' %}" class="btn-outline">Stay with us</a>
-            </div>
-        </div>
-    </section>
-
-    
-    <div class="pillars">
-        <div class="pillar">
-            <svg class="pillar-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C9A84C"
-                stroke-width="1.2">
-                <path d="M20 4C20 4 8 14 8 24a12 12 0 0024 0C32 14 20 4 20 4z" />
-                <path d="M20 14v14M14 20h12" />
-            </svg>
-            <div class="pillar-title">100% ORGANIC VINEYARDS</div>
-            <p class="pillar-desc">The largest organic vineyard estate in Cyprus.</p>
-        </div>
-        <div class="pillar">
-            <svg class="pillar-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C9A84C"
-                stroke-width="1.2">
-                <circle cx="14" cy="14" r="5" />
-                <circle cx="26" cy="14" r="5" />
-                <path d="M4 34c0-6 4-10 10-10h12c6 0 10 4 10 10" />
-            </svg>
-            <div class="pillar-title">FAMILY HERITAGE</div>
-            <p class="pillar-desc">Five generations of passion and dedication.</p>
-        </div>
-        <div class="pillar">
-            <svg class="pillar-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C9A84C"
-                stroke-width="1.2">
-                <rect x="10" y="18" width="20" height="16" rx="2" />
-                <path d="M14 18v-4a6 6 0 0112 0v4" />
-                <circle cx="20" cy="27" r="2" />
-            </svg>
-            <div class="pillar-title">ESTATE GROWN</div>
-            <p class="pillar-desc">From our vineyards to your table, we craft every step.</p>
-        </div>
-        <div class="pillar">
-            <svg class="pillar-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C9A84C"
-                stroke-width="1.2">
-                <path d="M20 36s-12-8-12-18a12 12 0 0124 0c0 10-12 18-12 18z" />
-                <circle cx="20" cy="18" r="4" />
-            </svg>
-            <div class="pillar-title">LEMONA, PAPHOS</div>
-            <p class="pillar-desc">In the foothills of the Troodos Mountains.</p>
-        </div>
-    </div>
-
-    
-    <div class="section-header">
-        <div class="section-rule"><span>✦</span></div>
-        <h2 class="section-title">Featured Wines</h2>
-    </div>
-    <a href="{% url 'shop' %}" class="section-view-all">
-        VIEW ALL WINES
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-        </svg>
-    </a>
-    <div id="shopify-collection-section">
-        <div id="shopify-collection-grid"></div>
-    </div>
-
-    
-    <div class="feature-grid">
-        <div class="feature-card">
-            <img src="{% static '1.jpg' %}" alt="Shop our wines" />
-            <div class="feature-overlay">
-                <span class="feature-tag">COLLECTION</span>
-                <div class="feature-title">Shop Our Wines</div>
-                <p class="feature-desc">Discover our wine collection of white, rosé, red, organic and wine accesories.</p>
-                <a href="{% url 'shop' %}" class="feature-link">SHOP NOW <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="feature-card">
-            <img src="{% static '2.jpg' %}" class="" alt="Stay with us" />
-            <div class="feature-overlay">
-                <span class="feature-tag">EXPERIENCE</span>
-                <div class="feature-title">Stay with us</div>
-                <p class="feature-desc">Join us for a wine tasting or tour and enjoy the true taste of Cyprus.</p>
-                <a href="{% url 'visit-us' %}" class="feature-link">BOOK NOW <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="feature-card">
-            <img src="{% static '3.jpg' %}" alt="events" />
-            <div class="feature-overlay">
-                <span class="feature-tag">JOURNAL</span>
-                <div class="feature-title">From the Winery</div>
-                <p class="feature-desc">Stories, recipes, and winemaking notes from our estate.</p>
-                <a href="{% url 'winery' %}" class="feature-link">READ MORE <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="feature-card">
-            <img src="{% static '4.jpg' %}" class="object-left" alt="Gift Sets" />
-            <div class="feature-overlay">
-                <span class="feature-tag">Vineyard</span>
-                <div class="feature-title">The Vineyard</div>
-                <p class="feature-desc">Come visit the vineyard and experience the beauty of our estate.</p>
-                <a href="{% url 'vineyard' %}" class="feature-link">EXPLORE THE VINEYARD <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-    </div>
-
-    
-    <div class="story-section">
-        <div class="story-image">
-            <img src="{% static 'Photo-10.jpeg' %}" alt="Our Story" />
-        </div>
-        <div class="story-content">
-            <div class="section-rule"><span>✦</span></div>
-            <h2 class="story-title">Five Generations of<br><em>Passion &amp; Craft</em></h2>
-            <p class="story-body">Founded in 2005, Tsangarides Winery has remained in the family for generations, each
-                one deepening our commitment to the land and to the art of winemaking. Our 100% organic vineyards,
-                nestled in the hills of Paphos, yield grapes of extraordinary character — the foundation of wines that
-                consistently earn the world's highest accolades.</p>
-            <div class="story-stat">
-                <div>
-                    <div class="stat-num">20+</div>
-                    <div class="stat-label">YEARS HERITAGE</div>
-                </div>
-                <div>
-                    <div class="stat-num">5</div>
-                    <div class="stat-label">GENERATIONS</div>
-                </div>
-                <div>
-                    <div class="stat-num">100%</div>
-                    <div class="stat-label">ORGANIC</div>
-                </div>
-            </div>
-            <a href="{% url 'our-story' %}" class="btn-gold" style="display:inline-block; text-decoration:none; align-self:flex-start;">OUR
-                STORY</a>
-        </div>
-    </div>
-
-    
-    <div id="shopify-cart"></div>
-
-    
-    <footer>
-        <div class="footer-top">
-            <div class="footer-brand">
-                <div class="logo-mark">
-                    <a href="{% url 'index' %}" class="logo-mark">
-                        <img src="{% static 'logo.png' %}" class="w-56 h-24 -my-6" alt="Tsangarides Winery Logo">
-                    </a>
-                </div>
-                <p>Family owned &amp; estate grown in Lemona, Paphos, Cyprus. Crafting organic wines with passion since
-                    2005.</p>
-            </div>
-            <div>
-                <div class="footer-col-title">WINES</div>
-                <ul class="footer-links">
-                    <li><a href="{% url 'shop' %}">Red Wines</a></li>
-                    <li><a href="{% url 'shop' %}">White Wines</a></li>
-                    <li><a href="{% url 'shop' %}">Rosé Wines</a></li>
-                    <li><a href="{% url 'shop' %}">Organic Wines</a></li>
-                    <li><a href="{% url 'shop' %}">Wine Accessories</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="footer-col-title">Who We Are</div>
-                <ul class="footer-links">
-                    <li><a href="{% url 'who-we-are' %}">Wine Tastings</a></li>
-                    <li><a href="{% url 'who-we-are' %}">Who We Are</a></li>
-                    <li><a href="{% url 'visit-us' %}">Accommodation</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="footer-col-title">CONTACT</div>
-                <ul class="footer-links">
-                    <li><a href="mailto:info@tsangarideswinery.com">info@tsangarideswinery.com</a></li>
-                    <li><a href="tel:+35726722777">+357 26 722 777</a></li>
-                    <li><a href="https://maps.app.goo.gl/79rim1Pa48aP5Zsw5" style="color:#8a7a5a; font-size:.75rem; line-height:1.5;">Lemona Village,<br>Paphos
-                            8545,<br>Cyprus</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <span>© <span id="year">2026</span> TSANGARIDES WINERY. ALL RIGHTS RESERVED.</span>
-            <div style="display:flex;gap:24px;flex-wrap:wrap;">
-                <a href="{% url 'privacy' %}"
-                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
-                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">PRIVACY POLICY</a>
-                <a href="{% url 'terms' %}"
-                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
-                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">TERMS OF USE</a>
-                <a href="{% url 'cookies' %}"
-                    style="color:#5a4c30;text-decoration:none;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;"
-                    onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#5a4c30'">COOKIE POLICY</a>
-            </div>
-        </div>
-    </footer>
-
-    
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-
-            const ageOverlay = document.getElementById('age-gate-overlay');
-            const ageYesBtn = document.getElementById('age-gate-yes');
-            const ageNoBtn = document.getElementById('age-gate-no');
-            const AGE_KEY = 'tsangarides_age_verified';
-
-            if (localStorage.getItem(AGE_KEY) !== 'true') {
-                document.body.style.overflow = 'hidden';
-                ageOverlay.setAttribute('aria-hidden', 'false');
-                requestAnimationFrame(() => ageOverlay.classList.add('visible'));
-            } else {
-                ageOverlay.remove();
-            }
-
-            ageYesBtn.addEventListener('click', function () {
-                localStorage.setItem(AGE_KEY, 'true');
-                ageOverlay.classList.remove('visible');
-                document.body.style.overflow = '';
-                ageOverlay.addEventListener('transitionend', () => ageOverlay.remove(), { once: true });
-            });
-
-            ageNoBtn.addEventListener('click', function () {
-                window.location.href = 'https://www.google.com';
-            });
-
-            document.getElementById('year').textContent = new Date().getFullYear();
-
-            const hamburgerBtn = document.getElementById('hamburger-btn');
-            const drawerClose = document.getElementById('drawer-close');
-            const overlay = document.getElementById('mobile-overlay');
-            const drawer = document.getElementById('mobile-drawer');
-            const body = document.body;
-
-            function openDrawer() {
-                overlay.classList.add('open');
-                requestAnimationFrame(() => {
-                    overlay.classList.add('visible');
-                    drawer.classList.add('open');
-                });
-                hamburgerBtn.classList.add('open');
-                hamburgerBtn.setAttribute('aria-expanded', 'true');
-                drawer.setAttribute('aria-hidden', 'false');
-                overlay.setAttribute('aria-hidden', 'false');
-                body.style.overflow = 'hidden'; // no background scroll
-            }
-
-            function closeDrawer() {
-                overlay.classList.remove('visible');
-                drawer.classList.remove('open');
-                hamburgerBtn.classList.remove('open');
-                hamburgerBtn.setAttribute('aria-expanded', 'false');
-                drawer.setAttribute('aria-hidden', 'true');
-                overlay.setAttribute('aria-hidden', 'true');
-                body.style.overflow = '';
-                overlay.addEventListener('transitionend', () => overlay.classList.remove('open'), { once: true });
-            }
-
-            hamburgerBtn.addEventListener('click', openDrawer);
-            drawerClose.addEventListener('click', closeDrawer);
-            overlay.addEventListener('click', closeDrawer);
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
-            });
-
-            window.addEventListener('resize', () => {
-                if (window.innerWidth >= 1024 && drawer.classList.contains('open')) closeDrawer();
-            });
-
-            const client = ShopifyBuy.buildClient({
-                domain: 'tsangarideswinery.com.co',
-                storefrontAccessToken: 'bbc2c3d95d8ecc7895e08d8448e7f28f',
-            });
-
-            const ui = ShopifyBuy.UI.init(client);
-
-            function updateCartBadge(cart) {
-                const badge = document.getElementById('cart-item-count');
-                if (!badge) return;
-                const count = cart ? cart.lineItems.reduce((sum, item) => sum + item.quantity, 0) : 0;
-                badge.textContent = count;
-                count > 0 ? badge.classList.add('visible') : badge.classList.remove('visible');
-            }
-
-            let cartComponent = null;
-
-            ui.createComponent('cart', {
-                node: document.getElementById('shopify-cart'),
-                options: {
-                    cart: {
-                        startOpen: false,
-                        styles: {
-                            button: {
-                                'background-color': '#C9A84C', 'color': '#1A1208',
-                                'font-family': 'Cinzel, serif',
-                                ':hover': { 'background-color': '#b0923d' }
-                            }
-                        },
-                        events: {
-                            afterInit: function (component) { cartComponent = component; updateCartBadge(component.model); },
-                            updateComplete: function (component) { updateCartBadge(component.model); }
-                        }
-                    }
-                }
-            }).then(function (component) { cartComponent = component; });
-
-            // document.getElementById('cart-toggle-btn').addEventListener('click', function () {
-            //     if (cartComponent) cartComponent.toggleVisibility();
-            // });
-
-            ui.createComponent('collection', {
-                id: '576540934410',
-                node: document.getElementById('shopify-collection-grid'),
-                options: {
-                    product: {
-                        buttonDestination: 'cart',
-                        layout: 'vertical',
-                        contents: { img: true, title: true, price: true, button: true },
-                        styles: {
-                            product: { 'text-align': 'center', 'margin-bottom': '40px' },
-                            title: { 'font-family': 'Cinzel, serif', 'color': '#1A1208' },
-                            price: { 'color': '#C9A84C' },
-                            button: {
-                                'background-color': '#C9A84C', 'color': '#1A1208',
-                                'font-family': 'Cinzel, serif',
-                                ':hover': { 'background-color': '#b0923d' }
-                            }
-                        },
-                        events: {
-                            addToCart: function () {
-                                if (cartComponent) updateCartBadge(cartComponent.model);
-                            }
-                        }
-                    },
-                    collection: {
-                        styles: {
-                            products: {
-                                'display': 'grid',
-                                'grid-template-columns': 'repeat(auto-fit, minmax(220px, 1fr))',
-                                'gap': '30px'
-                            }
-                        }
-                    }
-                }
-            });
+        ageYesBtn.addEventListener('click', function () {
+            localStorage.setItem(AGE_KEY, 'true');
+            ageOverlay.classList.remove('visible');
+            document.body.style.overflow = '';
+            ageOverlay.addEventListener('transitionend', () => ageOverlay.remove(), { once: true });
         });
-    </script>
 
-</body>
+        ageNoBtn.addEventListener('click', function () {
+            window.location.href = 'https://www.google.com';
+        });
+    });
+</script>
+{% endblock %}
 
-</html>
+{% block extra_head %}
+<style>
+.hero {
+position: relative;
+height: 88vh;
+min-height: 600px;
+overflow: hidden;
+display: flex;
+align-items: flex-end;
+padding: 72px 80px;
+}
+
+@media (max-width: 768px) {
+.hero {
+height: 85svh;
+padding: 40px 24px;
+min-height: 500px;
+}
+}
+
+.hero-bg {
+position: absolute;
+inset: 0;
+background: linear-gradient(110deg, rgba(9, 5, 1, 0.72) 0%, rgba(9, 5, 1, 0.48) 55%, rgba(9, 5, 1, 0.22) 100%),
+url("{% static 'home-hero.jpeg' %}") center/cover no-repeat;
+transform: scale(1.04);
+opacity: 1;
+animation: slowzoom 18s ease-in-out infinite alternate;
+}
+
+@keyframes slowzoom {
+from { transform: scale(1.04); }
+to { transform: scale(1.00); }
+}
+
+.hero-content {
+position: relative;
+max-width: 600px;
+}
+
+.hero-eyebrow {
+font-family: 'Cinzel', serif;
+font-size: 0.65rem;
+letter-spacing: 0.35em;
+color: var(--gold-light);
+margin-bottom: 16px;
+opacity: 0;
+animation: fadeup .8s .3s forwards;
+}
+
+@media (max-width: 768px) {
+.hero-eyebrow { font-size: 0.55rem; }
+}
+
+.hero-title {
+font-family: 'Cormorant Garamond', serif;
+font-size: clamp(2.6rem, 6vw, 5.2rem);
+font-weight: 300;
+line-height: 1.05;
+color: #fff;
+margin-bottom: 20px;
+opacity: 0;
+animation: fadeup .9s .5s forwards;
+text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+}
+
+.hero-title em {
+font-style: italic;
+color: var(--gold-light);
+}
+
+.hero-sub {
+font-size: 0.85rem;
+line-height: 1.7;
+color: rgba(255, 255, 255, 0.85);
+margin-bottom: 36px;
+max-width: 420px;
+opacity: 0;
+animation: fadeup .9s .7s forwards;
+text-shadow: 0 1px 12px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+.hero-sub { font-size: 0.8rem; }
+}
+
+.hero-btns {
+display: flex;
+gap: 12px;
+flex-wrap: wrap;
+opacity: 0;
+animation: fadeup .9s .9s forwards;
+}
+
+@media (max-width: 480px) {
+.hero-btns { flex-direction: column; align-items: flex-start; }
+}
+
+.hero-awards {
+position: absolute;
+right: 60px;
+bottom: 60px;
+display: flex;
+gap: 14px;
+align-items: center;
+}
+
+@media (max-width: 768px) {
+.hero-awards { display: none; }
+}
+
+.award-badge {
+width: 58px;
+height: 58px;
+border-radius: 50%;
+background: rgba(255, 255, 255, 0.12);
+border: 1px solid rgba(201, 168, 76, 0.5);
+backdrop-filter: blur(6px);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+color: var(--gold-light);
+font-size: 0.52rem;
+font-family: 'Cinzel', serif;
+letter-spacing: 0.05em;
+text-align: center;
+padding: 6px;
+}
+
+.award-badge .award-icon {
+font-size: 1.1rem;
+margin-bottom: 2px;
+}
+
+.award-label {
+font-family: 'Cinzel', serif;
+font-size: 0.55rem;
+letter-spacing: .12em;
+color: rgba(255, 255, 255, 0.55);
+align-self: flex-end;
+margin-bottom: 6px;
+}
+
+@keyframes fadeup {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.pillars {
+background: var(--warm-white);
+border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 768px) {
+.pillars { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+.pillars { grid-template-columns: 1fr; }
+}
+
+.pillar {
+padding: 44px 32px;
+text-align: center;
+border-right: 1px solid rgba(201, 168, 76, 0.15);
+transition: background .25s;
+}
+
+@media (max-width: 768px) {
+.pillar { padding: 32px 20px; }
+.pillar:nth-child(2) { border-right: none; }
+.pillar:nth-child(3) { border-right: 1px solid rgba(201, 168, 76, 0.15); }
+}
+
+@media (max-width: 480px) {
+.pillar { border-right: none; border-bottom: 1px solid rgba(201, 168, 76, 0.15); }
+}
+
+.pillar:last-child { border-right: none; }
+.pillar:hover { background: rgba(201, 168, 76, 0.06); }
+
+.pillar-icon {
+margin: 0 auto 14px;
+opacity: 0.7;
+}
+
+.pillar-title {
+font-family: 'Cinzel', serif;
+font-size: 0.6rem;
+letter-spacing: 0.22em;
+color: var(--charcoal);
+margin-bottom: 8px;
+}
+
+.pillar-desc {
+font-size: 0.78rem;
+line-height: 1.6;
+color: #6b5c3e;
+}
+
+#shopify-collection-section {
+padding: 0 48px 72px;
+min-height: 200px;
+}
+
+@media (max-width: 768px) {
+#shopify-collection-section { padding: 0 20px 48px; }
+}
+
+#shopify-collection-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: 30px;
+padding-top: 16px;
+}
+
+.wine-card {
+display: block;
+background: #fff;
+border: 1px solid rgba(201, 168, 76, 0.15);
+text-decoration: none;
+color: inherit;
+transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.wine-card:hover {
+transform: translateY(-4px);
+box-shadow: 0 18px 40px rgba(26, 18, 8, 0.08);
+border-color: rgba(201, 168, 76, 0.4);
+}
+
+.wine-card-img {
+height: 360px;
+background: #ede8df;
+overflow: hidden;
+}
+
+.wine-card-img img {
+width: 100%;
+height: 100%;
+object-fit: contain;
+display: block;
+transition: transform .4s ease;
+}
+
+.wine-card:hover .wine-card-img img {
+transform: scale(1.04);
+}
+
+.wine-card-body {
+padding: 22px 16px 26px;
+text-align: center;
+}
+
+.wine-card-title {
+font-family: 'Cinzel', serif;
+font-size: 0.75rem;
+letter-spacing: 0.12em;
+color: var(--dark);
+margin-bottom: 16px;
+text-transform: uppercase;
+}
+
+.wine-card-cta {
+display: inline-block;
+font-family: 'Cinzel', serif;
+font-size: 0.6rem;
+letter-spacing: 0.15em;
+padding: 10px 26px;
+background: var(--gold);
+color: var(--dark);
+transition: background .25s;
+}
+
+.wine-card:hover .wine-card-cta {
+background: var(--gold-light);
+}
+
+.collection-empty,
+.collection-error {
+grid-column: 1 / -1;
+font-family: 'Cinzel', serif;
+font-size: 0.65rem;
+letter-spacing: 0.15em;
+color: #8a7a5a;
+text-align: center;
+padding: 40px 20px;
+}
+
+.section-header {
+text-align: center;
+padding: 72px 48px 48px;
+}
+
+@media (max-width: 768px) {
+.section-header { padding: 48px 20px 32px; }
+}
+
+.section-title {
+font-family: 'Cormorant Garamond', serif;
+font-size: clamp(2rem, 3.5vw, 3rem);
+font-weight: 300;
+color: var(--dark);
+}
+
+.section-view-all {
+font-family: 'Cinzel', serif;
+font-size: 0.6rem;
+letter-spacing: 0.18em;
+color: var(--gold);
+text-decoration: none;
+display: flex;
+align-items: center;
+gap: 8px;
+justify-content: flex-end;
+padding-right: 48px;
+margin-top: -40px;
+transition: gap .2s;
+}
+
+@media (max-width: 768px) {
+.section-view-all { padding-right: 20px; margin-top: -24px; }
+}
+
+.section-view-all:hover { gap: 14px; }
+
+.feature-grid {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+@media (max-width: 1024px) {
+.feature-grid {
+grid-template-columns: 1fr 1fr;
+grid-template-rows: 260px 260px 260px;
+}
+.feature-card:nth-child(1) { grid-column: 1; grid-row: 1; }
+.feature-card:nth-child(2) { grid-column: 2; grid-row: 1; }
+.feature-card:nth-child(3) { grid-column: 1; grid-row: 2; }
+.feature-card:nth-child(4) { grid-column: 2; grid-row: 2; }
+.feature-card:nth-child(5) { grid-column: 1; grid-row: 3; }
+.feature-card:nth-child(6) { grid-column: 2; grid-row: 3; }
+}
+
+@media (max-width: 600px) {
+.feature-grid { grid-template-columns: 1fr; grid-template-rows: repeat(6, 220px); }
+.feature-card:nth-child(n) { grid-column: 1; grid-row: auto; }
+}
+
+.feature-card {
+position: relative;
+overflow: hidden;
+cursor: pointer;
+}
+
+@media (min-width: 1025px) {
+.feature-card:nth-child(1) { grid-column: 1; grid-row: 1 / 3; }
+.feature-card:nth-child(2) { grid-column: 2; grid-row: 1 / 3; }
+.feature-card:nth-child(3) { grid-column: 3; grid-row: 1; }
+.feature-card:nth-child(4) { grid-column: 4; grid-row: 1 / 2; }
+.feature-card:nth-child(5) { grid-column: 3; grid-row: 2; }
+.feature-card:nth-child(6) { grid-column: 4; grid-row: 2; }
+}
+
+.feature-card img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform .6s ease;
+}
+
+.feature-card:hover img { transform: scale(1.06); }
+
+.feature-overlay {
+position: absolute;
+inset: 0;
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+padding: 28px;
+}
+
+.feature-overlay::before {
+content: '';
+position: absolute;
+inset: 0;
+background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.4) 60%);
+z-index: 0;
+}
+
+.feature-overlay > * {
+position: relative;
+z-index: 1;
+}
+
+@media (max-width: 480px) {
+.feature-overlay { padding: 20px; }
+}
+
+.feature-tag {
+font-family: 'Cinzel', serif;
+font-size: 0.6rem;
+letter-spacing: 0.25em;
+color: var(--gold-light);
+margin-bottom: 8px;
+}
+
+.feature-title {
+font-family: 'Cormorant Garamond', serif;
+font-size: 1.5rem;
+font-weight: 300;
+color: #fff;
+margin-bottom: 8px;
+}
+
+@media (max-width: 480px) {
+.feature-title { font-size: 1.2rem; }
+}
+
+.feature-desc {
+font-size: 0.75rem;
+line-height: 1.6;
+color: rgba(255, 255, 255, 0.72);
+margin-bottom: 16px;
+}
+
+.feature-link {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+font-family: 'Cinzel', serif;
+font-size: 0.58rem;
+letter-spacing: 0.18em;
+color: var(--gold-light);
+text-decoration: none;
+transition: gap .2s;
+}
+
+.feature-link:hover { gap: 14px; }
+
+.feature-link svg {
+width: 14px;
+height: 14px;
+stroke: var(--gold-light);
+}
+
+.story-section {
+display: grid;
+grid-template-columns: 1fr 1fr;
+min-height: 520px;
+}
+
+@media (max-width: 768px) {
+.story-section { grid-template-columns: 1fr; }
+}
+
+.story-image {
+position: relative;
+overflow: hidden;
+}
+
+@media (max-width: 768px) {
+.story-image { height: 300px; }
+}
+
+.story-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.story-image::after {
+content: '';
+position: absolute;
+inset: 0;
+background: linear-gradient(to right, transparent 70%, var(--warm-white));
+}
+
+@media (max-width: 768px) {
+.story-image::after { background: linear-gradient(to bottom, transparent 60%, var(--warm-white)); }
+}
+
+.story-content {
+padding: 72px 64px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+@media (max-width: 768px) {
+.story-content { padding: 40px 24px 48px; }
+}
+
+.story-content .section-rule { justify-content: flex-start; }
+.story-content .section-rule::before { display: none; }
+.story-content .section-rule::after { background: linear-gradient(to right, var(--gold), transparent); }
+
+.story-title {
+font-family: 'Cormorant Garamond', serif;
+font-size: clamp(2rem, 3vw, 2.8rem);
+font-weight: 300;
+line-height: 1.15;
+color: var(--dark);
+margin-bottom: 20px;
+}
+
+.story-title em {
+font-style: italic;
+color: var(--gold);
+}
+
+.story-body {
+font-size: 0.85rem;
+line-height: 1.85;
+color: #5a4c30;
+margin-bottom: 32px;
+}
+
+.story-stat {
+display: flex;
+gap: 40px;
+margin-bottom: 36px;
+padding-top: 24px;
+border-top: 1px solid rgba(201, 168, 76, 0.2);
+flex-wrap: wrap;
+}
+
+.stat-num {
+font-family: 'Cormorant Garamond', serif;
+font-size: 2.4rem;
+font-weight: 300;
+color: var(--gold);
+line-height: 1;
+}
+
+.stat-label {
+font-family: 'Cinzel', serif;
+font-size: 0.55rem;
+letter-spacing: 0.18em;
+color: #8a7a5a;
+margin-top: 4px;
+}
+
+#age-gate-overlay {
+position: fixed;
+inset: 0;
+background: rgba(9, 5, 1, 0.92);
+backdrop-filter: blur(6px);
+z-index: 1000;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 24px;
+opacity: 0;
+transition: opacity .4s ease;
+}
+
+#age-gate-overlay.visible { opacity: 1; }
+
+#age-gate-modal {
+background: var(--dark);
+border: 1px solid rgba(201, 168, 76, 0.35);
+max-width: 440px;
+width: 100%;
+padding: 48px 40px;
+text-align: center;
+transform: translateY(16px);
+transition: transform .4s ease;
+}
+
+#age-gate-overlay.visible #age-gate-modal { transform: translateY(0); }
+
+.age-gate-emblem {
+width: 56px;
+height: 56px;
+margin: 0 auto 20px;
+border: 1.5px solid var(--gold);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: 'Cinzel', serif;
+font-size: 1.4rem;
+color: var(--gold);
+}
+
+.age-gate-title {
+font-family: 'Cormorant Garamond', serif;
+font-size: 1.9rem;
+font-weight: 300;
+color: #fff;
+margin-bottom: 12px;
+}
+
+.age-gate-title em {
+font-style: italic;
+color: var(--gold-light);
+}
+
+.age-gate-text {
+font-size: 0.82rem;
+line-height: 1.7;
+color: rgba(255, 255, 255, 0.68);
+margin-bottom: 32px;
+}
+
+.age-gate-btns {
+display: flex;
+gap: 12px;
+justify-content: center;
+margin-bottom: 20px;
+}
+
+@media (max-width: 480px) {
+.age-gate-btns { flex-direction: column; }
+#age-gate-modal { padding: 40px 24px; }
+}
+
+.age-gate-legal {
+font-family: 'Cinzel', serif;
+font-size: 0.55rem;
+letter-spacing: 0.1em;
+color: #5a4c30;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">Award-Winning<br><em>Organic Wines</em></h1>
+        <p class="hero-sub">Five generations of winemaking tradition, sustainable vineyards and passionate
+            craftsmanship poured into every bottle.</p>
+        <div class="hero-btns">
+            <a href="{% url 'shop' %}" class="btn-gold">SHOP WINES</a>
+            <a href="https://www.tsangarideswinery.com.co/products/book-tasting?view=booking" class="btn-outline">BOOK A
+                TASTING</a>
+            <a href="{% url 'visit-us' %}" class="btn-outline">Stay with us</a>
+        </div>
+    </div>
+</section>
+
+<div class="pillars">
+    <div class="pillar">
+        <svg class="pillar-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C9A84C"
+            stroke-width="1.2">
+            <path d="M20 4C20 4 8 14 8 24a12 12 0 0024 0C32 14 20 4 20 4z" />
+            <path d="M20 14v14M14 20h12" />
+        </svg>
+        <div class="pillar-title">100% ORGANIC VINEYARDS</div>
+        <p class="pillar-desc">The largest organic vineyard estate in Cyprus.</p>
+    </div>
+    <div class="pillar">
+        <svg class="pillar-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C9A84C"
+            stroke-width="1.2">
+            <circle cx="14" cy="14" r="5" />
+            <circle cx="26" cy="14" r="5" />
+            <path d="M4 34c0-6 4-10 10-10h12c6 0 10 4 10 10" />
+        </svg>
+        <div class="pillar-title">FAMILY HERITAGE</div>
+        <p class="pillar-desc">Five generations of passion and dedication.</p>
+    </div>
+    <div class="pillar">
+        <svg class="pillar-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C9A84C"
+            stroke-width="1.2">
+            <rect x="10" y="18" width="20" height="16" rx="2" />
+            <path d="M14 18v-4a6 6 0 0112 0v4" />
+            <circle cx="20" cy="27" r="2" />
+        </svg>
+        <div class="pillar-title">ESTATE GROWN</div>
+        <p class="pillar-desc">From our vineyards to your table, we craft every step.</p>
+    </div>
+    <div class="pillar">
+        <svg class="pillar-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C9A84C"
+            stroke-width="1.2">
+            <path d="M20 36s-12-8-12-18a12 12 0 0124 0c0 10-12 18-12 18z" />
+            <circle cx="20" cy="18" r="4" />
+        </svg>
+        <div class="pillar-title">LEMONA, PAPHOS</div>
+        <p class="pillar-desc">In the foothills of the Troodos Mountains.</p>
+    </div>
+</div>
+
+<div class="section-header">
+    <div class="section-rule"><span>✦</span></div>
+    <h2 class="section-title">Featured Wines</h2>
+</div>
+<a href="{% url 'shop' %}" class="section-view-all">
+    VIEW ALL WINES
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5">
+        <path d="M5 12h14M12 5l7 7-7 7" />
+    </svg>
+</a>
+<div id="shopify-collection-section">
+    <div id="shopify-collection-grid"></div>
+</div>
+
+<div class="feature-grid">
+    <div class="feature-card">
+        <img src="{% static '1.jpg' %}" alt="Shop our wines" />
+        <div class="feature-overlay">
+            <span class="feature-tag">COLLECTION</span>
+            <div class="feature-title">Shop Our Wines</div>
+            <p class="feature-desc">Discover our wine collection of white, rosé, red, organic and wine accesories.</p>
+            <a href="{% url 'shop' %}" class="feature-link">SHOP NOW <svg viewBox="0 0 24 24" fill="none"
+                    stroke-width="1.5">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg></a>
+        </div>
+    </div>
+    <div class="feature-card">
+        <img src="{% static '2.jpg' %}" alt="Stay with us" />
+        <div class="feature-overlay">
+            <span class="feature-tag">EXPERIENCE</span>
+            <div class="feature-title">Stay with us</div>
+            <p class="feature-desc">Join us for a wine tasting or tour and enjoy the true taste of Cyprus.</p>
+            <a href="{% url 'visit-us' %}" class="feature-link">BOOK NOW <svg viewBox="0 0 24 24" fill="none"
+                    stroke-width="1.5">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg></a>
+        </div>
+    </div>
+    <div class="feature-card">
+        <img src="{% static '3.jpg' %}" alt="events" />
+        <div class="feature-overlay">
+            <span class="feature-tag">JOURNAL</span>
+            <div class="feature-title">From the Winery</div>
+            <p class="feature-desc">Stories, recipes, and winemaking notes from our estate.</p>
+            <a href="{% url 'winery' %}" class="feature-link">READ MORE <svg viewBox="0 0 24 24" fill="none"
+                    stroke-width="1.5">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg></a>
+        </div>
+    </div>
+    <div class="feature-card">
+        <img src="{% static '4.jpg' %}" class="object-left" alt="Gift Sets" />
+        <div class="feature-overlay">
+            <span class="feature-tag">Vineyard</span>
+            <div class="feature-title">The Vineyard</div>
+            <p class="feature-desc">Come visit the vineyard and experience the beauty of our estate.</p>
+            <a href="{% url 'vineyard' %}" class="feature-link">EXPLORE THE VINEYARD <svg viewBox="0 0 24 24"
+                    fill="none" stroke-width="1.5">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg></a>
+        </div>
+    </div>
+</div>
+
+<div class="story-section">
+    <div class="story-image">
+        <img src="{% static 'Photo-10.jpeg' %}" alt="Our Story" />
+    </div>
+    <div class="story-content">
+        <div class="section-rule"><span>✦</span></div>
+        <h2 class="story-title">Five Generations of<br><em>Passion &amp; Craft</em></h2>
+        <p class="story-body">Founded in 2005, Tsangarides Winery has remained in the family for generations, each
+            one deepening our commitment to the land and to the art of winemaking. Our 100% organic vineyards,
+            nestled in the hills of Paphos, yield grapes of extraordinary character — the foundation of wines that
+            consistently earn the world's highest accolades.</p>
+        <div class="story-stat">
+            <div>
+                <div class="stat-num">20+</div>
+                <div class="stat-label">YEARS HERITAGE</div>
+            </div>
+            <div>
+                <div class="stat-num">5</div>
+                <div class="stat-label">GENERATIONS</div>
+            </div>
+            <div>
+                <div class="stat-num">100%</div>
+                <div class="stat-label">ORGANIC</div>
+            </div>
+        </div>
+        <a href="{% url 'our-story' %}" class="btn-gold"
+            style="display:inline-block; text-decoration:none; align-self:flex-start;">OUR STORY</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+    document.addEventListener('shopify:ready', function () {
+        const client = window.shopifyClient;
+
+        function toGlobalId(resource, id) {
+            return btoa(`gid://shopify/${resource}/${id}`);
+        }
+
+        function renderWineCard(product) {
+            const image = product.images && product.images[0] ? product.images[0].src : '';
+            const card = document.createElement('a');
+            card.className = 'wine-card';
+            card.href = `/shop/${product.handle}/`;
+            card.innerHTML = `
+                <div class="wine-card-img">
+                    ${image ? `<img src="${image}" alt="${product.title}" loading="lazy">` : ''}
+                </div>
+                <div class="wine-card-body">
+                    <h3 class="wine-card-title">${product.title}</h3>
+                    <span class="wine-card-cta">VIEW WINE</span>
+                </div>
+            `;
+            return card;
+        }
+
+        function loadFeaturedWines() {
+            const grid = document.getElementById('shopify-collection-grid');
+            const gid = toGlobalId('Collection', '576540934410');
+
+            client.collection.fetchWithProducts(gid, { productsFirst: 250 }).then((collection) => {
+                grid.innerHTML = '';
+
+                if (!collection.products.length) {
+                    const empty = document.createElement('p');
+                    empty.className = 'collection-empty';
+                    empty.textContent = 'NO FEATURED WINES YET';
+                    grid.appendChild(empty);
+                    return;
+                }
+
+                collection.products.forEach((product) => grid.appendChild(renderWineCard(product)));
+            }).catch((err) => {
+                console.error('Failed to load featured wines:', err);
+                grid.innerHTML = '<p class="collection-error">COULD NOT LOAD FEATURED WINES</p>';
+            });
+        }
+
+        loadFeaturedWines();
+    });
+</script>
+{% endblock %}
