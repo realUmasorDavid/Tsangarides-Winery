@@ -10,8 +10,8 @@ Multi-topic (e.g. footer), lets the visitor pick any combination:
 Valid interest values: wine-shop, wine-tasting, adopt-a-vine, wine-club
 {% endcomment %}
 <div class="newsletter-box" data-newsletter>
-    <div class="newsletter-heading">{{ newsletter_heading|default:"FROM THE ESTATE" }}</div>
-    <p class="newsletter-body">{{ newsletter_body|default:"Receive selected news and invitations from Tsangarides Winery from new releases and private tastings to vineyard experiences and Wine Club privileges." }}</p>
+    <div class="newsletter-heading">FROM THE ESTATE</div>
+    <p class="newsletter-body">Receive selected news and invitations from Tsangarides Winery from new releases and private tastings to vineyard experiences and Wine Club privileges.</p>
 
     <form class="newsletter-form" data-newsletter-form>
         {% csrf_token %}
