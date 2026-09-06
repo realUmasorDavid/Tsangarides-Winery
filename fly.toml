@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for tsangarides-winery on 2026-06-07T16:55:25Z
+# fly.toml app configuration file generated for tsangarides-winery-amlv0a on 2026-09-06T11:02:14Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'tsangarides-winery'
-primary_region = 'ams'
+app = 'tsangarides-winery-amlv0a'
+primary_region = 'fra'
 console_command = '/code/manage.py shell'
 
 [build]
