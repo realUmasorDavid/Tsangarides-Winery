@@ -31,6 +31,10 @@ DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://tsangarideswinery.com",
+]
+
 
 # Application definition
 

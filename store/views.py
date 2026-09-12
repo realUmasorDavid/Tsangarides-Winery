@@ -56,6 +56,14 @@ def terms(request):
 
 def cookies(request):
     return render(request, 'index.html')
+
+SUBSCRIPTION_LABELS = {
+    'wine-shop': 'Wines & New Releases',
+    'wine-tasting': 'Tastings & Experiences',
+    'adopt-a-vine': 'Adopt a Vine',
+    'wine-club': 'The Wine Club',
+}
+
 @require_POST
 def newsletter_signup(request):
     email = request.POST.get('email', '').strip()
@@ -65,6 +73,8 @@ def newsletter_signup(request):
         return JsonResponse({'message': 'Please enter a valid email address.'}, status=400)
 
     list_ids = [settings.BREVO_LISTS[i] for i in interests if i in settings.BREVO_LISTS]
+    subscription_labels = [SUBSCRIPTION_LABELS[i] for i in interests if i in SUBSCRIPTION_LABELS]
+
     if not list_ids:
         return JsonResponse({'message': 'Please choose at least one interest.'}, status=400)
 
@@ -76,7 +86,14 @@ def newsletter_signup(request):
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
-            json={'email': email, 'listIds': list_ids, 'updateEnabled': True},
+            json={
+                'email': email,
+                'listIds': list_ids,
+                'updateEnabled': True,
+                'attributes': {
+                    'SUBSCRIPTION': subscription_labels,
+                },
+            },
             timeout=8,
         )
     except requests.RequestException:
